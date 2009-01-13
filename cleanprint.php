@@ -170,7 +170,7 @@ if (!class_exists("CleanPrint")) {
 			$logoUrl = $devOptions["logoUrl"];
 			$divId = $devOptions["divId"];
 			?>
-			<script type="text/javascript">var cpProxyUrl = "<?php echo get_bloginfo('wpurl').'/wp-content/plugins/cleanprint/proxy.php'; ?>";
+			<script type="text/javascript">var cpProxyUrl = "<?php echo get_bloginfo('wpurl').'/wp-content/plugins/cleanprint-lt/proxy.php'; ?>";
 			var cpLogoUrl = "<?php echo $logoUrl; ?>";
 			var cpGravity = "<?php echo $devOptions['gravity']; ?>";</script>
 			<script type="text/javascript" src="http://cache-01.cleanprint.net/cp/ccg?divId=<?php echo $divId ?>&ps=<?php echo $selectedPrintSpec ?>" name="cleanprintloader"></script>
@@ -181,7 +181,7 @@ if (!class_exists("CleanPrint")) {
 }
 function cleanprintButtonInsert(){
 	if(is_single()){//comment out this line for mulitple post printing
-		return '<br /><a href="#" onclick="FDCPUrl();return false;"><img src="'.get_bloginfo('wpurl').'/wp-content/plugins/cleanprint/BlogPrintButton.png"></a>';
+		return '<br /><a href="#" onclick="FDCPUrl();return false;"><img src="'.get_bloginfo('wpurl').'/wp-content/plugins/cleanprint-lt/BlogPrintButton.png"></a>';
 	}//comment out this line for mulitple post printing
 	return '';
 }
@@ -243,7 +243,7 @@ if(!function_exists("cleanPrintAdminPage")){
 if (isset($cleanPrint)) {
 	//Actions
 	add_action('admin_menu', 'cleanPrintAdminPage');
-	add_action('cleanprint/cleanprint.php', array(&$cleanPrint, 'init'));
+	add_action('cleanprint-lt/cleanprint.php', array(&$cleanPrint, 'init'));
 	add_action('wp_head', array(&$cleanPrint, 'addCpScript'), 1);
 	add_action('wp_meta', 'cleanprintButtonInsert');
 	//Filters

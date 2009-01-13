@@ -21,8 +21,6 @@
 // Alter the path according to your environment.
 require_once("class_http.php");
 
-//$proxy_url = "http://l-dwilson:8080/cp/t";//isset($_GET['proxy_url'])?$_GET['proxy_url']:false;
-//$proxy_url = "http://billings:8080/cp/t";
 $proxy_url = "http://cleanprint.net/cp/t";
 if (!$proxy_url) {
     header("HTTP/1.0 400 Bad Request");
