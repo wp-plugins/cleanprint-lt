@@ -39,8 +39,6 @@ for print.
 
 == Screenshots ==
 
-== Arbitrary section ==
-
 == Advertising ==
 To enable print advertisements, you will need to join the Format Dynamics PrintNetwork, an
 ad network specializing in digital print advertising.  To sign up, go to the 
