@@ -4,7 +4,7 @@ Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: print
 Requires at least: 2.0.2
 Tested up to: 2.7
-Stable tag: 0.9.4b
+Stable tag: 0.9.5b
 
 The CleanPrint plugin for WordPress provides paginated, magazine-like output
 when readers print your posts, allowing logos, comics and print ads.  
