@@ -67,10 +67,10 @@ function echoSectionText() {
 ?>
 	The CleanPrint plugin can be configured to print in either a single or double column format
 	using a custom header and print button images. 	If an activation key is used, the key
-	itself defines the column format thus deactivating the choice.
+	itself defines the column format thus disabling the choice.
 
 	<p>If a header or print button image URL is provided it should be fully qualified.  Header images
-	should also be 660x40.  Print buttons should be small.
+	should be 660x40 otherwise they will be altered to fit the page.  Print buttons should be small.
 <?php
 }
 
@@ -181,18 +181,20 @@ function sanitizeSettings($options) {
 
 // WP callback for launching the options menu
 function addCleanPrintAdminMenu() {
-	add_options_page("CleanPrint Settings", "CleanPrint", 'manage_options', "cleanprint.php", "plugin_options_page");
+	add_options_page('CleanPrint Settings', 'CleanPrint', 'manage_options', 'cleanprint.php', 'plugin_options_page');
 }
 
 
 // WP callback for initializing the options menu
 function initCleanPrintAdmin() {
-	register_setting    ("CleanPrintAdminOptions", "CleanPrintAdminOptions", "sanitizeSettings");
-	add_settings_section("plugin_main", "",      "echoSectionText",  "cleanprint.php");
-	add_settings_field  ("plugin_printSpecId",   "Column format",    "echoPrintSpecSetting",     "cleanprint.php", "plugin_main");
-	add_settings_field  ("plugin_logoUrl",       "Header image URL", "echoLogoUrlSetting",       "cleanprint.php", "plugin_main");
-	add_settings_field  ("plugin_buttonUrl",     "Print button URL", "echoButtonUrlSetting",     "cleanprint.php", "plugin_main");
-	add_settings_field  ("plugin_activationKey", "Activation key",   "echoActivationKeySetting", "cleanprint.php", "plugin_main");
+	register_setting       ('CleanPrintAdminOptions', 'CleanPrintAdminOptions', 'sanitizeSettings');
+	register_uninstall_hook('cleanprint-lt/cleanprint.php', 'addCleanPrintUninstallHook');
+
+	add_settings_section   ('plugin_main', '',      'echoSectionText',  'cleanprint.php');
+	add_settings_field     ('plugin_printSpecId',   'Column format',    'echoPrintSpecSetting',     'cleanprint.php', 'plugin_main');
+	add_settings_field     ('plugin_logoUrl',       'Header image URL', 'echoLogoUrlSetting',       'cleanprint.php', 'plugin_main');
+	add_settings_field     ('plugin_buttonUrl',     'Print button URL', 'echoButtonUrlSetting',     'cleanprint.php', 'plugin_main');
+	add_settings_field     ('plugin_activationKey', 'Activation key',   'echoActivationKeySetting', 'cleanprint.php', 'plugin_main');
 }
 
 
@@ -295,6 +297,7 @@ function addCleanPrintScript() {
 }
 
 
+// Add the Settings menu link to the plugin page
 function addCleanPrintActions($links, $file) {
     if ($file == 'cleanprint-lt/cleanprint.php') {
 	    $links[] = sprintf("<a href='options-general.php?page=%s'>Settings</a>", "cleanprint.php");
@@ -303,12 +306,17 @@ function addCleanPrintActions($links, $file) {
 }
 
 
+// Remove the CleanPrint options from the database
+function addCleanPrintUninstallHook() {
+	delete_option('CleanPrintAdminOptions');
+}
+
+
 // Actions
 add_action('admin_init', 'initCleanPrintAdmin');
 add_action('admin_menu', 'addCleanPrintAdminMenu');
 add_action('wp_head',    'addCleanPrintScript', 1);
 add_action('wp_meta',    'addCleanPrintButton');
-
 
 // Filters
 add_filter('plugin_action_links', 'addCleanPrintActions', - 10, 2);
