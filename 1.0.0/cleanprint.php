@@ -1,253 +1,317 @@
 <?php
 /*
-Plugin Name: Clean Print
+Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Brings print functionality to your blog
-Version: 0.9.4b
+Version: 1.0.0
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
 
-if (!class_exists("CleanPrint")) {
-	class CleanPrint {
-		var $adminOptionsName = "CleanPrintAdminOptions";
-		var $singleColumnTemplate = "107";
-		var $doubleColumnTemplate = "108";
-		var $defaultDivId = "2434";
-		var $defaultLogoUrl = "http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg";
-		var $gravityDefault = "center";
 
-		function CleanPrint() { //constructor
-			
-		}
-		function init() {
-			$this->getAdminOptions();
-		}
-		function getAdminOptions() {
-			$cleanPrintAdminOptions = array("printSpecId" => $this->singleColumnTemplate,
-				"divId" => $this->defaultDivId,
-				"logoUrl" => $this->defaultLogoUrl,
-				"gravity" => $this->gravityDefault,
-				"activationKey" => "");
-			$devOptions = get_option($this->adminOptionsName);
-			if (!empty($devOptions)) {
-				foreach ($devOptions as $key => $option){
-					$cleanPrintAdminOptions[$key] = $option;
-				}
-			}
-			//see if there is an activation key present and override the printSpecId and divId
-			if(!empty($cleanPrintAdminOptions["activationKey"])){
-				$this->updateActivationKey($cleanPrintAdminOptions, $cleanPrintAdminOptions["activationKey"]);
-			}
-			update_option($this->adminOptionsName, $cleanPrintAdminOptions);
-			return $cleanPrintAdminOptions;
-		}
-		function parseKey($theKey){
-			$rv = explode("-", $theKey);
-			if(count($rv) != 2){
-				return null;
-			}
-			if(!is_numeric($rv[0]) || !is_numeric($rv[1])){
-				return null;
-			}
-			return $rv;
-		}
-		function updateActivationKey(&$cpOptions, $theKey){
-			//see if there is an activation key present and override the printSpecId and divId
-			$theKeys = $this->parseKey($theKey);
-			if(!empty($theKeys)){
-				$cpOptions["divId"] = $theKeys[0];
-				$cpOptions["printSpecId"] = $theKeys[1];
-			}
-			else{
-				//change divId and printSpecId if they are not one of the default values, catching removal of activation key
-				if($cpOptions["printSpecId"] != $this->singleColumnTemplate && $cpOptions["printSpecId"] != $this->doubleColumnTemplate){
-					$cpOptions["printSpecId"] = $this->singleColumnTemplate;
-				}
-				if($cpOptions["printSpecId"] != $this->defaultDivId){
-					$cpOptions["divId"] = $this->defaultDivId;
-				}
-				
-			}
-		}
-		function printCleanprintAdminPage(){
-		        $devOptions = $this->getAdminOptions();
-		        $devOptions = $this->getAdminOptions();
-		        if (isset($_POST['updateCleanprintSettings'])) {
-		                if (isset($_POST['printSpecId'])) {
-		                        $devOptions['printSpecId'] = $_POST['printSpecId'];
-		                }
-		                if (isset($_POST['logo'])) {
-		                        if($_POST['logo'] == "default"){
-		                                $devOptions['logoUrl'] = $this->defaultLogoUrl;
-		                        }
-		                        else if($_POST['logo'] == "custom"){
-		                                if (isset($_POST['customLogo'])) {
-		                                        $devOptions['logoUrl'] = $_POST['customLogo'];
-		                                }
-		                        }
-		                }
-				//if (isset($_POST['gravity'])) {
-				//	$devOptions['gravity'] = $_POST['gravity'];
-				//}
-				if(isset($_POST['activationKey'])) {
-                                        $devOptions['activationKey'] = $_POST['activationKey'];
-					$this->updateActivationKey($devOptions, $_POST['activationKey']);
-                                }
-		                update_option($this->adminOptionsName, $devOptions);
-		                ?>
-		                <div class="updated"><p><strong>Settings Updated.</strong></p></div>
-		                <?php
-		        }
-		        $selectedPrintSpec = $devOptions["printSpecId"];
-		        $singleColumnTemplate = $this->singleColumnTemplate;
-		        $doubleColumnTemplate = $this->doubleColumnTemplate;
-			$selectedGravity = $devOptions["gravity"];
+// Display the options page
+function plugin_options_page() {
+?>
+    <script language="javascript">
+       // Visually and functionally enables/disables the printSpec controls
+       function enableIt(enabled) {
+          var div   = document.getElementById("printSpecControls");
+          var radio = document.getElementById("plugin_printSpecId");
 
-		        $logoUrl = $devOptions["logoUrl"];
-		        $defaultLogoUrl = $this->defaultLogoUrl;
-		        ?>
-			<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
-		                <DIV class="wrap">
-				<H2>Cleanprint Settings Menu</H2>
-				<?php if(empty($devOptions["activationKey"])){ ?>
-				<h3>Pick a template</h3>
-		                <TABLE class="form-table">
-				<TR>
-				<TH class="th-full" scope="row">
-				<input type="radio" name="printSpecId" value="<?php echo $singleColumnTemplate; ?>" <?php if ($selectedPrintSpec == $singleColumnTemplate) { echo 'checked="checked"'; }?> />
-		                Single Column <br />
-		                <input type="radio" name="printSpecId" value="<?php echo $doubleColumnTemplate; ?>" <?php if ($selectedPrintSpec == $doubleColumnTemplate) { echo 'checked="checked"'; }?> />
-		                Double Column
-				</TH>
-				</TR>
-				</TABLE>
-				<?php } ?>
-				<!-- <h3>Pick gravity</h3>
-                                <TABLE class="form-table">
-                                <TR>
-                                <TH class="th-full" scope="row">
-				<input type="radio" name="gravity" value="left" <?php if ($selectedGravity == "left") { echo 'checked="checked"'; }?> />
-                                Left <br />
-                                <input type="radio" name="gravity" value="center" <?php if ($selectedGravity == "center") { echo 'checked="checked"'; }?> />
-                                Center
-				 </TH>
-                                </TR>
-                                </TABLE> -->
-		                <h3>Header Image</h3>
-		                <TABLE class="form-table">
-                                <TR>
-                                <TH class="th-full" scope="row">
-				<input type="radio" name="logo" value="default" <?php if ($defaultLogoUrl == $logoUrl) { echo 'checked="checked"'; }?> />
-		                Default<br />
-		                <input type="radio" name="logo" value="custom" <?php if ($defaultLogoUrl != $logoUrl) { echo 'checked="checked"'; }?> />
-		                Custom:
-		                <input type="" name="customLogo" value="<?php echo $defaultLogoUrl == $logoUrl ? "" : $logoUrl; ?>"><small>Example:http://www.someurl.com/image.png Image should be 660 X 40.</small>
-		                 </TH>
-                                </TR>
-                                </TABLE>
-				<h3>Activation key</h3>
-                                <TABLE class="form-table">
-                                <TR>
-                                <TH class="th-full" scope="row">
-				Key:
-                                <input type="" name="activationKey" value="<?php echo $devOptions['activationKey'] ?>">
-                                 </TH>
-                                </TR>
-                                </TABLE>
-				<P class="submit">
-		                <input type="submit" name="updateCleanprintSettings" value="Update Settings" />
-				</P>
-				</DIV>
-			</form>
-		        <?php
-		}
-	
-		function addCpScript(){
-			if(is_single()){//comment out this line for mulitple post printing
-			$devOptions = $this->getAdminOptions();
-			$selectedPrintSpec = $devOptions["printSpecId"];
-			$logoUrl = $devOptions["logoUrl"];
-			$divId = $devOptions["divId"];
-			?>
-			<script type="text/javascript">var cpProxyUrl = "<?php echo get_bloginfo('wpurl').'/wp-content/plugins/cleanprint-lt/proxy.php'; ?>";
-			var cpLogoUrl = "<?php echo $logoUrl; ?>";
-			var cpGravity = "<?php echo $devOptions['gravity']; ?>";</script>
-			<script type="text/javascript" src="http://cache-01.cleanprint.net/cp/ccg?divId=<?php echo $divId ?>&ps=<?php echo $selectedPrintSpec ?>" name="cleanprintloader"></script>
-			<?php
-			}//comment out this line for mulitple post printing
-		}
-	}
+          if (enabled) {
+             div.style.color     = "";
+             div.style.fontStyle = "";
+             radio.disabled      = false;
+          } else {
+             div.style.color     = "gray";
+             div.style.fontStyle = "italic";
+             radio.disabled      = true;
+          }
+       }
+
+       // Examines the activation key text field and enables/disables printSpec if set
+       function checkIt(node) {
+          enableIt(node.value.length==0);
+       }
+    </script>
+	<div class="wrap">
+		<div id="icon-options-general" class="icon32"><br /></div>
+		<h2>CleanPrint Settings</h2>
+		<form action="options.php" method="post">
+			<?php settings_fields     ("CleanPrintAdminOptions"); ?>
+			<?php do_settings_sections("cleanprint.php"); ?>
+
+			<input name="Submit" type="submit" value="Save Changes" />
+		</form>
+	</div>
+<?php
 }
-function cleanprintButtonInsert(){
-	if(is_single()){//comment out this line for mulitple post printing
-		return '<br /><a href="#" onclick="FDCPUrl();return false;"><img src="'.get_bloginfo('wpurl').'/wp-content/plugins/cleanprint-lt/BlogPrintButton.png"></a>';
-	}//comment out this line for mulitple post printing
+
+
+// This function takes an activation key and returns an array of divisionID and printSpecID (or null)
+function parseActivationKey($theKey){
+	$rv = explode("-", $theKey);
+	if(count($rv) != 2){
+		return null;
+	}
+	if(!is_numeric($rv[0]) || !is_numeric($rv[1])){
+		return null;
+	}
+	return $rv;
+}
+
+
+
+// Outputs a section heading but we do not use it
+function echoSectionText() {
+?>
+	The CleanPrint plugin can be configured to print in either a single or double column format
+	using a custom header and print button images. 	If an activation key is used, the key
+	itself defines the column format thus deactivating the choice.
+
+	<p>If a header or print button image URL is provided it should be fully qualified.  Header images
+	should also be 660x40.  Print buttons should be small.
+<?php
+}
+
+
+// WP callback for handling the printSpec (single/double column) option
+function echoPrintSpecSetting() {
+	$options              = get_option("CleanPrintAdminOptions");
+    $singleColumnTemplate = 107;
+    $doubleColumnTemplate = 108;
+    $defaultDivId         = 2434;
+
+    $printSpecId          = $options['printSpecId'];
+    $activationKey        = $options['activationKey'];
+
+    $doubleChecked        = $printSpecId==$doubleColumnTemplate;
+    $singleChecked        = !$doubleChecked;
+    $hasActivation        = !empty($activationKey);
+    $keys                 = parseActivationKey($activationKey);
+    $divId                = empty($keys) ? $defaultDivId                                                  : $keys[0];
+    $printSpecId          = empty($keys) ? $singleChecked ? $singleColumnTemplate : $doubleColumnTemplate : $keys[1];
+
+    $disabledAttr         = $hasActivation ? "disabled='disabled'" : "";
+    $singleCheckedAttr    = $singleChecked ? "checked='checked'"   : "";
+    $doubleCheckedAttr    = $doubleChecked ? "checked='checked'"   : "";
+
+    printf( "<div id='printSpecControls'>\n");
+    printf( "<input type='radio' id='plugin_printSpecId' name='CleanPrintAdminOptions[printSpecId]' value='%s' %s %s />", $singleColumnTemplate, $disabledAttr, $singleCheckedAttr);
+    printf( "Single Column<br />\n");
+
+    printf( "<input type='radio' id='plugin_printSpecId' name='CleanPrintAdminOptions[printSpecId]' value='%s' %s %s />", $doubleColumnTemplate, $disabledAttr, $doubleCheckedAttr);
+    printf( "Double Column<br />\n");
+
+    printf( "</div>\n");
+    printf( "<script>enableIt(%s)</script>\n", $hasActivation ? "false" : "true");
+}
+
+
+// WP callback for handling the Logo URL (default/custom) option
+function echoLogoUrlSetting() {
+	$options        = get_option("CleanPrintAdminOptions");
+	$defaultLogoUrl = "http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg";
+    $logoUrl        = $options['logoUrl'];
+    $customChecked  = isset($logoUrl) && $logoUrl!=$defaultLogoUrl;
+    $defaultChecked = !$customChecked;
+    $defaultGravity = "center";
+
+    printf( "<input type='radio' id='plugin_logoUrl' name='CleanPrintAdminOptions[logoUrl]' value='%s' %s />", $defaultLogoUrl, $defaultChecked?"checked='checked'":"");
+	printf( "Default<br />\n");
+
+	printf( "<input type='radio' id='plugin_logoUrl' name='CleanPrintAdminOptions[logoUrl]' value='custom' %s />", $customChecked ?"checked='checked'":"");
+	printf( "Custom:");
+	printf( "<input type='text'  id='plugin_logoUrl' name='CleanPrintAdminOptions[customLogo]' value='%s' /><br>\n", $customChecked ? $logoUrl : "");
+	printf( "<img width='100%%' src='%s'>", $customChecked ? $logoUrl : $defaultLogoUrl);
+}
+
+
+// WP callback for handling the Print Button URL (default/custom) option
+function echoButtonUrlSetting() {
+	$options          = get_option("CleanPrintAdminOptions");
+	$defaultButtonUrl = plugins_url('cleanprint-lt/BlogPrintButton.png');
+    $buttonUrl        = $options['buttonUrl'];
+    $customChecked    = isset($buttonUrl) && $buttonUrl!=$defaultButtonUrl;
+    $defaultChecked   = !$customChecked;
+
+    printf( "<input type='radio' id='plugin_buttonUrl' name='CleanPrintAdminOptions[buttonUrl]' value='%s' %s />", $defaultButtonUrl, $defaultChecked?"checked='checked'":"");
+	printf( "Default<br />\n");
+
+	printf( "<input type='radio' id='plugin_buttonUrl' name='CleanPrintAdminOptions[buttonUrl]' value='custom'  %s />", $customChecked ?"checked='checked'":"");
+	printf( "Custom:");
+	printf( "<input type='' name='CleanPrintAdminOptions[customButton]' value='%s' /><br>\n", $customChecked ? $buttonUrl : "");
+	printf( "<img src='%s'>", $customChecked ? $buttonUrl : $defaultButtonUrl);
+}
+
+
+// WP callback for handling the activation key option, setting an key disables the printSpec controls
+function echoActivationKeySetting() {
+	$options       = get_option("CleanPrintAdminOptions");
+	$activationKey = $options['activationKey'];
+
+	printf( "<input type='text' id='plugin_activationKey' name='CleanPrintAdminOptions[activationKey]' value='%s' onKeyUp='checkIt(this)' />", $activationKey);
+}
+
+
+// Clean up the DB properties
+function sanitizeSettings($options) {
+   $defaultLogoUrl   = 'http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg';
+   $defaultButtonUrl = plugins_url('cleanprint-lt/BlogPrintButton.png');
+   $logoUrl          = $options['logoUrl'];
+   $customLogo       = $options['customLogo'];
+   $buttonUrl        = $options['buttonUrl'];
+   $customButton     = $options['customButton'];
+
+
+   if (isset($logoUrl) && $logoUrl!=$defaultLogoUrl) {
+      $options['logoUrl'] = $customLogo;
+   }
+
+   if (isset($buttonUrl) && $buttonUrl!=$defaultButtonUrl) {
+      $options['buttonUrl'] = $customButton;
+   }
+
+   unset($options['customLogo']);
+   unset($options['customButton']);
+
+   return $options;
+}
+
+
+// WP callback for launching the options menu
+function addCleanPrintAdminMenu() {
+	add_options_page("CleanPrint Settings", "CleanPrint", 'manage_options', "cleanprint.php", "plugin_options_page");
+}
+
+
+// WP callback for initializing the options menu
+function initCleanPrintAdmin() {
+	register_setting    ("CleanPrintAdminOptions", "CleanPrintAdminOptions", "sanitizeSettings");
+	add_settings_section("plugin_main", "",      "echoSectionText",  "cleanprint.php");
+	add_settings_field  ("plugin_printSpecId",   "Column format",    "echoPrintSpecSetting",     "cleanprint.php", "plugin_main");
+	add_settings_field  ("plugin_logoUrl",       "Header image URL", "echoLogoUrlSetting",       "cleanprint.php", "plugin_main");
+	add_settings_field  ("plugin_buttonUrl",     "Print button URL", "echoButtonUrlSetting",     "cleanprint.php", "plugin_main");
+	add_settings_field  ("plugin_activationKey", "Activation key",   "echoActivationKeySetting", "cleanprint.php", "plugin_main");
+}
+
+
+// Adds the CleanPrint button to the page
+function addCleanPrintButton() {
+	if(is_single()) {
+	    $options          = get_option("CleanPrintAdminOptions");
+		$defaultButtonUrl = plugins_url('cleanprint-lt/BlogPrintButton.png');
+	    $buttonUrl        = $options['buttonUrl'];
+	    $customChecked    = isset($buttonUrl) && $buttonUrl!="default";
+
+		return sprintf("<br /><a href='#' onclick='FDCPUrl();return false;'><img src='%s'></a>", $customChecked ? $buttonUrl : $defaultButtonUrl);
+	}
 	return '';
 }
-function cpContentTags($content = '') {
-	if(is_single()){
+
+
+// Add the hooks for print functionality
+function addCleanPrintContentTags($content = '') {
+	if(is_single()) {
 		//single post content selection tags
 		//select title and other elements preceding post body
-		$content = $content.'<span class="fdPrintIncludeParentsPreviousSiblings"></span>';
+		$content .= '<span class="fdPrintIncludeParentsPreviousSiblings"></span>';
+
 		//if title and other elements aren't sized correctly in printout, comment out previous line and un-comment out next line
-		//$content = $content.'<span class="fdPrintIncludeParentsPreviousSiblingssChildren"></span>';
+		//$content .= '<span class="fdPrintIncludeParentsPreviousSiblingssChildren"></span>';
+
 		//grab all the nodes of the post body
-		$content = $content.'<span class="fdPrintIncludeParentsChildren"></span>';
+		$content .= '<span class="fdPrintIncludeParentsChildren"></span>';
+
 		//uncomment out next line if to include node immediately following the post node. Uncomment out line after that for all nodes following post node. Only uncomment out one at a time.
-		//$content = $content.'<span class="fdPrintIncludeParentsNextSibling"></span>';
-		//$content = $content.'<span class="fdPrintIncludeParentsNextSiblings"></span>';
+		//$content .= '<span class="fdPrintIncludeParentsNextSibling"></span>';
+		//$content .= '<span class="fdPrintIncludeParentsNextSiblings"></span>';
+
 		//if item exist after the post body that belong in the printout, comment out the next line
-		$content = $content.'<span class="fdPrintExcludeNextSiblings"></span>';
-		$content = $content.cleanprintButtonInsert();
+		$content .= '<span class="fdPrintExcludeNextSiblings"></span>';
+		$content .= addCleanPrintButton();
 		return $content;
-	}
-	else{
+
+	} else {
 		//Multiple blog posts on the page
 		//select title and other elements preceding post body
-                $content = $content.'<span class="fdPrintIncludeParentsPreviousSiblings"></span>';
+		$content .= '<span class="fdPrintIncludeParentsPreviousSiblings"></span>';
+
 		//if title and other elements aren't sized correctly in printout, comment out previous line and un-comment out next line
-                //$content = $content.'<span class="fdPrintIncludeParentsPreviousSiblingssChildren"></span>';
+		//$content .= '<span class="fdPrintIncludeParentsPreviousSiblingssChildren"></span>';
+
 		//grab all the nodes of the post body
-                $content = $content.'<span class="fdPrintIncludeParentsChildren"></span>';
+		$content .= '<span class="fdPrintIncludeParentsChildren"></span>';
 		//uncomment out next line if to include node immediately following the post node. Uncomment out line after that for all nodes following post node. Only uncomment out one at a time.
-                //$content = $content.'<span class="fdPrintIncludeParentsNextSibling"></span>';
-                //$content = $content.'<span class="fdPrintIncludeParentsNextSiblings"></span>';
-                //if item exist after the post body that don't belong in the printout, uncomment out the next line
-		//$content = $content.'<span class="fdPrintExcludeNextSiblings"></span>';
+		//$content .= '<span class="fdPrintIncludeParentsNextSibling"></span>';
+		//$content .= '<span class="fdPrintIncludeParentsNextSiblings"></span>';
+
+		//if item exist after the post body that don't belong in the printout, uncomment out the next line
+		//$content ,= '<span class="fdPrintExcludeNextSiblings"></span>';
 		return $content;
 	}
 }
-function cpTitleTags($title = ''){
+
+
+// ???  Not apparently used
+function addCleanPrintTitleTags($title = ''){
 	if(is_single()){
 		return "<span class='fdPrintIncludeParent'></span>".$title;
 	}
 	return $title;
 }
-if(class_exists("CleanPrint")) {
-	$cleanPrint = new CleanPrint();
-}
 
-if(!function_exists("cleanPrintAdminPage")){
-	function cleanPrintAdminPage() {
-		global $cleanPrint;
-		if(!isset($cleanPrint)){
-			return;
-		}
-		if(function_exists('add_options_page')){
-			add_options_page('Cleanprint Settings', 'Cleanprint Settings Menu', 9, basename(__FILE__), array(&$cleanPrint, 'printCleanprintAdminPage'));
-		}
+
+// Adds the CleanPrint script tags to the head section
+function addCleanPrintScript() {
+	if(is_single()) {
+		$options              = get_option("CleanPrintAdminOptions");
+		$singleColumnTemplate = 107;
+		$doubleColumnTemplate = 108;
+		$defaultDivId         = 2434;
+		$printSpecId          = $options['printSpecId'];
+		$logoUrl              = $options["logoUrl"];
+		$gravity              = $options["gravity"];
+		$doubleChecked        = $printSpecId==$doubleColumnTemplate;
+		$activationKey        = $options['activationKey'];
+		$hasActivation        = !empty($activationKey);
+		$enabled              = $hasActivation ? " disabled='disabled'" : "";
+		$singleChecked        = !$doubleChecked;
+		$keys                 = parseActivationKey($activationKey);
+		$divId                = empty($keys) ? $defaultDivId : $keys[0];
+		$printSpecId          = empty($keys) ? $singleChecked ? $singleColumnTemplate : $doubleColumnTemplate: $keys[1];
+		$defaultLogoUrl       = "http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg";
+ 		$customChecked        = isset($logoUrl) && $logoUrl!="default";
+
+		if (!isset($gravity)) $gravity = "center";
+
+        printf( "<script type='text/javascript'>\n");
+		printf( "   var cpProxyUrl = '%s';\n", plugins_url('cleanprint-lt/proxy.php'));
+		printf( "   var cpLogoUrl  = '%s';\n", $customChecked ? $logoUrl : $defaultLogoUrl);
+		printf( "   var cpGravity  = '%s';\n", $gravity);  // Gravity is currently unsetable but still required
+		printf( "</script>\n");
+		printf( "<script type='text/javascript' src='http://cache-01.cleanprint.net/cp/ccg?divId=%s&ps=%s' name='cleanprintloader'></script>\n", $divId, $printSpecId);
 	}
 }
 
-if (isset($cleanPrint)) {
-	//Actions
-	add_action('admin_menu', 'cleanPrintAdminPage');
-	add_action('cleanprint-lt/cleanprint.php', array(&$cleanPrint, 'init'));
-	add_action('wp_head', array(&$cleanPrint, 'addCpScript'), 1);
-	add_action('wp_meta', 'cleanprintButtonInsert');
-	//Filters
-	add_filter('the_content', 'cpContentTags');
+
+function addCleanPrintActions($links, $file) {
+    if ($file == 'cleanprint-lt/cleanprint.php') {
+	    $links[] = sprintf("<a href='options-general.php?page=%s'>Settings</a>", "cleanprint.php");
+   	}
+   	return $links;
 }
+
+
+// Actions
+add_action('admin_init', 'initCleanPrintAdmin');
+add_action('admin_menu', 'addCleanPrintAdminMenu');
+add_action('wp_head',    'addCleanPrintScript', 1);
+add_action('wp_meta',    'addCleanPrintButton');
+
+
+// Filters
+add_filter('plugin_action_links', 'addCleanPrintActions', - 10, 2);
+add_filter('the_content',         'addCleanPrintContentTags');
 
 ?>
