@@ -3,7 +3,7 @@
 Plugin Name: Clean Print
 Plugin URI: http://www.formatdynamics.com
 Description: Brings print functionality to your blog
-Version: 0.9.4b
+Version: 0.9.5b
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
