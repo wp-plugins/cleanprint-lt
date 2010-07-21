@@ -23,7 +23,10 @@ $pluginName           = 'cleanprint-lt';
 $pluginFile           = $pluginName . '/cleanprint.php';
 $pluginAttr           = 'plugin';
 $printAttr            = 'print';
-$defaultButtonUrl     = plugins_url($pluginName . '/BlogPrintButton.png');
+$defaultPrintBtnImg   = $pluginName . '/BlogPrintButton.png';
+$defaultLocalBtnUrl   = plugins_url($defaultPrintBtnImg);
+$defaultVipBtnUrl     = get_bloginfo('template_directory') . '/plugins/' . $defaultPrintBtnImg;
+$defaultButtonUrl     = function_exists(wpcom_is_vip) ? $defaultVipBtnUrl : $defaultLocalBtnUrl;
 $cpProxyUrl           = 'index.php?' . $pluginAttr . '=' . $pluginName . '&' . $printAttr . '=1';
 $optionsName          = 'CleanPrintAdminOptions';
 
