@@ -26,16 +26,10 @@ Please note that not all themes will produce perfect printouts with this plugin.
 
 1. Download the CleanPrint plugin to your local machine from the Format Dynamics website:
    * http://www.formatdynamics.com/cp-light-download.html      
-2. Log into your WordPress installation as an administrator.
-3. On the navigation on the left hand side, click Plugins, then Add New from the menu.
-4. Enable the CleanPrint plugin
-5. Visit the CleanPrint Settings for printing options
-
-Print Button Removal
-
-1. Disable the Print button via the 'none' option in the CleanPrint Settings page.
-2. Insert a hyperlink into your page as per the example below:
-   * &lt;a href='#' onclick='FDCPUrl();return false;'&gt;Print&lt;/a&gt;
+1. Log into your WordPress installation as an administrator.
+1. On the navigation on the left hand side, click Plugins, then Add New from the menu.
+1. Enable the CleanPrint plugin
+1. Visit the CleanPrint Settings for printing options
 
 == Screenshots ==
 
