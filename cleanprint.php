@@ -28,6 +28,10 @@ $defaultLocalBtnUrl   = plugins_url($defaultPrintBtnImg);
 $defaultVipBtnUrl     = get_bloginfo('template_directory') . '/plugins/' . $defaultPrintBtnImg;
 $defaultButtonUrl     = function_exists(wpcom_is_vip) ? $defaultVipBtnUrl : $defaultLocalBtnUrl;
 $cpProxyUrl           = 'index.php?' . $pluginAttr . '=' . $pluginName . '&' . $printAttr . '=1';
+$readmeTxt            = $pluginName . '/readme.txt';
+$readmeLocalUrl       = plugins_url($readmeTxt);
+$readmeVipUrl         = get_bloginfo('template_directory') . '/plugins/' . $readmeTxt;
+$readmeUrl            = function_exists(wpcom_is_vip) ? $readmeVipUrl : $readmeLocalUrl;
 $optionsName          = 'CleanPrintAdminOptions';
 
 
@@ -159,19 +163,26 @@ function echoLogoUrlSetting() {
 function echoButtonUrlSetting() {
     global $optionsName;
     global $defaultButtonUrl;
+    global $readmeUrl;
     
 	$options        = get_option($optionsName);
 	$buttonUrl      = $options['buttonUrl'];
-    $customChecked  = isset($buttonUrl) && $buttonUrl!=$defaultButtonUrl;
-    $defaultChecked = !$customChecked;
+    $defaultChecked = !isset($buttonUrl) || $buttonUrl==$defaultButtonUrl;
+	$noneChecked    =  isset($buttonUrl) && $buttonUrl=='none';
+	$customChecked  = $defaultChecked==false && $noneChecked==false;
 
     printf( "<input type='radio' id='plugin_buttonUrl' name='%s[buttonUrl]' value='%s' %s />", $optionsName, $defaultButtonUrl, $defaultChecked?"checked='checked'":"");
 	printf( "Default<br />\n");
 
+	printf( "<input type='radio' id='plugin_buttonUrl' name='%s[buttonUrl]' value='none' %s />", $optionsName, $noneChecked ?"checked='checked'":"");
+	printf( "Remove (see <a href='%s' target='_wpinst'>installation</a> instructions)<br />", $readmeUrl);
+	
 	printf( "<input type='radio' id='plugin_buttonUrl' name='%s[buttonUrl]' value='custom'  %s />", $optionsName, $customChecked ?"checked='checked'":"");
 	printf( "Custom:");
 	printf( "<input type='' name='%s[customButton]' value='%s' /><br>\n", $optionsName, $customChecked ? $buttonUrl : "");
-	printf( "<img src='%s'>", $customChecked ? $buttonUrl : $defaultButtonUrl);
+	printf( "<img src='%s' %s>", 
+		$customChecked ? $buttonUrl : $defaultButtonUrl, 
+		$noneChecked   ? "style='opacity:0.25;filter:alpha(opacity=25);'" : ""); 
 }
 
 
@@ -259,7 +270,7 @@ function sanitizeSettings($options) {
       $options['logoUrl'] = $customLogo;
    }
 
-   if (isset($buttonUrl) && $buttonUrl!=$defaultButtonUrl) {
+   if (isset($buttonUrl) && $buttonUrl!=$defaultButtonUrl && $buttonUrl!="none") {
       $options['buttonUrl'] = $customButton;
    }
 
@@ -286,11 +297,11 @@ function initCleanPrintAdmin() {
 	register_setting       ($optionsName, $optionsName, 'sanitizeSettings');
 	register_uninstall_hook($pluginFile, 'addCleanPrintUninstallHook');
 
-	add_settings_section   ('plugin_main', '',      'echoSectionText',  $pluginName);
-	add_settings_field     ('plugin_printSpecId',   'Column format',    'echoPrintSpecSetting',     $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_logoUrl',       'Header image URL', 'echoLogoUrlSetting',       $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_buttonUrl',     'Print button URL', 'echoButtonUrlSetting',     $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_activationKey', 'Activation key',   'echoActivationKeySetting', $pluginName, 'plugin_main');
+	add_settings_section   ('plugin_main', '',      'echoSectionText',    $pluginName);
+	add_settings_field     ('plugin_printSpecId',   'Column format',      'echoPrintSpecSetting',     $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_logoUrl',       'Header image',       'echoLogoUrlSetting',       $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_buttonUrl',     'Print button image', 'echoButtonUrlSetting',     $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_activationKey', 'Activation key',     'echoActivationKeySetting', $pluginName, 'plugin_main');
 }
 
 
@@ -299,11 +310,16 @@ function addCleanPrintButton() {
 	global $optionsName;
 	global $defaultButtonUrl;
 	 	    
-	$options       = get_option($optionsName);
-	$buttonUrl     = $options['buttonUrl'];
-	$customChecked = isset($buttonUrl) && $buttonUrl!="default";
-
-	return sprintf("<br /><a href='#' onclick='FDCPUrl();return false;'><img src='%s'></a>", $customChecked ? $buttonUrl : $defaultButtonUrl);
+	$options        = get_option($optionsName);
+	$buttonUrl      = $options['buttonUrl'];
+	$defaultChecked = !isset($buttonUrl) || $buttonUrl==$defaultButtonUrl;
+	$noneChecked    =  isset($buttonUrl) && $buttonUrl=="none";
+	$customChecked  = $defaultChecked==false && $noneChecked==false;
+	    
+	if (!$noneChecked) {
+		return sprintf("<br /><a href='#' onclick='FDCPUrl();return false;'><img src='%s'></a>", $customChecked ? $buttonUrl : $defaultButtonUrl);
+	}
+	return '';
 }
 
 
