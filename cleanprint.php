@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Brings print functionality to your blog
-Version: 1.0.0
+Version: 1.0.1
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -213,7 +213,7 @@ function proxyCleanPrint() {
 	if (isset($result->errors)) {
 		header("HTTP/1.0 404 Script Error");
 		error_log("proxyCleanUrl: ".$result->errors);
-		exit;
+		return;
 	}
 
 	$response = $result['response'];
@@ -224,7 +224,7 @@ function proxyCleanPrint() {
 	if ($code != 200) {	 	
 		header("HTTP/1.0 ". $code ." Script Error");
 		error_log( sprintf("proxyCleanUrl: %d,%s", $code, $message) );
-		exit;
+		return;
    	}
 		
 	echo $result['body'];
@@ -241,6 +241,7 @@ function pluginParseRequest($wp) {
         // The only param we support is print
         if (array_key_exists($printAttr,$params)) {
         	proxyCleanPrint();
+        	exit;
         }
     }
 }
