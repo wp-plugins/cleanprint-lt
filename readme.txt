@@ -4,7 +4,7 @@ Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: print
 Requires at least: 2.0.2
 Tested up to: 3.0
-Stable tag: /trunk/
+Stable tag: trunk
   
 
 == Description ==
