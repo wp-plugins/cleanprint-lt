@@ -5,42 +5,42 @@ Tags: print
 Requires at least: 2.0.2
 Tested up to: 3.0
 Stable tag: /trunk/
-
-The CleanPrint plugin for WordPress provides paginated, magazine-like output when readers print your posts, allowing logos, comics and print ads.  
+  
 
 == Description ==
-The CleanPrint plugin for WordPress dynamically creates print-optimized content when users print your blog posts. It creates paginated output that allows you to:
-*   Provide the reader with only the content that is relevant on the printed page, improving the user's experience and saving paper and ink
-*   Place a custom logo on the top of each page
-*   Place a custom print button within each page
-*   Flow content into multiple columns, increasing readability
-*   Optionally include print advertisements in your printed posts, earning you money when people print your content
+The CleanPrint plugin for WordPress dynamically optimizes content for output to print, PDF and email. With CleanPrint your readers can:
+*   Remove images
+*   Remove text
+*   Change font size
+*   Add notes to printout
+*   Save paper, ink, money and the environment
 
-The printed content of your site will resemble a magazine page, lending a professional look to your printed blog posts. 
+By installing CleanPrint for WordPress you provide the reader with output control, improving their experience on your site.
 
-The single post view adds a print button to the bottom of each post, showing users that these pages are optimized for print.
+The single post view adds a print button to each post, showing users that these pages are optimized for print, PDF and email.
 
-Please note that not all themes will produce perfect printouts with this plugin.
+Please note that not all themes will produce perfect printouts with this plugin. You can test your content at http://cpf.cleanprint.net/cpf/instructions.html.
 
 == Installation ==
 
-1. Download the CleanPrint plugin to your local machine from the Format Dynamics website:
-   * http://www.formatdynamics.com/cp-light-download.html      
-2. Log into your WordPress installation as an administrator.
-3. On the navigation on the left hand side, click Plugins, then Add New from the menu.
-4. Enable the CleanPrint plugin
-5. Visit the CleanPrint Settings for printing options
+1. Log into your WordPress installation as an administrator.
+2. On the navigation on the left hand side, click Plugins, then Add New from the menu.
+3. Enable the CleanPrint plugin
+4. Visit the CleanPrint Settings for options
 
 Print Button Removal
 
-1. Disable the Print button via the 'none' option in the CleanPrint Settings page.
+1. Disable the Print button via the 'Remove' option in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
-   * &lt;a href='#' onclick='FDCPUrl();return false;'&gt;Print&lt;/a&gt;
+   * <a href='.' onClick='CleanPrint(); return false' class='button' title='Print page'>Print</a>
 
-== Screenshots ==
+Below are paths to each of our standard buttons.
 
-1. Double column printout
-2. Single column printout
+    Black Button       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
+    White Button       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
+    Transparent Button : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
+    Text Button        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
 
 == Advertising ==
-To enable print advertisements, you will need to join the Format Dynamics PrintNetwork, an ad network specializing in digital print advertising.  To sign up, go to the signup page at https://services.formatdynamics.com/signup
+
+Stay tuned!
