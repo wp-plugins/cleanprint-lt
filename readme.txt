@@ -4,7 +4,7 @@ Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: cleanprint, pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable
 Requires at least: 2.0.2
 Tested up to: 3.0
-Stable tag: 1.5.0b
+Stable tag: trunk
   
 
 == Description ==
