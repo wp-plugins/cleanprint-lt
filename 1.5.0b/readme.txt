@@ -1,5 +1,5 @@
 === CleanPrint ===
-Contributors: danielbwilson, johnadams
+Contributors: danielbwilson, johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: print
 Requires at least: 2.0.2
