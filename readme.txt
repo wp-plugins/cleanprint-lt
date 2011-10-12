@@ -1,10 +1,10 @@
 === CleanPrint ===
 Contributors: danielbwilson, johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: print
+Tags: cleanprint, pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable
 Requires at least: 2.0.2
 Tested up to: 3.0
-Stable tag: trunk
+Stable tag: 1.5.0b
   
 
 == Description ==
@@ -21,6 +21,7 @@ The single post view adds a print button to each post, showing users that these 
 
 Please note that not all themes will produce perfect printouts with this plugin. You can test your content at http://cpf.cleanprint.net/cpf/instructions.html.
 
+
 == Installation ==
 
 1. Log into your WordPress installation as an administrator.
@@ -36,10 +37,16 @@ Print Button Removal
 
 Below are paths to each of our standard buttons.
 
-    Black Button       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
-    White Button       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
-    Transparent Button : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
-    Text Button        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
+    White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
+    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
+    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+
+
+== Screenshots ==
+
+1. CleanPrint reformats your article content in order to make the content easier to read and saves both paper and ink.  Users can edit article content, email and generate a PDF.
+
 
 == Advertising ==
 
