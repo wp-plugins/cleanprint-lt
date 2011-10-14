@@ -1,0 +1,122 @@
+
+Important - Read Carefully:  This End User License Agreement ("EULA") is a
+legal agreement between you and Format Dynamics, Inc. ("Format Dynamics") for
+certain content you have selected to download from the Format Dynamics website
+(the "Content").  BY INSTALLING, COPYING, ACCESSING OR OTHERWISE USING THE
+CONTENT, YOU AFFIRM THAT YOU HAVE READ AND UNDERSTAND AND AGREE TO BE BOUND BY
+ALL OF THE TERMS AND CONDITIONS OF THIS
+EULA, WITHOUT LIMITATION OR QUALIFICATION.  IF YOU DO NOT AGREE TO THESE TERMS,
+PLEASE PRESS THE "REJECT" BUTTON AND DO NOT INSTALL, COPY, ACCESS OR OTHERWISE
+USE THIS CONTENT.
+
+License Grant. The Content is protected by copyright laws, international
+copyright treaties and other intellectual property laws and treaties.  The
+Content is licensed on a non-exclusive basis, not sold.  All rights not
+expressly granted are reserved by Format Dynamics. Not limiting the foregoing,
+this EULA does not grant you any rights to (and you are prohibited from):
+(i) granting any sublicense, distributing or transmitting the Content in whole
+or in part; (ii) modifying the Content; (iii) reverse engineering, decompiling,
+or disassembling the Content, except as expressly permitted by applicable law;
+(iv) using any trademarks of Format Dynamics; or (v) using the Content for
+purposes other than as expressly authorized by Format Dynamics.  Your rights
+under this EULA may not be transferred, leased, assigned, or sublicensed.  Any
+purported attempt to transfer, lease, assign, or sublicense your rights will be
+void.
+
+Confidentiality.  The Content contains information and valuable trade secrets
+that are not generally known to the public. You must treat as confidential and
+preserve the confidentiality of the Content, and must not disclose any portion
+of the Content to any third party.  The foregoing obligation does not apply to
+any information that: (a) is already in your possession as shown by
+documentation; (b) is or becomes publicly available through no fault of your
+own; or (c) is obtained by you from a third person without breach by such third
+person of an obligation of confidence.  Information will not be deemed to be
+within the foregoing exceptions merely because it is: (i) embraced by more
+general information in the public domain or in the possession of the party
+receiving such information, or (ii) a combination of individual items of
+information that could be pieced together to reconstruct such combination from
+non-Confidential Information.
+
+Ownership of Intellectual Property.  As between you and Format Dynamics, all
+rights in and to the Content are owned by Format Dynamics, including all rights
+provided under copyright law, trademark law, patent law, trade secret law, and
+all other forms of proprietary and intellectual property protection.
+
+Breach; Termination. Without prejudice to any other rights, Format Dynamics may
+terminate this EULA if you fail to comply with the terms of this EULA.  In such
+an event, you must destroy all copies of the Content.  You may terminate this
+EULA at any time by discontinuing use of the Content, erasing the Content from
+all computer memories and storage devices within your possession or control,
+and destroying all materials obtained from Format Dynamics and all related
+documentation and all copies and installations thereof, whether made under
+these terms or otherwise. In the event of termination by you or Format Dynamics,
+you will not receive a refund of any license fees paid by you for use of the
+Content, if any.
+
+Disclaimer of  Warranties; Exclusion of Damages; Limitation of Liability. 	
+
+If you are dissatisfied with the Content, or with any terms of this EULA, your
+sole and exclusive remedy is to discontinue using the Content.  Format Dynamics
+assumes no responsibility and shall not be liable for the accuracy,
+completeness, timeliness, reliability, relevance or usefulness of the Content
+or for any problems that may result from your use of the Content.  Format
+Dynamics also assumes no responsibility and is not liable for any damages to,
+or viruses that may infect, your computer equipment or other property on
+account of your access to, use of the Content.
+
+THE CONTENT IS PROVIDED AS IS.  FORMAT DYNAMICS MAKES NO WARRANTIES OR
+REPRESENTATIONS AS TO THE PERFORMANCE OR RESULTS YOU MAY OBTAIN, AND PROVIDES
+NO GUARANTEE AGAINST THE POSSIBILITY OF DELETION, MISDELIVERY OR FAILURE TO
+STORE COMMUNICATIONS, PERSONALIZED SETTINGS, OR OTHER DATA.  IN NO EVENT WILL
+FORMAT DYNAMICS BE LIABLE TO YOU OR ANY THIRD PARTY FOR ANY CLAIM ARISING IN
+CONNECTION WITH THE USE OF THE CONTENT.  FORMAT DYNAMICS HEREBY DISCLAIMS ALL
+WARRANTIES, EXPRESS, IMPLIED, OR STATUTORY, INCLUDING BUT NOT LIMITED TO ANY
+WARRANTIES OF TITLE, NON-INFRINGEMENT, MERCHANTABILITY, FITNESS FOR ANY
+PARTICULAR PURPOSE, OR LACK OF VIRUSES.  TO THE MAXIMUM EXTENT PERMITTED BY
+APPLICABLE LAW, IN NO EVENT WILL FORMAT DYNAMICS BE LIABLE TO YOU FOR ANY
+CONSEQUENTIAL, INCIDENTAL, INDIRECT, SPECIAL, PUNITIVE, OR OTHER DAMAGES
+WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR ANY INJURY TO PERSON OR
+PROPERTY, LOSS OF PROFITS, BUSINESS INTERRUPTION, OR LOSS OF  BUSINESS
+INFORMATION) ARISING OUT OF OR IN ANY WAY RELATED TO THE USE OF OR INABILITY TO
+USE THE CONTENT, EVEN IF FORMAT DYNAMICS HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.  IN NO EVENT WILL FORMAT DYNAMICS' LIABILITY EXCEED THE AMOUNT
+YOU PAID FOR THIS CONTENT, IF ANYTHING.  Some states or jurisdictions do not
+allow the exclusion or limitation of incidental, consequential, or special
+damages, or the exclusion of implied warranties or limitations on how long an
+implied warranty may last, so the above limitations may not apply to you.
+
+Indemnification.  You agree to indemnify and to hold Format Dynamics harmless
+from any and all claims (including reasonable attorneys' fees and costs)
+resulting from your acts, omissions, or representations in any way related to
+this EULA or your access to, and use of, the Content. You will use your best
+efforts to cooperate with us in the defense of any claim. Format Dynamics
+reserves the right, at our own expense, to assume the exclusive defense and
+control of any matter otherwise subject to indemnification by you.
+
+General.   This EULA and the rights and obligations of the parties with respect
+to the Content will be governed by, and construed in accordance with the laws
+of the State of Colorado, USA, without reference to the choice of law
+principles thereof.  Any actions, proceedings or suits concerning or relating
+to this EULA may only be brought in a court of competent jurisdiction in Denver,
+Colorado, and each party hereby consents to the jurisdiction and venue of such
+court, and waives any objections thereto.  This EULA will not be governed by the
+United Nations Convention on Contracts for the International Sale of Goods.  If
+any part of this EULA is found unenforceable, it will not affect the validity or
+enforceability of any other provision of this EULA and the parties will
+substitute for the invalid provision a provision which most closely approximates
+the intent and economic effect of the invalid provision.  Failure by either
+party to complain of any act or failure to act of the other party or to declare
+the other party in default, irrespective of the duration of such default, will
+not constitute a waiver of rights hereunder. The Content may not be shipped into
+any country or used in any manner prohibited by law, regulation or order.
+Except as provided below, no amendment, modification, or waiver of any provision
+of this EULA will be effective unless it is set forth in a writing signed by an
+authorized officer of both parties.  This EULA constitutes the complete
+agreement between you and Format Dynamics with respect to the Content and
+supersedes all proposals (oral or written), all previous negotiations, and all
+other communications, except as set forth above.  Format Dynamics may at any
+time, in its sole discretion, revise the terms of this EULA by updating them on
+the Format Dynamics website.  You are bound by any such revisions and should
+therefore periodically visit the Format Dynamics website to review the current
+EULA.
+
