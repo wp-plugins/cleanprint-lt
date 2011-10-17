@@ -16,6 +16,10 @@ $pluginName           = 'cleanprint-lt';
 $pluginFile           = $pluginName . '/cleanprint.php';
 $pluginAttr           = 'plugin';
 $printAttr            = 'print';
+$defaultPrintBtnImg   = $pluginName . '/BlogPrintButton.png';
+$defaultLocalBtnUrl   = plugins_url($defaultPrintBtnImg);
+$defaultVipBtnUrl     = get_bloginfo('template_directory') . '/plugins/' . $defaultPrintBtnImg;
+$oldBlogButtonUrl     = function_exists(wpcom_is_vip) ? $defaultVipBtnUrl : $defaultLocalBtnUrl;
 $publisherKey         = 'wpdefault15'; 
 $cleanprintUrl        = 'http://cache-02.cleanprint.net/cpf/cleanprint';
 $blackButtonUrl       = 'http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png';
@@ -93,9 +97,6 @@ function echoButtonUrlSetting() {
     
     printf( "<br /><input type='radio' id='plugin_buttonUrl' name='%s[buttonUrl]' value='none' %s />", $optionsName, $removeChecked ?"checked='checked'":"");
     printf( "Remove (see <a href='%s' target='_wpinst'>installation</a> instructions)<br />", $readmeUrl);
-    //  printf( "<img id='btnImg' src='%s' %s>", 
-    //  $customChecked ? $buttonUrl : $blackButtonUrl, 
-    //  $noneChecked   ? "style='opacity:0.25;filter:alpha(opacity=25);'" : ""); 
 }
 
 // WP callback for handling button placement
@@ -149,15 +150,11 @@ function pluginQueryVars($vars) {
 
 // Clean up the DB properties
 function sanitizeSettings($options) {
-   global $blackuttonUrl;
-   global $whiteButtonUrl;
-   global $opaqueButtonUrl;
-   global $textButtonUrl;
+   global $oldBlogButtonUrl;
+   global $blackButtonUrl;
    
-   $buttonUrl       = $options['buttonUrl'];
-   $customButton    = $options['customButton'];
-   $GASetting       = $options['GASetting'];
-   $ButtonPlacement = $options['ButtonPlacement'];
+   $buttonUrl    = $options['buttonUrl'];
+   $customButton = $options['customButton'];
 
    if (isset($buttonUrl) && $buttonUrl=="custom") {
       $options['buttonUrl'] = $customButton;
@@ -185,10 +182,10 @@ function initCleanPrintAdmin() {
     register_setting       ($optionsName, $optionsName, 'sanitizeSettings');
     register_uninstall_hook($pluginFile, 'addCleanPrintUninstallHook');
 
-    add_settings_section   ('plugin_main', '',      'echoSectionText',    $pluginName);
-    add_settings_field     ('plugin_buttonUrl',     'Print button image', 'echoButtonUrlSetting',     $pluginName, 'plugin_main');
-    add_settings_field     ('plugin_buttonplacement',      'Button Placement',   'echoButtonPlacement',      $pluginName, 'plugin_main');
-    add_settings_field     ('plugin_gaOption',      'Google analytics',   'echoGASetting',            $pluginName, 'plugin_main');
+    add_settings_section   ('plugin_main', '',       'echoSectionText',    $pluginName);
+    add_settings_field     ('plugin_buttonUrl',      'Print button image', 'echoButtonUrlSetting',     $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_buttonplacement','Button Placement',   'echoButtonPlacement',      $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_gaOption',       'Google analytics',   'echoGASetting',            $pluginName, 'plugin_main');
 }
 
 // Add the hooks for print functionality
