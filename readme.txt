@@ -25,11 +25,13 @@ Please note that not all themes will produce perfect printouts with this plugin.
 == Installation ==
 
 1. Log into your WordPress installation as an administrator.
-2. On the navigation on the left hand side, click Plugins, then Add New from the menu.
+2. On the navigation on the left hand side, click 'Plugins', then 'Add New' from the menu.
 3. Enable the CleanPrint plugin
 4. Visit the CleanPrint Settings for options
 
 Print Button Removal
+
+If you prefer to use your own print link instead of one of the provided buttons you may do so by:
 
 1. Disable the Print button via the 'Remove' option in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
