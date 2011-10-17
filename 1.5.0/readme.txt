@@ -1,7 +1,7 @@
 ﻿=== CleanPrint ===
 Contributors: danielbwilson, johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: print
+Tags: pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable
 Requires at least: 2.0.2
 Tested up to: 3.0
 Stable tag: /trunk/
