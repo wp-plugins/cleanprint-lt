@@ -1,4 +1,4 @@
-=== CleanPrint ===
+﻿=== CleanPrint ===
 Contributors: danielbwilson, johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: print
@@ -8,19 +8,27 @@ Stable tag: /trunk/
   
 
 == Description ==
-The CleanPrint plugin for WordPress dynamically optimizes content for output to print, PDF and email. With CleanPrint your readers can:
-*   Remove images
-*   Remove text
-*   Change font size
-*   Add notes to printout
-*   Save paper, ink, money and the environment
+CleanPrint 4.0 – Efficient content output to print, PDF, email
 
-By installing CleanPrint for WordPress you provide the reader with output control, improving their experience on your site.
+CleanPrint has processed hundreds of millions of print jobs on top 20 web sites. We’ve taken everything we’ve learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
 
-The single post view adds a print button to each post, showing users that these pages are optimized for print, PDF and email.
+How CleanPrint Works
+CleanPrint is activated in a lightbox when the print button is clicked next to your content. Before printing or saving your content, users can eliminate images, increase or decrease font size, and eliminate or grayscale text. The CleanPrint window includes sharing tools and a paper saving counter that shows visitors how eco-friendly your site is. 
+Features and Benefits - Publisher
+•	Use the CleanPrint button set or point your own buttons or text to CleanPrint.
+•	Lightbox keeps users on your page within their original browser window.
+•	Green ticker shows how many pages CleanPrint has saved.
+•	Share options – share options are always visible in the print, PDF and email channels so that you get more traffic.
 
-Please note that not all themes will produce perfect printouts with this plugin. You can test your content at http://cpf.cleanprint.net/cpf/instructions.html.
+Features and Benefits – Users
+•	Control – Users are in control of font size, images, grayscale of text, and eliminating any unwanted content before outputting to print and PDF.
+•	Button Set – Users feel good about hitting eco-friendly content output buttons next to your content.
+•	On-Page-Lightbox doesn’t open a new browser window on visitor’s screen.
+•	Green ticker shows how many pages CleanPrint has saved.
+•	Branded output - Your brand/URL are printed on the page or saved in the PDF so that people can always get back to the source.
 
+Try CleanPrint at 
+http://cpf.cleanprint.net/cpf/instructions.html.
 
 == Installation ==
 
@@ -49,6 +57,9 @@ Below are paths to each of our standard buttons.
 
 1. CleanPrint reformats your article content in order to make the content easier to read and saves both paper and ink.  Users can edit article content, email and generate a PDF.
 
+== Upgrade Notice ==
+
+All CleanPrint 1.0 users please upgrade to the 1.5 version.  We have upgraded our systems and are discontinuing the old.  The CleanPrint 1.1 termination date is 12/1/2011, if you have any questions please email tech@formatdynamics.com.
 
 == Advertising ==
 
