@@ -1,46 +1,66 @@
-=== CleanPrint ===
-Contributors: danielbwilson, johnadams
+﻿=== CleanPrint ===
+Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: print
+Tags: pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable
 Requires at least: 2.0.2
-Tested up to: 3.0
+Tested up to: 3.2
 Stable tag: /trunk/
-
-The CleanPrint plugin for WordPress provides paginated, magazine-like output when readers print your posts, allowing logos, comics and print ads.  
+  
 
 == Description ==
-The CleanPrint plugin for WordPress dynamically creates print-optimized content when users print your blog posts. It creates paginated output that allows you to:
-*   Provide the reader with only the content that is relevant on the printed page, improving the user's experience and saving paper and ink
-*   Place a custom logo on the top of each page
-*   Place a custom print button within each page
-*   Flow content into multiple columns, increasing readability
-*   Optionally include print advertisements in your printed posts, earning you money when people print your content
+CleanPrint 4.0 – Efficient content output to print, PDF, email
 
-The printed content of your site will resemble a magazine page, lending a professional look to your printed blog posts. 
+CleanPrint has processed hundreds of millions of print jobs on top 20 web sites. We’ve taken everything we’ve learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
 
-The single post view adds a print button to the bottom of each post, showing users that these pages are optimized for print.
+How CleanPrint Works
+CleanPrint is activated in a lightbox when the print button is clicked next to your content. Before printing or saving your content, users can eliminate images, increase or decrease font size, and eliminate or grayscale text. The CleanPrint window includes sharing tools and a paper saving counter that shows visitors how eco-friendly your site is. 
+Features and Benefits - Publisher
+•	Use the CleanPrint button set or point your own buttons or text to CleanPrint.
+•	Lightbox keeps users on your page within their original browser window.
+•	Green ticker shows how many pages CleanPrint has saved.
+•	Share options – share options are always visible in the print, PDF and email channels so that you get more traffic.
 
-Please note that not all themes will produce perfect printouts with this plugin.
+Features and Benefits – Users
+•	Control – Users are in control of font size, images, grayscale of text, and eliminating any unwanted content before outputting to print and PDF.
+•	Button Set – Users feel good about hitting eco-friendly content output buttons next to your content.
+•	On-Page-Lightbox doesn’t open a new browser window on visitor’s screen.
+•	Green ticker shows how many pages CleanPrint has saved.
+•	Branded output - Your brand/URL are printed on the page or saved in the PDF so that people can always get back to the source.
+
+Try CleanPrint at 
+http://cpf.cleanprint.net/cpf/instructions.html.
 
 == Installation ==
 
-1. Download the CleanPrint plugin to your local machine from the Format Dynamics website:
-   * http://www.formatdynamics.com/cp-light-download.html      
-2. Log into your WordPress installation as an administrator.
-3. On the navigation on the left hand side, click Plugins, then Add New from the menu.
-4. Enable the CleanPrint plugin
-5. Visit the CleanPrint Settings for printing options
+1. Log into your WordPress installation as an administrator.
+2. On the navigation on the left hand side, click 'Plugins', then 'Add New' from the menu.
+3. Enable the CleanPrint plugin
+4. Visit the CleanPrint Settings for options
 
 Print Button Removal
 
-1. Disable the Print button via the 'none' option in the CleanPrint Settings page.
+If you prefer to use your own print link instead of one of the provided buttons you may do so by:
+
+1. Disable the Print button via the 'Remove' option in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
-   * &lt;a href='#' onclick='FDCPUrl();return false;'&gt;Print&lt;/a&gt;
+   * <a href='.' onClick='CleanPrint(); return false' class='button' title='Print page'>Print</a>
+
+Below are paths to each of our standard buttons.
+
+    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
+    White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
+    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
+    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+
 
 == Screenshots ==
 
-1. Double column printout
-2. Single column printout
+1. CleanPrint reformats your article content in order to make the content easier to read and saves both paper and ink.  Users can edit article content, email and generate a PDF.
+
+== Upgrade Notice ==
+
+All CleanPrint 1.0 users please upgrade to the 1.5 version.  We have upgraded our systems and are discontinuing the old.  The CleanPrint 1.1 termination date is 12/1/2011, if you have any questions please email tech@formatdynamics.com.
 
 == Advertising ==
-To enable print advertisements, you will need to join the Format Dynamics PrintNetwork, an ad network specializing in digital print advertising.  To sign up, go to the signup page at https://services.formatdynamics.com/signup
+
+Stay tuned!
