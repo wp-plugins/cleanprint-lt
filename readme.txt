@@ -8,9 +8,9 @@ Stable tag: /trunk/
   
 
 == Description ==
-CleanPrint 4.0 – Efficient content output to print, PDF, email
+CleanPrint 4.0 - Efficient content output to print, PDF, email
 
-CleanPrint has processed hundreds of millions of print jobs on top 20 web sites. We’ve taken everything we’ve learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
+CleanPrint has processed hundreds of millions of print jobs on top 20 web sites. We've taken everything we've learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
 
 How CleanPrint Works
 CleanPrint is activated in a lightbox when the print button is clicked next to your content. Before printing or saving your content, users can eliminate images, increase or decrease font size, and eliminate or grayscale text. The CleanPrint window includes sharing tools and a paper saving counter that shows visitors how eco-friendly your site is. 
@@ -20,14 +20,14 @@ Features and Benefits - Publisher
     <li>Use the CleanPrint button set or point your own buttons or text to CleanPrint.</li>
     <li>Lightbox keeps users on your page within their original browser window.</li>
     <li>Green ticker shows how many pages CleanPrint has saved.</li>
-    <li>Share options – share options are always visible in the print, PDF and email channels so that you get more traffic.</li>
+    <li>Share options - share options are always visible in the print, PDF and email channels so that you get more traffic.</li>
 </ul>
 
-Features and Benefits – Users
+Features and Benefits - Users
 <ul>
-    <li>Control – Users are in control of font size, images, grayscale of text, and eliminating any unwanted content before outputting to print and PDF.</li>
-    <li>Button Set – Users feel good about hitting eco-friendly content output buttons next to your content.</li>
-    <li>On-Page-Lightbox doesn’t open a new browser window on visitor’s screen.</li>
+    <li>Control - Users are in control of font size, images, grayscale of text, and eliminating any unwanted content before outputting to print and PDF.</li>
+    <li>Button Set - Users feel good about hitting eco-friendly content output buttons next to your content.</li>
+    <li>On-Page-Lightbox doesn't open a new browser window on visitor's screen.</li>
     <li>Green ticker shows how many pages CleanPrint has saved.</li>
     <li>Branded output - Your brand/URL are printed on the page or saved in the PDF so that people can always get back to the source.</li>
 </ul>
