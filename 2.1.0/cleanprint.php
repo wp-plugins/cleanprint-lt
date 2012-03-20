@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Brings print functionality to your blog
-Version: 2.0
+Version: 2.1.0
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -12,34 +12,24 @@ if( !class_exists( 'WP_Http' ) )
    include_once( ABSPATH . WPINC. '/class-http.php' );
 
 
-$pluginName           = 'cleanprint-lt';
-$pluginFile           = $pluginName . '/cleanprint.php';
-$pluginAttr           = 'plugin';
-$printAttr            = 'print';
-$defaultPrintBtnImg   = $pluginName . '/BlogPrintButton.png';
-$defaultLocalBtnUrl   = plugins_url($defaultPrintBtnImg);
-$defaultLogoUrl       = 'http://cache-02.cleanprint.net/media/logos/Default.png';
-$defaultVipBtnUrl     = get_bloginfo('template_directory') . '/plugins/' . $defaultPrintBtnImg;
-$publisherKey         = 'wpdefault15';
-$cleanprintUrl        = 'http://cache-02.cleanprint.net/cpf/cleanprint';
-$buttonUrl            = 'http://cache-02.cleanprint.net/media/pfviewer/images';
-$blackPrintButtonUrl  = 'http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png';
-$blackPDFButtonUrl    = 'http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png';
-$blackEmailButtonUrl  = 'http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png';
-$whitePrintButtonUrl  = 'http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png';
-$whitePDFButtonUrl    = 'http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png';
-$whiteEmailButtonUrl  = 'http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png';
-$opaquePrintButtonUrl = 'http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png';
-$opaquePDFButtonUrl   = 'http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png';
-$opaqueEmailButtonUrl = 'http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png';
-$textPrintButtonUrl   = 'http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png';
-$textPDFButtonUrl     = 'http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png';
-$textEmailButtonUrl   = 'http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png';
-$readmeTxt            = $pluginName . '/readme.txt';
-$readmeLocalUrl       = plugins_url($readmeTxt);
-$readmeVipUrl         = get_bloginfo('template_directory') . '/plugins/' . $readmeTxt;
-$readmeUrl            = function_exists(wpcom_is_vip) ? $readmeVipUrl : $readmeLocalUrl;
-$optionsName          = 'CleanPrintAdminOptions';
+$pluginName             = 'cleanprint-lt';
+$pluginFile             = $pluginName . '/cleanprint.php';
+$pluginAttr             = 'plugin';
+$printAttr              = 'print';
+$defaultPrintBtnImg     = $pluginName . '/BlogPrintButton.png';
+$defaultLocalBtnUrl     = plugins_url($defaultPrintBtnImg);
+$defaultButtonColor     = 'black';
+$defaultButtonPlacement = 'tr';
+$cleanprintUrl          = 'http://cache-02.cleanprint.net/cpf/cleanprint';
+$imagesUrl              = 'http://cache-02.cleanprint.net/media/pfviewer/images';
+$defaultLogoUrl         = 'http://cache-02.cleanprint.net/media/logos/Default.png';
+$defaultVipBtnUrl       = get_bloginfo('template_directory') . '/plugins/' . $defaultPrintBtnImg;
+$publisherKey           = 'wpdefault15';
+$readmeTxt              = $pluginName . '/readme.txt';
+$readmeLocalUrl         = plugins_url($readmeTxt);
+$readmeVipUrl           = get_bloginfo('template_directory') . '/plugins/' . $readmeTxt;
+$readmeUrl              = function_exists(wpcom_is_vip) ? $readmeVipUrl : $readmeLocalUrl;
+$optionsName            = 'CleanPrintAdminOptions';
 
 
 // Display the options page
@@ -64,9 +54,14 @@ function pluginOptionsPage() {
 // Outputs a section heading but we do not use it
 function echoSectionText() {
 ?>
-	Thanks for installing CleanPrint on your site and helping your users save paper, ink, money and trees! Below are a few options to customize CleanPrint and make it your own. You can use your logo and choose from a variety of button styles or use your own button. You may also select the corner of your post where the button(s) will appear. 
-	If you would like to place the button(s) in a custom position please see intallation instructions. Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site *MUST* have Google Analytics running.  
-	<?php printf("<tr><td><h2>Logo</h2><hr /></td></tr>");?>
+    <p>Thanks for installing CleanPrint on your site and helping your users save paper, ink, money and trees!
+    Below are a few options to customize CleanPrint and make it your own. You can use your logo and choose
+    from a variety of button styles or use your own button. You may also select the corner of your post
+    where the button(s) will appear.</p>
+    <p>If you would like to place the button(s) in a custom position please see installation instructions.
+    Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site *MUST*
+    have Google Analytics running.</p>
+    <?php printf("<tr><td><h2>Logo</h2><hr /></td></tr>");?>
 <?php
 }
 
@@ -88,47 +83,52 @@ function echoLogoUrlSetting() {
 	printf( "Custom:");
 	printf( "<input type='text'  id='plugin_logoUrl' name='%s[customLogo]' value='%s' /><br>\n", $optionsName, $customChecked ? $logoUrl : "");
 	printf( "<td>Logo Preview<br /><div style='background-color:#DDD; border: 1px solid #BBB; padding: 10px; text-align:center;'><img height='40px' src='%s'></div></td>", $customChecked ? $logoUrl : $defaultLogoUrl);
-	printf("<tr><td  colspan='3'><h2>Buttons</h2><hr /></td></tr>");
+	printf("<tr><td  colspan='3'><h2>Button Styles</h2><hr /></td></tr>");
 }
 
 // WP callback for handling the Print Button URL (default/custom) option
 function echoButtonColorSetting() {
     global $optionsName;
     global $readmeUrl;
-    global $buttonUrl;
+    global $imagesUrl;
+    global $defaultButtonColor;
     
 	$options        = get_option($optionsName);
 	$buttonColor    = $options['buttonColor'];
-    $blackChecked   = $buttonColor=='black';
-    $whiteChecked   = !isset($buttonColor) || $buttonColor=='white';
-    $transparentChecked  =  $buttonColor=='transparent';
-    $textChecked    =  $buttonColor=='text';
-//    $removeChecked  =  $buttonColor=='none';
-	$customChecked  =  $blackChecked==false && $whiteChecked==false && $opaqueChecked==false && $textChecked==false && $removeChecked==false;
 	
-	if(!isset($options['buttonColor'])) {
-		$buttonColor = 'white';
-	}
+	if(!isset($buttonColor)) {
+        $buttonColor = $defaultButtonColor;
+    }
+    
+    $blackChecked   = $buttonColor=='black';
+    $whiteChecked   = $buttonColor=='white';
+    $transChecked   = $buttonColor=='transparent';
+    $textChecked    = $buttonColor=='text';
 	
 	printf("<script>function changeButtons(select) {");
 	printf("var index  = select.selectedIndex;");
 	printf("var value  = select.options[index].value;");
-	printf("cpUrl    = 'http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_' + value + '.png';");
-	printf("pdfUrl   = 'http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_'        + value + '.png';");
-	printf("emailUrl = 'http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_'      + value + '.png';");
+	printf("cpUrl    = '$imagesUrl/CleanPrintBtn_' + value + '.png';");
+	printf("pdfUrl   = '$imagesUrl/PdfBtn_'        + value + '.png';");
+	printf("emailUrl = '$imagesUrl/EmailBtn_'      + value + '.png';");
 	printf("document.getElementById('cpImg')   .src = cpUrl;");
 	printf("document.getElementById('pdfImg')  .src = pdfUrl;");
 	printf("document.getElementById('emailImg').src = emailUrl;");
 	printf("}</script>");
 
 	printf( "<select id='plugin_buttonColor' name='%s[buttonColor]' onchange='changeButtons(this); return false;'>", $optionsName);
-	printf( "<option value='white' %s>White</option>", ($whiteChecked?"selected='selected'":""));
-	printf( "<option value='black' %s>Black</option>", ($blackChecked?"selected='selected'":""));
-	printf( "<option value='transparent' %s>Transparent</option>", ($transparentChecked?"selected='selected'":""));
-	printf( "<option value='text' %s>Simple</option>", ($textChecked?"selected='selected'":""));
-//	printf( "<option value='none' %s>None</option>", ($removeChecked?"selected='selected'":""));
-	printf( "</select> <td>Button Preview<br /><div id='sampleArea' style='border: 1px solid #BBB; padding: 10px; text-align:center;'><img id='cpImg' src='$buttonUrl/CleanPrintBtn_$buttonColor.png'><img id='pdfImg' src='$buttonUrl/PdfBtn_$buttonColor.png'><img id='emailImg' src='$buttonUrl/EmailBtn_$buttonColor.png'></div></td>");
-
+	printf( "<option value='white'       %s>White</option>",       ($whiteChecked ? "selected='selected'" : ""));
+	printf( "<option value='black'       %s>Black</option>",       ($blackChecked ? "selected='selected'" : ""));
+	printf( "<option value='transparent' %s>Transparent</option>", ($transChecked ? "selected='selected'" : ""));
+	printf( "<option value='text'        %s>Simple</option>",      ($textChecked  ? "selected='selected'" : ""));
+//	printf( "<option value='none'        %s>None</option>",        ($removeChecked? "selected='selected'" : ""));
+	printf( "</select>");
+	
+	printf( "<td>Button Preview<br /><div id='sampleArea' style='border: 1px solid #BBB; padding: 10px; text-align:center;'>");
+	printf( "<img id='cpImg'    src='$imagesUrl/CleanPrintBtn_$buttonColor.png'>");
+	printf( "<img id='pdfImg'   src='$imagesUrl/PdfBtn_$buttonColor.png'>");
+    printf( "<img id='emailImg' src='$imagesUrl/EmailBtn_$buttonColor.png'>");
+	printf( "</div></td>");
 }
 
 // WP callback for handling button include
@@ -178,13 +178,20 @@ function echoEmailInclude() {
 // WP callback for handling button placement
 function echoButtonPlacement() {
     global $optionsName;
+    global $defaultButtonPlacement;
     
 	$options         = get_option($optionsName);
 	$ButtonPlacement = $options['ButtonPlacement'];
-	$trChecked  = !isset($ButtonPlacement) || $ButtonPlacement=="tr";
+	
+	if (!isset($ButtonPlacement)) {
+	   $ButtonPlacement = $defaultButtonPlacement;
+	}
+	
+	$trChecked  = $ButtonPlacement=="tr";
     $tlChecked  = $ButtonPlacement=="tl";
 	$blChecked  = $ButtonPlacement=="bl";
 	$brChecked  = $ButtonPlacement=="br";
+	
 	
     printf( "<input type='radio' id='plugin_buttonplacement' name='%s[ButtonPlacement]' value='tl' %s />", $optionsName, $tlChecked ?"checked='checked'":"");
 	printf( "Top Left<br />\n");
@@ -197,7 +204,74 @@ function echoButtonPlacement() {
 	
 	printf( "<input type='radio' id='plugin_buttonplacement' name='%s[ButtonPlacement]' value='br' %s />", $optionsName, $brChecked  ?"checked='checked'":"");
 	printf( "Bottom Right<br />\n");
-	printf("<tr><td  colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");
+	printf("<tr><td colspan='3'><h2>Display Button(s) on the Following:</h2><hr /></td></tr>");  
+}
+
+// WP callback for handling page type
+function echoPageTypeHomePage() {
+    global $optionsName;
+    
+    $options     = get_option($optionsName);
+    $homepage    = $options['homepage'];
+    $isChecked   = $homepage=="include" || !isset($homepage);
+    
+    printf( "<select id='plugin_homepage' name='%s[homepage]'>", $optionsName);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");          
+}
+
+function echoPageTypeFrontpage() {
+    global $optionsName;
+    
+    $options     = get_option($optionsName);
+    $frontpage   = $options['frontpage'];
+    $isChecked   = $frontpage=="include" || !isset($frontpage);
+    
+    printf( "<select id='plugin_frontpage' name='%s[frontpage]'>", $optionsName);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");
+}
+
+function echoPageTypeCategory() {
+    global $optionsName;
+    
+    $options     = get_option($optionsName);
+    $category    = $options['category'];
+    $isChecked   = $category=="include" || !isset($category);
+    
+    printf( "<select id='plugin_category' name='%s[category]'>", $optionsName);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");
+}
+
+function echoPageTypePosts() {
+    global $optionsName;
+    
+    $options     = get_option($optionsName);
+    $posts       = $options['posts'];
+    $isChecked   = $posts=="include" || !isset($posts);
+    
+    printf( "<select id='plugin_posts' name='%s[posts]'>", $optionsName);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");    
+}
+
+function echoPageTypePages() {
+    global $optionsName;
+    
+    $options     = get_option($optionsName);
+    $pages       = $options['pages'];
+    $isChecked   = $pages=="include" || !isset($pages);
+    
+    printf( "<select id='plugin_pages' name='%s[pages]'>", $optionsName);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");
+    printf("<tr><td colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");    
 }
 
 // WP callback for handling the Google Analytics option
@@ -266,60 +340,102 @@ function initCleanPrintAdmin() {
 	register_setting       ($optionsName, $optionsName, 'sanitizeSettings');
 	register_uninstall_hook($pluginFile, 'addCleanPrintUninstallHook');
 
-	add_settings_section   ('plugin_main', '',      'echoSectionText',    $pluginName);
-	add_settings_field     ('plugin_logoUrl',       '<strong>Logo Image:</strong>',       'echoLogoUrlSetting',       $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_buttonColor',     '<strong>Button Style:</strong>', 'echoButtonColorSetting',     $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_PrintInclude',     '<strong>Print Button:</strong>', 'echoPrintInclude',     $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_PDFInclude',     '<strong>PDF Button:</strong>', 'echoPDFInclude',     $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_EmailInclude',     '<strong>Email Button:</strong>', 'echoEmailInclude',     $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_buttonplacement',      '<strong>Button Placement:</strong>',   'echoButtonPlacement',      $pluginName, 'plugin_main');
-	add_settings_field     ('plugin_gaOption',      '<strong>Google Analytics CleanPrint event tracking:</strong>',   'echoGASetting',            $pluginName, 'plugin_main');
+	add_settings_section   ('plugin_main', '',        'echoSectionText',    $pluginName);
+	add_settings_field     ('plugin_logoUrl',         '<strong>Image:</strong>',                     'echoLogoUrlSetting',     $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_buttonColor',     '<strong>Color:</strong>',                     'echoButtonColorSetting', $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_PrintInclude',    '<strong>Display Print Button:</strong>',      'echoPrintInclude',       $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_PDFInclude',      '<strong>Display PDF Button:</strong>',        'echoPDFInclude',         $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_EmailInclude',    '<strong>Display Email Button:</strong>',      'echoEmailInclude',       $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_buttonplacement', '<strong>Page Location:</strong>',             'echoButtonPlacement',    $pluginName, 'plugin_main');
+	add_settings_field     ('plugin_homepage',        '<strong>Homepage:</strong>',                  'echoPageTypeHomePage',   $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_frontpage',       '<strong>Frontpage:</strong>',                 'echoPageTypeFrontpage',  $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_category',        '<strong>Categories:</strong>',                'echoPageTypeCategory',   $pluginName, 'plugin_main');    
+    add_settings_field     ('plugin_posts',           '<strong>Posts:</strong>',                     'echoPageTypePosts',      $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_pages',           '<strong>Pages:</strong>',                     'echoPageTypePages',      $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_gaOption',        '<strong>CleanPrint event tracking:</strong>', 'echoGASetting',          $pluginName, 'plugin_main');
+}
+
+
+function showButton() {
+    global $optionsName;
+
+    $options       = get_option($optionsName);
+    $homepage      = $options['homepage'];
+    $frontpage     = $options['frontpage'];
+    $category      = $options['category'];
+    $posts         = $options['posts'];
+    $pages         = $options['pages'];
+    
+    $isHomeChecked = $homepage =='include' || !isset($homepage);
+    $isFrntChecked = $frontpage=='include' || !isset($frontpage);
+    $isCatgChecked = $category =='include' || !isset($category);
+    $isPostChecked = $posts    =='include' || !isset($posts);
+    $isPageChecked = $pages    =='include' || !isset($pages);
+    
+    if (is_home()       && $isHomeChecked) return true;
+    if (is_category()   && $isCatgChecked) return true;
+    if (is_single()     && $isPostChecked) return true;
+    if (is_front_page() && $isFrntChecked) return true;              
+    if (is_page()       && $isPageChecked) return true;
+    
+    return false;
 }
 
 // Add the hooks for print functionality
 function addCleanPrintContentTags($content) {
 	
 	global $optionsName;
-    global $blackPrintButtonUrl;
-	global $buttonUrl;
+	global $imagesUrl;
+	global $defaultButtonColor;
+	global $defaultButtonPlacement;
 	 	    
 	$options         = get_option($optionsName);
 	$buttonColor     = $options['buttonColor'];
-    $nothingChecked  = !isset($buttonColor);
-	$removeChecked   = $options['PrintInclude'] == 'exclude' && $options['PDFInclude'] == 'exclude' && $options['EmailInclude'] == 'exclude';
-	$ButtonPlacement = $options['ButtonPlacement'];
-	
-	if ($options['PrintInclude'] == 'include') {
-		$displayPrint = 'inline';
-	}else{
-		$displayPrint = 'none';
-	}
-	if ($options['PDFInclude'] == 'include') {
-		$displayPDF = 'inline';
-	}else{
-		$displayPDF = 'none';
-	}
-	if ($options['EmailInclude'] == 'include') {
-		$displayEmail = 'inline';
-	}else{
-		$displayEmail = 'none';
-	}
-	    
-    if ($nothingChecked) {
-        $buttonColor = 'white';
+    $ButtonPlacement = $options['ButtonPlacement'];
+    
+    $showPrintBtn    = $options['PrintInclude']=='include' || !isset($options['PrintInclude']);
+    $showPdfBtn      = $options['PDFInclude']  =='include' || !isset($options['PDFInclude']);
+    $showEmailBtn    = $options['EmailInclude']=='include' || !isset($options['EmailInclude']);
+    
+    if (!isset($ButtonPlacement)) {
+       $ButtonPlacement = $defaultButtonPlacement;
     }
+    
+    
+	
+	if (showButton()) {
+	   if (!isset($buttonColor)) {
+            $buttonColor = $defaultButtonColor;
+        }
 
-	if ($removeChecked) {
-		//dont add a button
-    } else if ($ButtonPlacement=="tl") {
-		$content = sprintf("<a style='display:$displayPrint' href='.' onClick='CleanPrint(); return false' class='button' title='Print page'><img src='$buttonUrl/CleanPrintBtn_$buttonColor.png' /></a><a style='display:$displayPDF' href='.' onClick='CleanPDF(); return false' class='button' title='PDF page'><img src='$buttonUrl/PdfBtn_$buttonColor.png' /></a><a style='display:$displayEmail' href='.' onClick='CleanEmail(); return false' class='button' title='Email page'><img src='$buttonUrl/EmailBtn_$buttonColor.png' /></a><br />%s", $content);
-	} else if ($ButtonPlacement=="tr") {
-		$content = sprintf("<div style='text-align: right;'><a style='display:$displayPrint' href='.' onClick='CleanPrint(); return false' class='button' title='Print page'><img src='$buttonUrl/CleanPrintBtn_$buttonColor.png' /></a><a style='display:$displayPDF' href='.' onClick='CleanPDF(); return false' class='button' title='PDF page'><img src='$buttonUrl/PdfBtn_$buttonColor.png' /></a><a style='display:$displayEmail' href='.' onClick='CleanEmail(); return false' class='button' title='Email page'><img src='$buttonUrl/EmailBtn_$buttonColor.png' /></a></div><br />%s", $content);
-	} else if($ButtonPlacement=="bl") {
-		$content = sprintf("%s<br /><a style='display:$displayPrint' href='.' onClick='CleanPrint(); return false' class='button' title='Print page'><img src='$buttonUrl/CleanPrintBtn_$buttonColor.png' /></a><a style='display:$displayPDF' href='.' onClick='CleanPDF(); return false' class='button' title='PDF page'><img src='$buttonUrl/PdfBtn_$buttonColor.png' /></a><a style='display:$displayEmail' href='.' onClick='CleanEmail(); return false' class='button' title='Email page'><img src='$buttonUrl/EmailBtn_$buttonColor.png' /></a>", $content);	
-	} else {
-		$content = sprintf("%s<br /><div style='text-align: right;'><a style='display:$displayPrint' href='.' onClick='CleanPrint(); return false' class='button' title='Print page'><img src='$buttonUrl/CleanPrintBtn_$buttonColor.png' /></a><a style='display:$displayPDF' href='.' onClick='CleanPDF(); return false' class='button' title='PDF page'><img src='$buttonUrl/PdfBtn_$buttonColor.png' /></a><a style='display:$displayEmail' href='.' onClick='CleanEmail(); return false' class='button' title='Email page'><img src='$buttonUrl/EmailBtn_$buttonColor.png' /></a></div>", $content);	
-	}
+        if ($showPrintBtn) {
+            $buttons .= "<a href='.' onClick='CleanPrint();return false' title='Print page'><img src='$imagesUrl/CleanPrintBtn_$buttonColor.png' /></a>";
+        }
+
+        if ($showPdfBtn) {
+            $buttons .= "<a href='.' onClick='CleanPDF();return false' title='PDF page'><img src='$imagesUrl/PdfBtn_$buttonColor.png' /></a>";
+        }
+
+        if ($showEmailBtn) {
+            $buttons .= "<a href='.' onClick='CleanEmail();return false' title='Email page'><img src='$imagesUrl/EmailBtn_$buttonColor.png' /></a>";
+        }
+
+
+        if (isset($buttons)) {
+            if ($ButtonPlacement=="tl") {
+                $content = sprintf("%s<br />%s", $buttons, $content);
+
+            } else if ($ButtonPlacement=="tr") {
+                $content = sprintf("<div style='text-align:right;'>%s</div><br />%s", $buttons, $content);
+
+            } else if($ButtonPlacement=="bl") {
+                $content = sprintf("%s<br />%s", $content, $buttons);
+
+            } else {
+                $content = sprintf("%s<br /><div style='text-align:right;'>%s</div>", $content, $buttons);
+            }
+        }
+    }
 	return $content;
 }
 
