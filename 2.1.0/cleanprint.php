@@ -73,14 +73,13 @@ function echoLogoUrlSetting() {
 	$logoUrl        = $options['Cp4LogoUrl'];
     $customChecked  = isset($logoUrl) && $logoUrl!=$defaultLogoUrl;
     $defaultChecked = !$customChecked;
-    $defaultGravity = "center";
 
-    printf( "<input type='radio' id='plugin_logoUrl' name='%s[logoUrl]' value='%s' %s />", $optionsName, $defaultLogoUrl, $defaultChecked?"checked='checked'":"");
+    printf( "<input type='radio' id='plugin_logoUrl' name='%s[Cp4LogoUrl]' value='%s' %s />", $optionsName, $defaultLogoUrl, $defaultChecked?"checked='checked'":"");
 	printf( "Default<br />\n");
 
-	printf( "<input type='radio' id='plugin_logoUrl' name='%s[logoUrl]' value='custom' %s />", $optionsName, $customChecked ?"checked='checked'":"");
+	printf( "<input type='radio' id='plugin_logoUrl' name='%s[Cp4LogoUrl]' value='custom' %s />", $optionsName, $customChecked ?"checked='checked'":"");
 	printf( "Custom:");
-	printf( "<input type='text'  id='plugin_logoUrl' name='%s[customLogo]' value='%s' /><br>\n", $optionsName, $customChecked ? $logoUrl : "");
+	printf( "<input type='text'  id='plugin_logoUrl' name='%s[Cp4CustomLogo]' value='%s' /><br>\n", $optionsName, $customChecked ? $logoUrl : "");
 	printf( "<td>Logo Preview<br /><div style='background-color:#DDD; border: 1px solid #BBB; padding: 10px; text-align:center;'><img height='40px' src='%s'></div></td>", $customChecked ? $logoUrl : $defaultLogoUrl);
 	printf("<tr><td  colspan='3'><h2>Button Styles</h2><hr /></td></tr>");
 }
@@ -301,6 +300,7 @@ function pluginQueryVars($vars) {
 // Clean up the DB properties
 function sanitizeSettings($options) {
    global $defaultLogoUrl;
+   global $optionsVersion;
    
    // If the 1.0 logoUrl is set to the (1.0) default, delete it (below).
    // Anything else we cannot tell the difference between the CP3/WP1 and a CP4/WP2 so assume the latter   
@@ -308,7 +308,17 @@ function sanitizeSettings($options) {
    if (isset($logoUrl) && $logoUrl != 'http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg') {      
       $options['Cp4LogoUrl'] = $logoUrl;
    }
+   
     
+   // The Cp4CustomLogo is temporary cause WP has trouble with certain UI behaviors so map it
+   $logoUrl    = $options['Cp4LogoUrl'];
+   $customLogo = $options['Cp4CustomLogo'];
+   if (isset($logoUrl) && isset($customLogo) && $logoUrl!=$defaultLogoUrl) {
+      $options['Cp4LogoUrl'] = $customLogo;            
+   }
+   unset($options['Cp4CustomLogo']);
+   
+   
    // Deprecate 1.x and early options
    unset($options['printSpecId']);
    unset($options['activationKey']);
@@ -316,6 +326,7 @@ function sanitizeSettings($options) {
    unset($options['buttonUrl']);
    unset($options['customLogo']);
    unset($options['customButton']);
+   
    
    // Set the version of these options
    $options['version'] = $optionsVersion;
