@@ -1,12 +1,12 @@
 ﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, advertising, monetize, social, dropbox, output, plugin, saver, adsense
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver
 Requires at least: 2.0.2
 Tested up to: 3.2
 Stable tag: 2.0
   
-CleanPrint 4.0 – Efficient content output to print, PDF, email, Dropbox (coming soon)
+CleanPrint 4.0 – Efficient content output to print, PDF and email
 
 == Description ==
 CleanPrint has processed hundreds of millions of print jobs on top web sites. We’ve taken everything we’ve learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
