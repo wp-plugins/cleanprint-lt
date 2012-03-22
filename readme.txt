@@ -106,7 +106,7 @@ Additional button styles including chiclets
 Remove the class="button" to avoid conflicts with other styles
 Minor bug fixes
 
-= 2.0.0 =
+= 2.0 =
 Adds support for Email and PDF buttons
 Adds customizable logo
 
