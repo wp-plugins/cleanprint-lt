@@ -54,26 +54,46 @@ If you prefer to use your own print link or button instead of one of the provide
 
 Below are paths to each of our standard Print buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text_small.png
+    
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_16x16.png
 
 Below are paths to each of our standard PDF buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
 
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text_small.png
+    
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_16x16.png
+    
 Below are paths to each of our standard Email buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
 
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text_small.png
 
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_16x16.png
+    
 == Screenshots ==
 
 1. CleanPrint reformats your article content in order to make the content easier to read and saves both paper and ink.  Users can edit article content, email and generate a PDF.
