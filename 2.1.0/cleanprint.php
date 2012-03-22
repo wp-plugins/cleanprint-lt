@@ -16,11 +16,15 @@ $pluginName             = 'cleanprint-lt';
 $pluginFile             = $pluginName . '/cleanprint.php';
 $pluginAttr             = 'plugin';
 $printAttr              = 'print';
-$defaultButtonColor     = 'white';
+
+$baseUrl                = 'http://cpf.staging.cleanprint.net';
+$cleanprintUrl          = $baseUrl . '/cpf/cleanprint';
+$imagesUrl              = $baseUrl . '/media/pfviewer/images';
+$defaultLogoUrl         = $baseUrl . '/media/logos/CleanPrintSave.png';
+
+$buttonStyles           = array('black'=>'Black', 'white'=>'White', 'transparent'=>'Transparent', 'text'=>'Simple');
+$defaultButtonColor     = 'black';
 $defaultButtonPlacement = 'tr';
-$cleanprintUrl          = 'http://cache-02.cleanprint.net/cpf/cleanprint';
-$imagesUrl              = 'http://cache-02.cleanprint.net/media/pfviewer/images';
-$defaultLogoUrl         = 'http://cache-02.cleanprint.net/media/logos/CleanPrintSave.png';
 $publisherKey           = 'wpdefault15';
 $optionsName            = 'CleanPrintAdminOptions';
 $optionsVersion         = '2.1';
@@ -89,21 +93,17 @@ function echoButtonColorSetting() {
     global $optionsName;
     global $readmeUrl;
     global $imagesUrl;
+    global $buttonStyles;
     global $defaultButtonColor;
     
-	$options        = get_option($optionsName);
-	$buttonColor    = $options['buttonColor'];
+	$options     = get_option($optionsName);
+	$buttonColor = $options['buttonColor'];
 	
 	if(!isset($buttonColor)) {
         $buttonColor = $defaultButtonColor;
     }
     
-    $blackChecked   = $buttonColor=='black';
-    $whiteChecked   = $buttonColor=='white';
-    $transChecked   = $buttonColor=='transparent';
-    $textChecked    = $buttonColor=='text';
-	
-	printf("<script>function changeButtons(select) {");
+    printf("<script>function changeButtons(select) {");
 	printf("var index  = select.selectedIndex;");
 	printf("var value  = select.options[index].value;");
 	printf("cpUrl    = '$imagesUrl/CleanPrintBtn_' + value + '.png';");
@@ -112,21 +112,36 @@ function echoButtonColorSetting() {
 	printf("document.getElementById('cpImg')   .src = cpUrl;");
 	printf("document.getElementById('pdfImg')  .src = pdfUrl;");
 	printf("document.getElementById('emailImg').src = emailUrl;");
-	printf("}</script>");
-
-	printf( "<select id='plugin_buttonColor' name='%s[buttonColor]' onchange='changeButtons(this); return false;'>", $optionsName);
-	printf( "<option value='white'       %s>White</option>",       ($whiteChecked ? "selected='selected'" : ""));
-	printf( "<option value='black'       %s>Black</option>",       ($blackChecked ? "selected='selected'" : ""));
-	printf( "<option value='transparent' %s>Transparent</option>", ($transChecked ? "selected='selected'" : ""));
-	printf( "<option value='text'        %s>Simple</option>",      ($textChecked  ? "selected='selected'" : ""));
-//	printf( "<option value='none'        %s>None</option>",        ($removeChecked? "selected='selected'" : ""));
-	printf( "</select>");
+	printf("}");
 	
-	printf( "<td>Button Preview<br /><div id='sampleArea' style='border: 1px solid #BBB; padding: 10px; text-align:center;'>");
-	printf( "<img id='cpImg'    src='$imagesUrl/CleanPrintBtn_$buttonColor.png'>");
-	printf( "<img id='pdfImg'   src='$imagesUrl/PdfBtn_$buttonColor.png'>");
-    printf( "<img id='emailImg' src='$imagesUrl/EmailBtn_$buttonColor.png'>");
-	printf( "</div></td>");
+	printf("function changeButton(select,button) {");
+    printf("var index  = select.selectedIndex;");
+    printf("var value  = select.options[index].value;");
+    printf("var elem   = document.getElementById(button);");
+    printf("if (value=='include') {elem.style.display='inline';}");
+    printf("else                  {elem.style.display='none';}");
+    printf("}</script>\n\n");
+
+	printf("<select id='plugin_buttonColor' name='%s[buttonColor]' onchange='changeButtons(this); return false;'>", $optionsName);	
+	foreach ($buttonStyles as $buttonStyleValue => $buttonStyleLabel) {
+	   $isChecked = $buttonColor == $buttonStyleValue;
+	   printf("<option value='$buttonStyleValue' %s>$buttonStyleLabel</option>", ($isChecked ? "selected='selected'" : ""));
+	}
+	printf("</select>");
+	
+	
+	$PrintInclude    = $options['PrintInclude'];
+    $PDFInclude      = $options['PDFInclude'];
+    $EmailInclude    = $options['EmailInclude'];
+    $printChecked    = !isset($PrintInclude) || $PrintInclude=="include";
+    $pdfChecked      = !isset($PDFInclude)   || $PDFInclude  =="include";
+    $emailChecked    = !isset($EmailInclude) || $EmailInclude=="include";
+    
+	printf("<td>Button Preview<br /><div id='sampleArea' style='border: 1px solid #BBB; padding: 10px; text-align:center;'>");
+	printf("<img id='cpImg'    src='$imagesUrl/CleanPrintBtn_$buttonColor.png' style='%s'/>", ($printChecked ? "" : "display:none"));
+	printf("<img id='pdfImg'   src='$imagesUrl/PdfBtn_$buttonColor.png'        style='%s'/>", ($pdfChecked   ? "" : "display:none"));
+    printf("<img id='emailImg' src='$imagesUrl/EmailBtn_$buttonColor.png'      style='%s'/>", ($emailChecked ? "" : "display:none"));
+	printf("</div></td>");
 }
 
 // WP callback for handling button include
@@ -137,11 +152,10 @@ function echoPrintInclude() {
 	$PrintInclude    = $options['PrintInclude'];
 	$printChecked    = !isset($PrintInclude) || $PrintInclude =="include";
 	
-	printf( "<select id='plugin_PrintInclude' name='%s[PrintInclude]'>", $optionsName);
+	printf( "<select id='plugin_PrintInclude' name='%s[PrintInclude]' onchange='changeButton(this,\"cpImg\"); return false;'>", $optionsName);
 	printf( "<option value='include' %s>Include</option>", ($printChecked ?"selected='selected'":""));
 	printf( "<option value='exclude' %s>Exclude</option>", (!$printChecked ?"selected='selected'":""));
 	printf( "</select>");
-
 }
 
 // WP callback for handling button include
@@ -152,11 +166,10 @@ function echoPDFInclude() {
 	$PDFInclude      = $options['PDFInclude'];
     $pdfChecked      = !isset($PDFInclude) || $PDFInclude =="include";
 	
-	printf( "<select id='plugin_PDFInclude' name='%s[PDFInclude]'>", $optionsName);
+	printf( "<select id='plugin_PDFInclude' name='%s[PDFInclude]' onchange='changeButton(this,\"pdfImg\"); return false;'>", $optionsName);
 	printf( "<option value='include' %s>Include</option>", ($pdfChecked  ?"selected='selected'":""));
 	printf( "<option value='exclude' %s>Exclude</option>", (!$pdfChecked ?"selected='selected'":""));
 	printf( "</select>");
-	
 }
 
 // WP callback for handling button include
@@ -167,7 +180,7 @@ function echoEmailInclude() {
 	$EmailInclude    = $options['EmailInclude'];
 	$emailChecked    = !isset($EmailInclude) || $EmailInclude =="include";
 	
-	printf( "<select id='plugin_EmailInclude' name='%s[EmailInclude]'>", $optionsName);
+	printf( "<select id='plugin_EmailInclude' name='%s[EmailInclude]' onchange='changeButton(this,\"emailImg\"); return false;'>", $optionsName);
 	printf( "<option value='include' %s>Include</option>", ($emailChecked  ?"selected='selected'":""));
 	printf( "<option value='exclude' %s>Exclude</option>", (!$emailChecked  ?"selected='selected'":""));
 	printf( "</select>");
