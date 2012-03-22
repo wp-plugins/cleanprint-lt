@@ -12,30 +12,34 @@ if( !class_exists( 'WP_Http' ) )
    include_once( ABSPATH . WPINC. '/class-http.php' );
 
 
+// Plug-in parameters (do not change these)
 $pluginName             = 'cleanprint-lt';
 $pluginFile             = $pluginName . '/cleanprint.php';
 $pluginAttr             = 'plugin';
 $printAttr              = 'print';
+$optionsName            = 'CleanPrintAdminOptions';
 
+// CleanPrint parameters (change these *only* if you know what you're doing)
 $baseUrl                = 'http://cache-02.cleanprint.net';
+$publisherKey           = 'wpdefault15';
+
+// Best not change these (internal-use only)
 $cleanprintUrl          = $baseUrl . '/cpf/cleanprint';
 $imagesUrl              = $baseUrl . '/media/pfviewer/images';
 $defaultLogoUrl         = $baseUrl . '/media/logos/Default.png';
-
-$buttonStyles           = array('Btn_white'     =>'Large / White', 'Btn_black'      =>'Large / Black',  'Btn_transparent'=>'Large / Transparent', 'Btn_text'      =>'Large / Simple',
-                                'Btn_gray_small'=>'Medium / Gray', 'Btn_black_small'=>'Medium / Black',                                           'Btn_text_small'=>'Medium / Simple',
-                                'Icn_32x32'     =>'Medium / Chiclet',
-                                'Icn_16x16'     =>'Small / Chiclet',
-);
 $defaultButtonStyle     = 'Btn_white';
 $defaultButtonPlacement = 'tr';
-$publisherKey           = 'wpdefault15';
-$optionsName            = 'CleanPrintAdminOptions';
+$buttonStyles           = array('Btn_white'       => 'Large / White',
+                                'Btn_black'       => 'Large / Black',
+                                'Btn_transparent' => 'Large / Transparent',
+                                'Btn_text'        => 'Large / Simple',
+                                'Btn_gray_small'  => 'Medium / Gray',
+                                'Btn_black_small' => 'Medium / Black',
+                                'Btn_text_small'  => 'Medium / Simple',
+                                'Icn_32x32'       => 'Medium / Chiclet',
+                                'Icn_16x16'       => 'Small / Chiclet');
+                                
 
-$readmeTxt              = $pluginName . '/readme.txt';
-$readmeLocalUrl         = plugins_url($readmeTxt);
-$readmeVipUrl           = get_bloginfo('template_directory') . '/plugins/' . $readmeTxt;
-$readmeUrl              = function_exists(wpcom_is_vip) ? $readmeVipUrl : $readmeLocalUrl;
 
 
 // Display the options page
@@ -97,7 +101,6 @@ function cleanprint_add_settings_field_logo_url_() {
 // WP callback for handling the Print Button URL (default/custom) option
 function cleanprint_add_settings_field_button_color() {
     global $optionsName;
-    global $readmeUrl;
     global $imagesUrl;
     global $buttonStyles;
     global $defaultButtonStyle;
@@ -440,10 +443,9 @@ function cleanprint_wp_head() {
     global $publisherKey;
 	global $defaultLogoUrl;
    
-	$options              = get_option($optionsName);
-	$GASetting            = $options['GASetting'];
-	$logoUrl              = $options['logoUrl'];
-	$customChecked		  = isset($logoUrl) && $logoUrl!=$defaultLogoUrl;
+	$options   = get_option($optionsName);
+	$GASetting = $options['GASetting'];
+	$logoUrl   = $options['logoUrl'];
 		
     printf( "<script type='text/javascript'>\n");
     printf( "   function CleanPrint() {");
@@ -466,7 +468,8 @@ function cleanprint_wp_head() {
     printf( "   }");
     printf( "</script>\n");
 	
-	printf( "<script language='javascript' type='text/javascript' src='%s?key=%s&logo=%s'></script>\n", $cleanprintUrl, $publisherKey, $customChecked ? $logoUrl : $defaultLogoUrl);
+	printf( "<script language='javascript' type='text/javascript' src='%s?key=%s&logo=%s'></script>\n", 
+	           $cleanprintUrl, urlencode($publisherKey), urlencode($logoUrl));
 }
 
 
@@ -503,7 +506,9 @@ function cleanprint_activate() {
          }
          
          $buttonColor = $options['buttonColor'];
-         $options['buttonStyle'] = 'Btn_' . $buttonColor;
+         if (isset($buttonColor)) {
+            $options['buttonStyle'] = 'Btn_' . $buttonColor;
+         }
    
          // Get rid of the old options
          unset($options['printSpecId']);
