@@ -22,7 +22,11 @@ $cleanprintUrl          = $baseUrl . '/cpf/cleanprint';
 $imagesUrl              = $baseUrl . '/media/pfviewer/images';
 $defaultLogoUrl         = $baseUrl . '/media/logos/Default.png';
 
-$buttonStyles           = array('black'=>'Black', 'white'=>'White', 'transparent'=>'Transparent', 'text'=>'Simple');
+$buttonStyles           = array('Btn_black'      =>'Large / Black',  'Btn_white'     =>'Large / White', 'Btn_transparent'=>'Large / Transparent', 'Btn_text'      =>'Large / Simple',
+                                'Btn_black_small'=>'Medium / Black', 'Btn_gray_small'=>'Medium / Gray',                                           'Btn_text_small'=>'Medium / Simple',
+                                'Icn_32x32'      =>'Medium / Chiclet',
+                                'Icn_16x16'      =>'Small / Chiclet',
+);
 $defaultButtonColor     = 'white';
 $defaultButtonPlacement = 'tr';
 $publisherKey           = 'wpdefault15';
@@ -58,10 +62,11 @@ function cleanprint_add_settings_section() {
 ?>
     <p>Thanks for installing CleanPrint on your site and helping your users save paper, ink, money and trees!
     Below are a few options to customize CleanPrint and make it your own. You can use your logo and choose
-    from a variety of button styles or use your own button. You may also select the corner of your post
-    where the button(s) will appear.</p>
+    from a variety of button styles or use your own button.  You may also select which corner where the
+    button(s) and the types of pages.</p>
+    
     <p>If you would like to place the button(s) in a custom position please see installation instructions.
-    Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site *MUST*
+    Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site <b>MUST</b>
     have Google Analytics running.</p>
     <?php printf("<tr><td><h2>Logo</h2><hr /></td></tr>");?>
 <?php
@@ -107,9 +112,9 @@ function cleanprint_add_settings_field_button_color() {
     printf("<script>function changeButtons(select) {");
 	printf("var index  = select.selectedIndex;");
 	printf("var value  = select.options[index].value;");
-	printf("cpUrl    = '$imagesUrl/CleanPrintBtn_' + value + '.png';");
-	printf("pdfUrl   = '$imagesUrl/PdfBtn_'        + value + '.png';");
-	printf("emailUrl = '$imagesUrl/EmailBtn_'      + value + '.png';");
+	printf("cpUrl    = '$imagesUrl/CleanPrint' + value + '.png';");
+	printf("pdfUrl   = '$imagesUrl/Pdf'        + value + '.png';");
+	printf("emailUrl = '$imagesUrl/Email'      + value + '.png';");
 	printf("document.getElementById('cpImg')   .src = cpUrl;");
 	printf("document.getElementById('pdfImg')  .src = pdfUrl;");
 	printf("document.getElementById('emailImg').src = emailUrl;");
@@ -139,9 +144,9 @@ function cleanprint_add_settings_field_button_color() {
     $emailChecked    = !isset($EmailInclude) || $EmailInclude=="include";
     
 	printf("<td>Button Preview<br /><div id='sampleArea' style='border: 1px solid #BBB; padding: 10px; text-align:center;'>");
-	printf("<img id='cpImg'    src='$imagesUrl/CleanPrintBtn_$buttonColor.png' style='%s'/>", ($printChecked ? "" : "display:none"));
-	printf("<img id='pdfImg'   src='$imagesUrl/PdfBtn_$buttonColor.png'        style='%s'/>", ($pdfChecked   ? "" : "display:none"));
-    printf("<img id='emailImg' src='$imagesUrl/EmailBtn_$buttonColor.png'      style='%s'/>", ($emailChecked ? "" : "display:none"));
+	printf("<img id='cpImg'    src='$imagesUrl/CleanPrint$buttonColor.png' style='%s'/>", ($printChecked ? "" : "display:none"));
+	printf("<img id='pdfImg'   src='$imagesUrl/Pdf$buttonColor.png'        style='%s'/>", ($pdfChecked   ? "" : "display:none"));
+    printf("<img id='emailImg' src='$imagesUrl/Email$buttonColor.png'      style='%s'/>", ($emailChecked ? "" : "display:none"));
 	printf("</div></td>");
 }
 
@@ -530,7 +535,7 @@ function cleanprint_admin_init() {
 
     add_settings_section   ('plugin_main', '', 'cleanprint_add_settings_section', $pluginName);
     add_settings_field     ('plugin_logoUrl',         '<strong>Image:</strong>',                     'cleanprint_add_settings_field_logo_url_',     $pluginName, 'plugin_main');
-    add_settings_field     ('plugin_buttonColor',     '<strong>Color:</strong>',                     'cleanprint_add_settings_field_button_color',  $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_buttonColor',     '<strong>Size / Color:</strong>',              'cleanprint_add_settings_field_button_color',  $pluginName, 'plugin_main');
     add_settings_field     ('plugin_PrintInclude',    '<strong>Print Button:</strong>',              'cleanprint_add_settings_field_print_btn',     $pluginName, 'plugin_main');
     add_settings_field     ('plugin_PDFInclude',      '<strong>PDF Button:</strong>',                'cleanprint_add_settings_field_pdf_btn',       $pluginName, 'plugin_main');
     add_settings_field     ('plugin_EmailInclude',    '<strong>Email Button:</strong>',              'cleanprint_add_settings_field_email_btn',     $pluginName, 'plugin_main');
