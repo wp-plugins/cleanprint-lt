@@ -22,12 +22,12 @@ $cleanprintUrl          = $baseUrl . '/cpf/cleanprint';
 $imagesUrl              = $baseUrl . '/media/pfviewer/images';
 $defaultLogoUrl         = $baseUrl . '/media/logos/Default.png';
 
-$buttonStyles           = array('Btn_black'      =>'Large / Black',  'Btn_white'     =>'Large / White', 'Btn_transparent'=>'Large / Transparent', 'Btn_text'      =>'Large / Simple',
-                                'Btn_black_small'=>'Medium / Black', 'Btn_gray_small'=>'Medium / Gray',                                           'Btn_text_small'=>'Medium / Simple',
-                                'Icn_32x32'      =>'Medium / Chiclet',
-                                'Icn_16x16'      =>'Small / Chiclet',
+$buttonStyles           = array('Btn_white'     =>'Large / White', 'Btn_black'      =>'Large / Black',  'Btn_transparent'=>'Large / Transparent', 'Btn_text'      =>'Large / Simple',
+                                'Btn_gray_small'=>'Medium / Gray', 'Btn_black_small'=>'Medium / Black',                                           'Btn_text_small'=>'Medium / Simple',
+                                'Icn_32x32'     =>'Medium / Chiclet',
+                                'Icn_16x16'     =>'Small / Chiclet',
 );
-$defaultButtonColor     = 'white';
+$defaultButtonStyle     = 'Btn_white';
 $defaultButtonPlacement = 'tr';
 $publisherKey           = 'wpdefault15';
 $optionsName            = 'CleanPrintAdminOptions';
@@ -100,13 +100,13 @@ function cleanprint_add_settings_field_button_color() {
     global $readmeUrl;
     global $imagesUrl;
     global $buttonStyles;
-    global $defaultButtonColor;
+    global $defaultButtonStyle;
     
 	$options     = get_option($optionsName);
-	$buttonColor = $options['buttonColor'];
+	$buttonStyle = $options['buttonStyle'];
 	
-	if(!isset($buttonColor)) {
-        $buttonColor = $defaultButtonColor;
+	if(!isset($buttonStyle)) {
+        $buttonStyle = $defaultButtonStyle;
     }
     
     printf("<script>function changeButtons(select) {");
@@ -128,9 +128,9 @@ function cleanprint_add_settings_field_button_color() {
     printf("else                  {elem.style.display='none';}");
     printf("}</script>\n\n");
 
-	printf("<select id='plugin_buttonColor' name='%s[buttonColor]' onchange='changeButtons(this); return false;'>", $optionsName);	
+	printf("<select id='plugin_buttonStyle' name='%s[buttonStyle]' onchange='changeButtons(this); return false;'>", $optionsName);	
 	foreach ($buttonStyles as $buttonStyleValue => $buttonStyleLabel) {
-	   $isChecked = $buttonColor == $buttonStyleValue;
+	   $isChecked = $buttonStyle == $buttonStyleValue;
 	   printf("<option value='$buttonStyleValue' %s>$buttonStyleLabel</option>", ($isChecked ? "selected='selected'" : ""));
 	}
 	printf("</select>");
@@ -144,9 +144,9 @@ function cleanprint_add_settings_field_button_color() {
     $emailChecked    = !isset($EmailInclude) || $EmailInclude=="include";
     
 	printf("<td>Button Preview<br /><div id='sampleArea' style='border: 1px solid #BBB; padding: 10px; text-align:center;'>");
-	printf("<img id='cpImg'    src='$imagesUrl/CleanPrint$buttonColor.png' style='%s'/>", ($printChecked ? "" : "display:none"));
-	printf("<img id='pdfImg'   src='$imagesUrl/Pdf$buttonColor.png'        style='%s'/>", ($pdfChecked   ? "" : "display:none"));
-    printf("<img id='emailImg' src='$imagesUrl/Email$buttonColor.png'      style='%s'/>", ($emailChecked ? "" : "display:none"));
+	printf("<img id='cpImg'    src='$imagesUrl/CleanPrint$buttonStyle.png' style='%s'/>", ($printChecked ? "" : "display:none"));
+	printf("<img id='pdfImg'   src='$imagesUrl/Pdf$buttonStyle.png'        style='%s'/>", ($pdfChecked   ? "" : "display:none"));
+    printf("<img id='emailImg' src='$imagesUrl/Email$buttonStyle.png'      style='%s'/>", ($emailChecked ? "" : "display:none"));
 	printf("</div></td>");
 }
 
@@ -379,11 +379,11 @@ function cleanprint_add_content($content) {
 	
 	global $optionsName;
 	global $imagesUrl;
-	global $defaultButtonColor;
+	global $defaultButtonStyle;
 	global $defaultButtonPlacement;
 	 	    
 	$options         = get_option($optionsName);
-	$buttonColor     = $options['buttonColor'];
+	$buttonStyle     = $options['buttonStyle'];
     $ButtonPlacement = $options['ButtonPlacement'];
     
     $showPrintBtn    = $options['PrintInclude']=='include' || !isset($options['PrintInclude']);
@@ -397,20 +397,20 @@ function cleanprint_add_content($content) {
     
 	
 	if (cleanprint_is_pagetype()) {
-	   if (!isset($buttonColor)) {
-            $buttonColor = $defaultButtonColor;
+	   if (!isset($buttonStyle)) {
+            $buttonStyle = $defaultButtonStyle;
         }
 
         if ($showPrintBtn) {
-            $buttons .= "<a href='.' onClick='CleanPrint();return false' title='Print page' class='cleanprint-exclude'><img src='$imagesUrl/CleanPrintBtn_$buttonColor.png' /></a>";
+            $buttons .= "<a href='.' onClick='CleanPrint();return false' title='Print page' class='cleanprint-exclude'><img src='$imagesUrl/CleanPrint$buttonStyle.png' /></a>";
         }
 
         if ($showPdfBtn) {
-            $buttons .= "<a href='.' onClick='CleanPDF();return false' title='PDF page' class='cleanprint-exclude'><img src='$imagesUrl/PdfBtn_$buttonColor.png' /></a>";
+            $buttons .= "<a href='.' onClick='CleanPDF();return false' title='PDF page' class='cleanprint-exclude'><img src='$imagesUrl/Pdf$buttonStyle.png' /></a>";
         }
 
         if ($showEmailBtn) {
-            $buttons .= "<a href='.' onClick='CleanEmail();return false' title='Email page' class='cleanprint-exclude'><img src='$imagesUrl/EmailBtn_$buttonColor.png' /></a>";
+            $buttons .= "<a href='.' onClick='CleanEmail();return false' title='Email page' class='cleanprint-exclude'><img src='$imagesUrl/Email$buttonStyle.png' /></a>";
         }
 
 
@@ -501,13 +501,17 @@ function cleanprint_activate() {
          if (isset($logoUrl) && $logoUrl == 'http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg') {      
             unset($options['logoUrl']);
          }
+         
+         $buttonColor = $options['buttonColor'];
+         $options['buttonStyle'] = 'Btn_' . $buttonColor;
    
-         // Get rid of the CP3/WP options
+         // Get rid of the old options
          unset($options['printSpecId']);
          unset($options['activationKey']);
          unset($options['buttonUrl']);
          unset($options['customButton']);
          unset($options['customLogo']);
+         unset($options['buttonColor']);
       }
    
       // Set the version and commit the changes
@@ -535,7 +539,7 @@ function cleanprint_admin_init() {
 
     add_settings_section   ('plugin_main', '', 'cleanprint_add_settings_section', $pluginName);
     add_settings_field     ('plugin_logoUrl',         '<strong>Image:</strong>',                     'cleanprint_add_settings_field_logo_url_',     $pluginName, 'plugin_main');
-    add_settings_field     ('plugin_buttonColor',     '<strong>Size / Color:</strong>',              'cleanprint_add_settings_field_button_color',  $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_buttonStyle',     '<strong>Size / Color:</strong>',              'cleanprint_add_settings_field_button_color',  $pluginName, 'plugin_main');
     add_settings_field     ('plugin_PrintInclude',    '<strong>Print Button:</strong>',              'cleanprint_add_settings_field_print_btn',     $pluginName, 'plugin_main');
     add_settings_field     ('plugin_PDFInclude',      '<strong>PDF Button:</strong>',                'cleanprint_add_settings_field_pdf_btn',       $pluginName, 'plugin_main');
     add_settings_field     ('plugin_EmailInclude',    '<strong>Email Button:</strong>',              'cleanprint_add_settings_field_email_btn',     $pluginName, 'plugin_main');
