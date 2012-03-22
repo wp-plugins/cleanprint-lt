@@ -2,7 +2,7 @@
 /*
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
-Description: Brings print functionality to your blog
+Description: Efficient content output to print, PDF and email
 Version: 2.1.0
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
