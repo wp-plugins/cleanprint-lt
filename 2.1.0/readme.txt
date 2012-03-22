@@ -101,8 +101,10 @@ Below are paths to each of our standard Email buttons.
 == Changelog ==
 
 = 2.1.0 =
-Adds support for turning off the buttons on certain page types
+Support for turning on/off the buttons per-page type
+Additional button styles including chiclets
 Remove the class="button" to avoid conflicts with other styles
+Minor bug fixes
 
 = 2.0.0 =
 Adds support for Email and PDF buttons
