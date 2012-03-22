@@ -1,12 +1,12 @@
 ﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, advertising, monetize, social, dropbox, output, plugin, saver, adsense
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver
 Requires at least: 2.0.2
 Tested up to: 3.2
-Stable tag: 2.0
+Stable tag: 2.1.0
   
-CleanPrint 4.0 – Efficient content output to print, PDF, email, Dropbox (coming soon)
+CleanPrint 4.0 – Efficient content output to print, PDF and email
 
 == Description ==
 CleanPrint has processed hundreds of millions of print jobs on top web sites. We’ve taken everything we’ve learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
@@ -54,26 +54,46 @@ If you prefer to use your own print link or button instead of one of the provide
 
 Below are paths to each of our standard Print buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text_small.png
+    
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_16x16.png
 
 Below are paths to each of our standard PDF buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
 
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text_small.png
+    
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_16x16.png
+    
 Below are paths to each of our standard Email buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
 
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text_small.png
 
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_16x16.png
+    
 == Screenshots ==
 
 1. CleanPrint reformats your article content in order to make the content easier to read and saves both paper and ink.  Users can edit article content, email and generate a PDF.
@@ -81,8 +101,10 @@ Below are paths to each of our standard Email buttons.
 == Changelog ==
 
 = 2.1.0 =
-Adds support for turning off the buttons on certain page types
+Support for turning on/off the buttons per-page type
+Additional button styles including chiclets
 Remove the class="button" to avoid conflicts with other styles
+Minor bug fixes
 
 = 2.0.0 =
 Adds support for Email and PDF buttons
