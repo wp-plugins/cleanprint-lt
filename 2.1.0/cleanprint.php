@@ -26,19 +26,10 @@ $publisherKey           = 'wpdefault15';
 // Best not change these (internal-use only)
 $cleanprintUrl          = $baseUrl . '/cpf/cleanprint';
 $imagesUrl              = $baseUrl . '/media/pfviewer/images';
+$buttonHelperUrl        = $baseUrl . '/cpf/publisherSignup/js/generateCPFTag.js';
 $defaultLogoUrl         = $baseUrl . '/media/logos/Default.png';
 $defaultButtonStyle     = 'Btn_white';
 $defaultButtonPlacement = 'tr';
-$buttonStyles           = array('Btn_white'       => 'Large / White',
-                                'Btn_black'       => 'Large / Black',
-                                'Btn_transparent' => 'Large / Transparent',
-                                'Btn_text'        => 'Large / Simple',
-                                'Btn_gray_small'  => 'Medium / Gray',
-                                'Btn_black_small' => 'Medium / Black',
-                                'Btn_text_small'  => 'Medium / Simple',
-                                'Icn_32x32'       => 'Medium / Chiclet',
-                                'Icn_16x16'       => 'Small / Chiclet');
-                                
 
 
 
@@ -102,7 +93,7 @@ function cleanprint_add_settings_field_logo_url_() {
 function cleanprint_add_settings_field_button_color() {
     global $optionsName;
     global $imagesUrl;
-    global $buttonStyles;
+    global $buttonHelperUrl;
     global $defaultButtonStyle;
     
 	$options     = get_option($optionsName);
@@ -112,12 +103,30 @@ function cleanprint_add_settings_field_button_color() {
         $buttonStyle = $defaultButtonStyle;
     }
     
-    printf("<script>function changeButtons(select) {");
-	printf("var index  = select.selectedIndex;");
-	printf("var value  = select.options[index].value;");
-	printf("cpUrl    = '$imagesUrl/CleanPrint' + value + '.png';");
-	printf("pdfUrl   = '$imagesUrl/Pdf'        + value + '.png';");
-	printf("emailUrl = '$imagesUrl/Email'      + value + '.png';");
+    printf("<script type='text/javascript' src='%s'></script>", $buttonHelperUrl);    
+    printf("<script type='text/javascript'>function buildButtonSelect() {");
+    printf("var select = document.createElement('select');");
+    printf("select.setAttribute('id',       'plugin_buttonStyle');");
+    printf("select.setAttribute('name',     '%s[buttonStyle]');", $optionsName);
+    printf("select.setAttribute('onchange', 'changeButtons(this);return false;');");
+    printf("var styles = getCPFButtonStyles();");
+    printf("for (style in styles) {");
+    printf("var label  = styles[style];");
+    printf("var option = document.createElement('option');");
+    printf("option.setAttribute('value', style);");
+    printf("if (style=='%s') option.setAttribute('selected', 'selected');", $buttonStyle);
+    printf("option.innerHTML = label;");
+    printf("select.appendChild(option);");
+    printf("}");
+    printf("return select;");
+    printf("}");
+    
+    printf("function changeButtons(select) {");
+	printf("var index = select.selectedIndex;");
+	printf("var value = select.options[index].value;");
+	printf("var cpUrl    = '$imagesUrl/CleanPrint' + value + '.png';");
+	printf("var pdfUrl   = '$imagesUrl/Pdf'        + value + '.png';");
+	printf("var emailUrl = '$imagesUrl/Email'      + value + '.png';");
 	printf("document.getElementById('cpImg')   .src = cpUrl;");
 	printf("document.getElementById('pdfImg')  .src = pdfUrl;");
 	printf("document.getElementById('emailImg').src = emailUrl;");
@@ -129,15 +138,11 @@ function cleanprint_add_settings_field_button_color() {
     printf("var elem   = document.getElementById(button);");
     printf("if (value=='include') {elem.style.display='inline';}");
     printf("else                  {elem.style.display='none';}");
-    printf("}</script>\n\n");
+    printf("}</script>");
 
-	printf("<select id='plugin_buttonStyle' name='%s[buttonStyle]' onchange='changeButtons(this); return false;'>", $optionsName);	
-	foreach ($buttonStyles as $buttonStyleValue => $buttonStyleLabel) {
-	   $isChecked = $buttonStyle == $buttonStyleValue;
-	   printf("<option value='$buttonStyleValue' %s>$buttonStyleLabel</option>", ($isChecked ? "selected='selected'" : ""));
-	}
-	printf("</select>");
-	
+    printf("<span id='cpf_button_selector'></span>");
+    printf("<script>document.getElementById('cpf_button_selector').appendChild(buildButtonSelect());</script>");
+    
 	
 	$PrintInclude    = $options['PrintInclude'];
     $PDFInclude      = $options['PDFInclude'];
