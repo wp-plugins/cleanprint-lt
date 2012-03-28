@@ -1,100 +1,181 @@
 ﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: pdf, print, printer, printable, printing, widget, email, save, ads, advertise, revenue, optimize, output, edit, editing, eco-friendly, environmental, sustainable, Reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, advertising, monetize, social, dropbox, output, plugin, saver, adsense
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver, dropbox, google docs
 Requires at least: 2.0.2
 Tested up to: 3.2
-Stable tag: 2.0
+Stable tag: 3.0.0
   
-CleanPrint 4.0 – Efficient content output to print, PDF, email, Dropbox (coming soon)
+CleanPrint – Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
+
 
 == Description ==
-CleanPrint has processed hundreds of millions of print jobs on top web sites. We’ve taken everything we’ve learned and built it into this economically and ecologically friendly print tool that saves paper, ink, and money for your users. 
+The world's best and most used eco-friendly print tool is now available on WordPress. Join top sites like MSNBC, CNN, Disney and Fox Sports and offer your users an economically and ecologically friendly printing and saving experience that saves paper, ink, and money while saving trees.
 
-How CleanPrint Works
-CleanPrint is activated in a lightbox when the print button is clicked next to your content. Before printing or saving your content, users can eliminate images, increase or decrease font size, and eliminate or grayscale text. The CleanPrint window includes sharing tools and a paper saving counter that shows visitors how eco-friendly your site is. 
+<h4>How CleanPrint Works</h4>
 
-Features and Benefits - Publisher
-<ul>
-    <li>Use the CleanPrint button set or point your own buttons or text to CleanPrint.</li>
-    <li>Lightbox keeps users on your page within their original browser window.</li>
-    <li>Green ticker shows how many pages CleanPrint has saved.</li>
-    <li>Share options – share options are always visible in the print, PDF and email channels so that you get more traffic.</li>
-</ul>
+Clean Print is an eco-friendly tool that saves paper, ink and money when printing from the internet. Users can easily edit content before printing or saving to PDF, Dropbox or Google Docs. CleanPrint includes sharing tools and a pagination/paper saving counter that shows visitors how eco-friendly your site is and helps them avoid that dreaded extra sheet of paper!
 
-Features and Benefits – Users
-<ul>
-    <li>Control – Users are in control of font size, images, grayscale of text, and eliminating any unwanted content before outputting to print and PDF.</li>
-    <li>Button Set – Users feel good about hitting eco-friendly content output buttons next to your content.</li>
-    <li>On-Page-Lightbox doesn’t open a new browser window on visitor’s screen.</li>
-    <li>Green ticker shows how many pages CleanPrint has saved.</li>
-    <li>Branded output - Your brand/URL are printed on the page or saved in the PDF so that people can always get back to the source.</li>
-</ul>
+1. User activates CleanPrint by hitting print button
+2. Print preview appears including pagination and editing tools for optimization
+3. User selects desired output:
+   * Print - Sends content to your printer
+   * PDF - Saves content as a PDF document
+   * Email - Sends content via eMail
+   * Dropbox - Saves a PDF or text file to your Dropbox account
+   * Google Docs - Saves a PDF or text file to your Google Docs account
+4. Share article link to Facebook, Twitter, LinkedIn, and Google+
 
-For more info go to : 
-http://www.formatdynamics.com/cpconfig/
+<h4>Features and Benefits</h4>
+
+1. Use the CleanPrint button set or point your own buttons or text to CleanPrint.
+2. Lightbox keeps users on your page within their original browser window.
+3. Green ticker shows how many pages CleanPrint has saved.
+4. Pagination/paper saving counter helps users avoid that dreaded extra sheet of paper.
+5. Control - Users are in control of font size, images, gray scale of text, and eliminating any unwanted content before outputting to print, PDF, Dropbox, and Google Docs.
+6. Button Set - Users feel good about hitting eco-friendly content output buttons next to your content.
+7. Branded output - Your brand/URL are printed on the page or saved so that people can always get back to your site.
+
 
 == Installation ==
 
 1. Log into your WordPress installation as an administrator.
 2. On the navigation on the left hand side, click 'Plugins', then 'Add New' from the menu.
 3. Enable the CleanPrint plugin.
-4. Visit the CleanPrint Settings page, select the appropiate options and click "Save Changes".
+4. Visit the CleanPrint Settings page, select the appropriate options and click "Save Changes".
 
-Print Button Removal
+<h4>Using Your Own Buttons</h4>
 
-If you prefer to use your own print link instead of one of the provided buttons you may do so by:
+If you prefer to use your own print link or button instead of one of the provided buttons you may do so by:
 
-1. Disable the Print button via the 'exclude' button option in the CleanPrint Settings page.
+1. Disable the buttons via the 'exclude' button option in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
-   * <a href='.' onClick='CleanPrint(); return false' class='button' title='Print page'>Print</a>
-   * <a href='.' onClick='CleanEmail(); return false' class='button' title='Email page'>Email</a>
-   * <a href='.' onClick='CleanPDF(); return false' class='button' title='PDF page'>Email</a>
+   * &lt;a href='.' onClick='CleanPrint(); return false' title='Print page'&gt;Print&lt;/a&gt;
+   * &lt;a href='.' onClick='CleanEmail(); return false' title='Email page'&gt;Email&lt;/a&gt;
+   * &lt;a href='.' onClick='CleanPDF();   return false' title='PDF page'&gt;PDF&lt;/a&gt;
 
 Below are paths to each of our standard Print buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
+    
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text_small.png
+    
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_16x16.png
 
 Below are paths to each of our standard PDF buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtnv_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
 
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text_small.png
+    
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_16x16.png
+    
 Below are paths to each of our standard Email buttons.
 
-    Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
-    White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
-    Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
-    Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
+    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
+    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
+    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
+    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
+
+    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black_small.png
+    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_gray_small.png
+    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text_small.png
+
+    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_32x32.png
+    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_16x16.png
+
+
+== Frequently Asked Questions ==
+
+= Can I personalize CleanPrint for my site? =
+
+Yes, you can add your own logo in the CleanPrint Settings page.  The logo should be no more than 200px wide and 40px tall.
+
+= How do remove the Email and PDF buttons leaving only the Print button? =
+
+In the CleanPrint Settings page you may choose from a wide variety of button styles.  You may also elect to turn on/off any button.
+
+= How do I remove the Print button from my home page? =
+
+Change the Home Page setting from "Include" to "Exclude" in the CleanPrint Settings page.
+
+= How do I move the buttons from the upper right corner to the lower left? =
+
+Change the Page Location setting from "Top Right" to "Bottom Left" in the CleanPrint Settings page.
+
+= How do I set CleanPrint to pre-remove content so the user doesn't have to? =
+
+This can be tricky depending upon your WordPress knowledge and requires you to set certain class names on the element in question.  Visit http://www.formatdynamics.com/cpconfig for details.
+
+= Where can I see CleanPrint in action? =
+
+You have two options:
+<ol>
+   <li>Visit any of our publisher partners, locate an article and press their print button:
+   <ul>
+      <li>http://www.msnbc.msn.com</li>
+      <li>http://www.cnn.com</li>
+      <li>http://msn.foxsports.com</li>
+      <li>http://www.slate.com</li>
+   </ul></li>
+   <li>Install our free browser tool and try it anywhere yourself.
+   <ul>
+      <li>http://www.formatdynamics.com/bookmarklets.</li>
+   </ul></li>
+</ol>
+
+= Where can I learn more about CleanPrint? =
+
+Visit us at:
+<ul>
+   <li><a href="http://www.formatdynamics.com">FormatDynamics.com</a></li>
+   <li><a href="http://www.facebook.com/pages/CleanPrint/131304880322920?sk=app_162498273831267">Facebook</a></li>
+</ul>
 
 
 == Screenshots ==
 
-1. CleanPrint reformats your article content in order to make the content easier to read and saves both paper and ink.  Users can edit article content, email and generate a PDF.
+1. CleanPrint allows you to insert Print, Email and PDF buttons into your content anywhere you like from a large number of button styles.
+2. CleanPrint reformats your article content in order to make it easier to read and saves both paper and ink.  Users can edit article content further to get the output they desire.
+3. Users can then print the article, email it to their friends or save it as a PDF or text document to their computer, Google Docs or Dropbox account.
+
 
 == Changelog ==
 
+= 3.0.0 =
+* Support for turning on/off the buttons per-page
+* Additional button styles including chiclets
+* Remove the class="button" to avoid conflicts with other styles
+* Minor bug fixes
+
+= 2.0 =
+* Adds support for Email and PDF buttons
+* Adds customizable logo
+
 = 1.5.0 =
-Uses CleanPrint 4.0 engine<br>
-Additional print button styles<br>
-Ability to place the button in different locations<br>
-Ability to use Google Analytics
+* Uses the new CleanPrint engine<br>
+* Additional print button styles<br>
+* Ability to place the button in different locations<br>
+* Ability to use Google Analytics
 
 = 1.0.1 =
-Minor bug fixes
+* Minor bug fixes
 
 = 1.0.0 =
-Re-factored for WordPress VIP installations
+* Re-factored for WordPress VIP installations
 
 == Upgrade Notice ==
 
-All CleanPrint 1.0 users please upgrade to the 1.5 version.  We have upgraded our systems and are discontinuing the old.  The CleanPrint 1.1 termination date is 1/1/2012, if you have any questions please email tech@formatdynamics.com.
-
-== Advertising ==
-
-Stay tuned!
+All CleanPrint 0.9.5b, 1.0.0 and 1.0.1 installations must upgrade to the latest version before 3/31/2012, if you have any questions please email tech@formatdynamics.com.
