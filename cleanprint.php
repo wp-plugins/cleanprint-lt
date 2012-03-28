@@ -21,7 +21,7 @@ $optionsName            = 'CleanPrintAdminOptions';
 
 // CleanPrint parameters (change these *only* if you know what you're doing)
 $baseUrl                = 'http://cache-02.cleanprint.net';
-$publisherKey           = 'wpdefault15';
+$publisherKey           = 'wpdefault';
 
 // Best not change these (internal-use only)
 $cleanprintUrl          = $baseUrl . '/cpf/cleanprint';
