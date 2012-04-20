@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
-Version: 3.0.0
+Version: 3.0.1
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -410,15 +410,15 @@ function cleanprint_add_content($content) {
         }
 
         if ($showPrintBtn) {
-            $buttons .= "<a href='.' onClick='CleanPrint();return false' title='Print page' class='cleanprint-exclude'><img src='$imagesUrl/CleanPrint$buttonStyle.png' /></a>";
+            $buttons .= "<a href=\".\" onClick=\"CleanPrint();return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
         }
 
         if ($showPdfBtn) {
-            $buttons .= "<a href='.' onClick='CleanPDF();return false' title='PDF page' class='cleanprint-exclude'><img src='$imagesUrl/Pdf$buttonStyle.png' /></a>";
+            $buttons .= "<a href=\".\" onClick=\"CleanPDF();return false\" title=\"PDF page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\" /></a>";
         }
 
         if ($showEmailBtn) {
-            $buttons .= "<a href='.' onClick='CleanEmail();return false' title='Email page' class='cleanprint-exclude'><img src='$imagesUrl/Email$buttonStyle.png' /></a>";
+            $buttons .= "<a href=\".\" onClick=\"CleanEmail();return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\" /></a>";
         }
 
 
