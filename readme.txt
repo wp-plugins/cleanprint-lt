@@ -1,10 +1,10 @@
 ﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver, dropbox, google docs
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver, dropbox, google docs google drive
 Requires at least: 2.0.2
-Tested up to: 3.3.1
-Stable tag: 3.0.1
+Tested up to: 3.3.2
+Stable tag: 3.1.0
   
 CleanPrint – Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
 
@@ -154,8 +154,11 @@ Visit us at:
 
 == Changelog ==
 
-= 3.0.1 =
-* Workaround for Google Analytics plug-in defect
+= 3.1.0 =
+* Added support for tag page type
+* Added support for excluding specific page IDs
+* Added support for multiple print buttons per page
+* Workaround for Google Analytics for WordPress plug-in defect
 
 = 3.0.0 =
 * Support for turning on/off the buttons per-page
