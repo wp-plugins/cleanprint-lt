@@ -20,7 +20,7 @@ $printAttr              = 'print';
 $optionsName            = 'CleanPrintAdminOptions';
 
 // CleanPrint parameters (change these *only* if you know what you're doing)
-$baseUrl                = 'http://cpf.staging.cleanprint.net';
+$baseUrl                = 'http://cache-02.cleanprint.net';
 $publisherKey           = 'wpdefault';
 
 // Best not change these (internal-use only)
@@ -57,8 +57,12 @@ function cleanprint_add_settings_section() {
 ?>
     <p>Thanks for installing CleanPrint on your site and helping your users save paper, ink, money and trees!
     Below are a few options to customize CleanPrint and make it your own. You can use your logo and choose
-    from a variety of button styles or use your own button.  You may also select which corner where the
-    button(s) and the types of pages.</p>
+    from a variety of button styles or use your own buttons.  You may also select the location within the page
+    where the button(s) are placed.</p>
+    
+    <p>You may select which page types that the button(s) should appear on.  You may also exclude specific
+    pages by entering their comma separated IDs.  NOTE: The ID is visible in the URL when you navigate to
+    that page.</p>
     
     <p>If you would like to place the button(s) in a custom position please see installation instructions.
     Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site <b>MUST</b>
@@ -313,6 +317,21 @@ function cleanprint_add_settings_field_pages() {
 }
 
 
+function cleanprint_add_settings_field_tags() {
+    global $optionsName;
+    
+    $options     = get_option($optionsName);
+    $tags        = $options['TagsInclude'];
+    $isChecked   = $tags=="include" || !isset($tags);
+    
+    printf( "<select id='plugin_tags' name='%s[TagsInclude]'>", $optionsName);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");
+    printf( "<i> - i.e. is_tag()</i>");
+}
+
+
 function cleanprint_add_settings_field_excludes() {
     global $optionsName;
     
@@ -378,6 +397,7 @@ function cleanprint_is_pagetype() {
     $category      = $options['CategoryInclude'];
     $posts         = $options['PostsInclude'];
     $pages         = $options['PagesInclude'];
+    $tags          = $options['TagsInclude'];
     $excludes      = $options['PagesExcludes'];
     
     if (isset($excludes)) {
@@ -393,12 +413,14 @@ function cleanprint_is_pagetype() {
     $isCatgChecked = $category =='include' || !isset($category);
     $isPostChecked = $posts    =='include' || !isset($posts);
     $isPageChecked = $pages    =='include' || !isset($pages);
+    $isTagChecked  = $tags     =='include' || !isset($tags);
     
     if (is_home()       && $isHomeChecked) return true;
     if (is_front_page() && $isFrntChecked) return true;              
     if (is_category()   && $isCatgChecked) return true;
     if (is_single()     && $isPostChecked) return true;
     if (is_page()       && $isPageChecked) return true;
+    if (is_tag()        && $isTagChecked ) return true;
     
     return false;
 }
@@ -579,7 +601,8 @@ function cleanprint_admin_init() {
     add_settings_field     ('plugin_category',        '<strong>Categories:</strong>',                'cleanprint_add_settings_field_category',      $pluginName, 'plugin_main');    
     add_settings_field     ('plugin_posts',           '<strong>Posts:</strong>',                     'cleanprint_add_settings_field_posts',         $pluginName, 'plugin_main');
     add_settings_field     ('plugin_pages',           '<strong>Pages:</strong>',                     'cleanprint_add_settings_field_pages',         $pluginName, 'plugin_main');
-    add_settings_field     ('plugin_excludes',        '<strong>Excluded Pages:</strong>',            'cleanprint_add_settings_field_excludes',      $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_tags',            '<strong>Tags:</strong>',                      'cleanprint_add_settings_field_tags',          $pluginName, 'plugin_main');
+    add_settings_field     ('plugin_excludes',        '<strong>Excluded Page IDs:</strong>',         'cleanprint_add_settings_field_excludes',      $pluginName, 'plugin_main');
     add_settings_field     ('plugin_gaOption',        '<strong>CleanPrint Event Tracking:</strong>', 'cleanprint_add_settings_field_ga',            $pluginName, 'plugin_main');
 }
 
