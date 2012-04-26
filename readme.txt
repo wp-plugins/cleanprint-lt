@@ -1,10 +1,10 @@
 ﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver, dropbox, google docs
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver, dropbox, google docs, google drive
 Requires at least: 2.0.2
-Tested up to: 3.2
-Stable tag: 3.0.0
+Tested up to: 3.3.2
+Stable tag: 3.1.0
   
 CleanPrint – Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
 
@@ -14,7 +14,7 @@ The world's best and most used eco-friendly print tool is now available on WordP
 
 <h4>How CleanPrint Works</h4>
 
-Clean Print is an eco-friendly tool that saves paper, ink and money when printing from the internet. Users can easily edit content before printing or saving to PDF, Dropbox or Google Docs. CleanPrint includes sharing tools and a pagination/paper saving counter that shows visitors how eco-friendly your site is and helps them avoid that dreaded extra sheet of paper!
+CleanPrint is an eco-friendly tool that saves paper, ink and money when printing from the internet. Users can easily edit content before printing or saving to PDF, Dropbox or Google Docs. CleanPrint includes sharing tools and a pagination/paper saving counter that shows visitors how eco-friendly your site is and helps them avoid that dreaded extra sheet of paper!
 
 1. User activates CleanPrint by hitting print button
 2. Print preview appears including pagination and editing tools for optimization
@@ -153,6 +153,12 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.1.0 =
+* Added support for tag page type
+* Added support for excluding specific page IDs
+* Added support for multiple print buttons per page
+* Workaround for Google Analytics for WordPress plug-in defect
 
 = 3.0.0 =
 * Support for turning on/off the buttons per-page
