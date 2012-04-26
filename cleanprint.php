@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
-Version: 3.0.1
+Version: 3.1.0
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
