@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
-Version: 3.1.0
+Version: 3.1.1
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -61,9 +61,9 @@ function cleanprint_add_settings_section() {
     from a variety of button styles or use your own buttons.  You may also select the location within the page
     where the button(s) are placed.</p>
     
-    <p>You may select which page types that the button(s) should appear on.  You may also exclude specific
+    <p>You may select which page types that the button(s) should appear on.  <!-- You may also exclude specific
     pages by entering their comma separated IDs.  NOTE: The ID is visible in the URL when you navigate to
-    that page.</p>
+    that page. --></p>
     
     <p>If you would like to place the button(s) in a custom position please see installation instructions.
     Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site <b>MUST</b>
@@ -330,6 +330,7 @@ function cleanprint_add_settings_field_tags() {
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
     printf( "</select>");
     printf( "<i> - i.e. is_tag()</i>");
+    printf("<tr><td colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");
 }
 
 
@@ -340,7 +341,7 @@ function cleanprint_add_settings_field_excludes() {
     $excludes    = $options['PagesExcludes'];
     
     printf( "<input type='text' id='plugin_excludes' name='%s[PagesExcludes]' value='%s' /><br>\n", $optionsName, $excludes);
-    printf("<tr><td colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");  
+//  printf("<tr><td colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");  
 }
 
 
@@ -399,7 +400,8 @@ function cleanprint_is_pagetype() {
     $pages         = $options['PagesInclude'];
     $tags          = $options['TagsInclude'];
     $excludes      = $options['PagesExcludes'];
-    
+
+/*
     if (isset($excludes) && isset($page_id)) {
        $IDs = explode(",", $excludes);
        $len = count($IDs);
@@ -407,7 +409,7 @@ function cleanprint_is_pagetype() {
           if ($page_id == $IDs[$i]) return false;
        }
     }
-
+*/
     $isHomeChecked = $homepage =='include' || !isset($homepage);
     $isFrntChecked = $frontpage=='include' || !isset($frontpage);
     $isCatgChecked = $category =='include' || !isset($category);
@@ -609,7 +611,7 @@ function cleanprint_admin_init() {
     add_settings_field     ('plugin_posts',           '<strong>Posts:</strong>',                     'cleanprint_add_settings_field_posts',         $pluginName, 'plugin_main');
     add_settings_field     ('plugin_pages',           '<strong>Pages:</strong>',                     'cleanprint_add_settings_field_pages',         $pluginName, 'plugin_main');
     add_settings_field     ('plugin_tags',            '<strong>Tags:</strong>',                      'cleanprint_add_settings_field_tags',          $pluginName, 'plugin_main');
-    add_settings_field     ('plugin_excludes',        '<strong>Excluded Page IDs:</strong>',         'cleanprint_add_settings_field_excludes',      $pluginName, 'plugin_main');
+//  add_settings_field     ('plugin_excludes',        '<strong>Excluded Page IDs:</strong>',         'cleanprint_add_settings_field_excludes',      $pluginName, 'plugin_main');
     add_settings_field     ('plugin_gaOption',        '<strong>CleanPrint Event Tracking:</strong>', 'cleanprint_add_settings_field_ga',            $pluginName, 'plugin_main');
 }
 
