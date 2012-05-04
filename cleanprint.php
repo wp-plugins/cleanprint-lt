@@ -30,7 +30,7 @@ $buttonHelperUrl        = $baseUrl . '/cpf/publisherSignup/js/generateCPFTag.js'
 $defaultLogoUrl         = $baseUrl . '/media/logos/Default.png';
 $defaultButtonStyle     = 'Btn_white';
 $defaultButtonPlacement = 'tr';
-$cleanprintDebug        = true;
+$cleanprintDebug        = false;
 
 
 
