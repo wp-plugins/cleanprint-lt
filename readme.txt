@@ -1,10 +1,10 @@
 ﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
-Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, printer friendly, print friendly, airprint, social, output, plugin, saver, dropbox, google docs, google drive, box, box.net, box.com
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
 Requires at least: 2.0.2
-Tested up to: 3.3.2
-Stable tag: 3.1.3
+Tested up to: 3.4.1
+Stable tag: 3.2.0
   
 CleanPrint - Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
 
@@ -19,11 +19,14 @@ CleanPrint is an eco-friendly tool that saves paper, ink and money when printing
 1. User activates CleanPrint by hitting print button
 2. Print preview appears including pagination and editing tools for optimization
 3. User selects desired output:
-   * Print - Sends content to your printer
    * PDF - Saves content as a PDF document
-   * Email - Sends content via eMail
+   * Text - Saves content as a rich text formated file
    * Dropbox - Saves a PDF or text file to your Dropbox account
-   * Google Docs - Saves a PDF or text file to your Google Docs account
+   * Box - Saves a PDF or text file to your Box account
+   * Google Drive - Saves a PDF or text file to your Google Drive account
+   * Google Cloud Print - prints to a remote printer
+   * Print - Sends content to your printer
+   * Email - Sends content via email
 4. Share article link to Facebook, Twitter, LinkedIn, and Google+
 
 <h4>Features and Benefits</h4>
@@ -153,6 +156,21 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.2.0 =
+* Added support for Google Cloud Print
+* Added support for RTF
+* Improved button identifiers
+* Improved script injection
+
+= 3.1.3 =
+* Minor bug fixes
+
+= 3.1.2 =
+* Minor bug fixes
+
+= 3.1.1 =
+* Minor bug fixes
 
 = 3.1.0 =
 * Added support for tag page type

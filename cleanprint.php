@@ -2,8 +2,8 @@
 /*
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
-Description: Eco-friendly content output to print, PDF, email, Box.net, Google Docs and Dropbox
-Version: 3.1.3
+Description: Eco-friendly content output to print, PDF, text, email, Box.net, Google Docs, Google Drive, Google Cloud Print and Dropbox
+Version: 3.2.0
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -494,9 +494,23 @@ function cleanprint_wp_head() {
 	global $defaultLogoUrl;
     global $cleanprintDebug;
    
-	$options   = get_option($optionsName);
-	$GASetting = $options['GASetting'];
-	$logoUrl   = $options['logoUrl'];
+	$options      = get_option($optionsName);
+	$GASetting    = $options['GASetting'];
+	$logoUrl      = $options['logoUrl'];
+
+    $showPrintBtn = $options['PrintInclude']=='include' || !isset($options['PrintInclude']);
+    $showPdfBtn   = $options['PDFInclude'  ]=='include' || !isset($options['PDFInclude']);
+    $showEmailBtn = $options['EmailInclude']=='include' || !isset($options['EmailInclude']);
+
+    if (cleanprint_is_pagetype() == false) {
+       // Disabled page type
+       return;
+    }
+
+    if (!($showPrintBtn || $showPdfBtn || $showEmailBtn)) {
+       // All the buttons are excluded
+       return;
+    }
 
     if ($cleanprintDebug) {
 		printf("\n\n\n<!-- CleanPrint Debug\n\t\t%s\n\t\tpage_id:%s, home:%d, front:%d, category:%d, single:%d, page:%d, tag:%d\n-->\n\n\n",
