@@ -110,6 +110,18 @@ Yes, you can add your own logo in the CleanPrint Settings page.  The logo should
 
 In the CleanPrint Settings page you may choose from a wide variety of button styles.  You may also elect to turn on/off any button.
 
+= Can I add the CleanPrint button via a shortcode?
+
+Yes, add the following to your functions.php in your theme:
+<pre>
+   add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
+   function get_cleanprint_print_button() {
+      if( function_exists('cleanprint_add_print_button') ){
+         return cleanprint_add_print_button();
+      }
+   }
+</pre>
+
 = How do I remove the Print button from my home page? =
 
 Change the Home Page setting from "Include" to "Exclude" in the CleanPrint Settings page.
