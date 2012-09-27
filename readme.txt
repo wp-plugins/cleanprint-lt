@@ -1,4 +1,4 @@
-﻿=== CleanPrint ===
+﻿﻿=== CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
@@ -10,7 +10,7 @@ CleanPrint - Eco-friendly content output to print, PDF, email, Google Drive and 
 
 
 == Description ==
-The world's best and most used eco-friendly print tool is now available on WordPress. Join top sites like MSNBC, CNN, Disney and Fox Sports and offer your users an economically and ecologically friendly printing and saving experience that saves paper, ink, and money while saving trees.
+The world's best and most used eco-friendly print tool is now available on WordPress. Join top sites like NBC News, CNN, Disney and Fox Sports and offer your users an economically and ecologically friendly printing and saving experience that saves paper, ink, and money while saving trees.
 
 <h4>How CleanPrint Works</h4>
 
@@ -51,7 +51,7 @@ CleanPrint is an eco-friendly tool that saves paper, ink and money when printing
 
 If you prefer to use your own print link or button instead of one of the provided buttons you may do so by:
 
-1. Disable the buttons via the 'exclude' button option in the CleanPrint Settings page.
+1. Hide the buttons under Button Styles in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
    * &lt;a href='.' onClick='CleanPrint(); return false' title='Print page'&gt;Print&lt;/a&gt;
    * &lt;a href='.' onClick='CleanEmail(); return false' title='Email page'&gt;Email&lt;/a&gt;
@@ -100,6 +100,20 @@ Below are paths to each of our standard Email buttons.
     Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_16x16.png
 
 
+<h4>Using The Shortcode Button</h4>
+
+1. Hide the buttons under Button Styles in the CleanPrint Settings page.
+2. Add the shortcode [cleanprint_print_button] to your content
+3. Add the following to your theme's functions.php file:
+<pre>
+    add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
+    function get_cleanprint_print_button() {
+       if( function_exists('cleanprint_add_print_button') ){
+          return cleanprint_add_print_button();
+       }
+    }
+</pre>
+
 == Frequently Asked Questions ==
 
 = Can I personalize CleanPrint for my site? =
@@ -140,7 +154,7 @@ You have two options:
 <ol>
    <li>Visit any of our publisher partners, locate an article and press their print button:
    <ul>
-      <li>http://www.msnbc.msn.com</li>
+      <li>http://www.nbcnews.com</li>
       <li>http://www.cnn.com</li>
       <li>http://msn.foxsports.com</li>
       <li>http://www.slate.com</li>
@@ -174,7 +188,7 @@ Visit us at:
 * Added support for RTF
 * Improved button identifiers
 * Improved script injection
-* Shortcode support
+* Added shortcode support
 
 = 3.1.3 =
 * Minor bug fixes
