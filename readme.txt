@@ -3,10 +3,10 @@ Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
 Requires at least: 2.0.2
-Tested up to: 3.4.1
+Tested up to: 3.4.2
 Stable tag: 3.2.0
   
-CleanPrint - Eco-friendly content output to print, PDF, email, Google Docs and Dropbox
+CleanPrint - Eco-friendly content output to print, PDF, email, Google Drive and Dropbox
 
 
 == Description ==
@@ -110,6 +110,18 @@ Yes, you can add your own logo in the CleanPrint Settings page.  The logo should
 
 In the CleanPrint Settings page you may choose from a wide variety of button styles.  You may also elect to turn on/off any button.
 
+= Can I add the CleanPrint button via a shortcode?
+
+Yes, add the following to your functions.php in your theme:
+<pre>
+   add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
+   function get_cleanprint_print_button() {
+      if( function_exists('cleanprint_add_print_button') ){
+         return cleanprint_add_print_button();
+      }
+   }
+</pre>
+
 = How do I remove the Print button from my home page? =
 
 Change the Home Page setting from "Include" to "Exclude" in the CleanPrint Settings page.
@@ -162,6 +174,7 @@ Visit us at:
 * Added support for RTF
 * Improved button identifiers
 * Improved script injection
+* Shortcode support
 
 = 3.1.3 =
 * Minor bug fixes
