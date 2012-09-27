@@ -485,6 +485,25 @@ function cleanprint_add_content($content) {
 }
 
 
+// Adds the CleanPrint print button for use by a shortcode
+function cleanprint_add_print_button($content) {
+    global $post;
+    global $optionsName;
+    global $imagesUrl;
+    global $defaultButtonStyle;
+	 	    
+    $options     = get_option($optionsName);
+    $buttonStyle = $options['buttonStyle'];
+    $postId      = isset($post) && isset($post->ID) ? sprintf("'post-%s'", $post->ID) : ""; 
+        
+    if (!isset($buttonStyle)) {
+        $buttonStyle = $defaultButtonStyle;
+    }
+
+    return "<a href=\".\" onClick=\"CleanPrint($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+}
+
+
 // Adds the CleanPrint script tags to the head section
 function cleanprint_wp_head() {
     global $page_id;
