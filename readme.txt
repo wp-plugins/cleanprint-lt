@@ -4,7 +4,7 @@ Donate link: http://www.formatdynamics.com/aboutus-contactus.php
 Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
 Requires at least: 2.0.2
 Tested up to: 3.4.2
-Stable tag: 3.2.0
+Stable tag: 3.2.1
   
 CleanPrint - Eco-friendly content output to print, PDF, email, Google Drive and Dropbox
 
@@ -105,14 +105,14 @@ Below are paths to each of our standard Email buttons.
 1. Hide the buttons under Button Styles in the CleanPrint Settings page.
 2. Add the shortcode [cleanprint_print_button] to your content
 3. Add the following to your theme's functions.php file:
-<pre>
+
     add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
     function get_cleanprint_print_button() {
        if( function_exists('cleanprint_add_print_button') ){
           return cleanprint_add_print_button();
        }
     }
-</pre>
+
 
 == Frequently Asked Questions ==
 
@@ -182,6 +182,9 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.2.1 =
+* Minor bug fixes 
 
 = 3.2.0 =
 * Added support for Google Cloud Print
