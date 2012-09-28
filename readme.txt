@@ -105,14 +105,14 @@ Below are paths to each of our standard Email buttons.
 1. Hide the buttons under Button Styles in the CleanPrint Settings page.
 2. Add the shortcode [cleanprint_print_button] to your content
 3. Add the following to your theme's functions.php file:
-<pre>
+
     add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
     function get_cleanprint_print_button() {
        if( function_exists('cleanprint_add_print_button') ){
           return cleanprint_add_print_button();
        }
     }
-</pre>
+
 
 == Frequently Asked Questions ==
 
@@ -124,17 +124,9 @@ Yes, you can add your own logo in the CleanPrint Settings page.  The logo should
 
 In the CleanPrint Settings page you may choose from a wide variety of button styles.  You may also elect to turn on/off any button.
 
-= Can I add the CleanPrint button via a shortcode?
+= Can I add the CleanPrint button via a shortcode? =
 
-Yes, add the following to your functions.php in your theme:
-<pre>
-   add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
-   function get_cleanprint_print_button() {
-      if( function_exists('cleanprint_add_print_button') ){
-         return cleanprint_add_print_button();
-      }
-   }
-</pre>
+Yes, see the Installation instructions.
 
 = How do I remove the Print button from my home page? =
 
@@ -182,6 +174,9 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.2.1 =
+* Minor bug fixes 
 
 = 3.2.0 =
 * Added support for Google Cloud Print
