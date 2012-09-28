@@ -521,6 +521,11 @@ function cleanprint_wp_head() {
     $showPdfBtn   = $options['PDFInclude'  ]=='include' || !isset($options['PDFInclude']);
     $showEmailBtn = $options['EmailInclude']=='include' || !isset($options['EmailInclude']);
 
+    if ($cleanprintDebug) {
+		printf("\n\n\n<!-- CleanPrint Debug\n\t\t%s\n\t\tpage_id:%s, home:%d, front:%d, category:%d, single:%d, page:%d, tag:%d\n-->\n\n\n",
+					               http_build_query($options,"","\n\t\t"), $page_id, is_home(), is_front_page(), is_category(), is_single(), is_page(), is_tag());
+	}
+		
     if (cleanprint_is_pagetype() == false) {
        // Disabled page type
        return;
@@ -531,11 +536,6 @@ function cleanprint_wp_head() {
        return;
     }
 */
-    if ($cleanprintDebug) {
-		printf("\n\n\n<!-- CleanPrint Debug\n\t\t%s\n\t\tpage_id:%s, home:%d, front:%d, category:%d, single:%d, page:%d, tag:%d\n-->\n\n\n",
-					               http_build_query($options,"","\n\t\t"), $page_id, is_home(), is_front_page(), is_category(), is_single(), is_page(), is_tag());
-	}
-		
     printf( "<script id='cpf_wp' type='text/javascript'>\n");
     printf( "   function CleanPrint(postId) {\n");
     printf( "   	CleanPrintPrintHtml(null,postId);\n");
