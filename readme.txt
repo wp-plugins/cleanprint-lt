@@ -105,13 +105,14 @@ Below are paths to each of our standard Email buttons.
 1. Hide the buttons under Button Styles in the CleanPrint Settings page.
 2. Add the shortcode [cleanprint_print_button] to your content
 3. Add the following to your theme's functions.php file:
-
+<pre>
     add_shortcode('cleanprint_print_button', 'get_cleanprint_print_button');
     function get_cleanprint_print_button() {
        if( function_exists('cleanprint_add_print_button') ){
           return cleanprint_add_print_button();
        }
     }
+</pre>
 
 
 == Frequently Asked Questions ==
