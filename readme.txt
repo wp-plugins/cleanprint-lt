@@ -3,8 +3,8 @@ Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/
 Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
 Requires at least: 2.0.2
-Tested up to: 3.4.2
-Stable tag: 3.2.2
+Tested up to: 3.5
+Stable tag: 3.2.3
   
 CleanPrint - Eco-friendly content output to print, PDF, email, Google Drive and Dropbox
 
@@ -46,6 +46,8 @@ CleanPrint is an eco-friendly tool that saves paper, ink and money when printing
 2. On the navigation on the left hand side, click 'Plugins', then 'Add New' from the menu.
 3. Enable the CleanPrint plugin.
 4. Visit the CleanPrint Settings page, select the appropriate options and click "Save Changes".
+5. To remove ads from CleanPrint go to http://www.formatdynamics.com/diypub-adfree/ and sign up.
+
 
 <h4>Using Your Own Buttons</h4>
 
@@ -121,6 +123,10 @@ Below are paths to each of our standard Email buttons.
 
 Yes, you can add your own logo in the CleanPrint Settings page.  The logo should be no more than 200px wide and 40px tall.
 
+= Can I remove ads from CleanPrint? =
+
+Yes, to remove ads from CleanPrint go to http://www.formatdynamics.com/diypub-adfree/ and sign up.
+
 = How do remove the Email and PDF buttons leaving only the Print button? =
 
 In the CleanPrint Settings page you may choose from a wide variety of button styles.  You may also elect to turn on/off any button.
@@ -175,6 +181,9 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.2.3 =
+* Added no-ad option
 
 = 3.2.2 =
 * Minor bug fixes 

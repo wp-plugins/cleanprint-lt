@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Box.net, Google Docs, Google Drive, Google Cloud Print and Dropbox
-Version: 3.2.2
+Version: 3.2.3
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -68,6 +68,9 @@ function cleanprint_add_settings_section() {
     <p>If you would like to place the button(s) in a custom position please see installation instructions.
     Also, if you choose to use Google Analytics custom event tracking for CleanPrint your site <b>MUST</b>
     have Google Analytics running.</p>
+    
+    <p>You can also turn off advertising, visit our site and sign up
+       <a href="http://www.formatdynamics.com/diypub-adfree/" target="adfree">http://www.formatdynamics.com/diypub-adfree/</a>.</p>
     <?php printf("<tr><td><h2>Logo</h2><hr /></td></tr>");?>
 <?php
 }
