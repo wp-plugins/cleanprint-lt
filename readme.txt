@@ -4,7 +4,7 @@ Donate link: http://www.formatdynamics.com/
 Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
 Requires at least: 2.0.2
 Tested up to: 3.5
-Stable tag: 3.2.3
+Stable tag: 3.2.4
   
 CleanPrint - Eco-friendly content output to print, PDF, email, Google Drive and Dropbox
 
@@ -181,6 +181,9 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.2.4 =
+* Minor bug fixes 
 
 = 3.2.3 =
 * Added no-ad option
