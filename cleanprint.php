@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Box.net, Google Docs, Google Drive, Google Cloud Print and Dropbox
-Version: 3.2.3
+Version: 3.2.4
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -70,7 +70,7 @@ function cleanprint_add_settings_section() {
     have Google Analytics running.</p>
     
     <p>You can also turn off advertising, visit our site and sign up
-       <a href="http://www.formatdynamics.com/diypub-adfree/" target="adfree">http://www.formatdynamics.com/diypub-adfree/</a>.</p>
+    <a href="http://www.formatdynamics.com/diypub-adfree/" target="adfree">http://www.formatdynamics.com/diypub-adfree/</a>.</p>
     <?php printf("<tr><td><h2>Logo</h2><hr /></td></tr>");?>
 <?php
 }
@@ -504,6 +504,36 @@ function cleanprint_add_print_button() {
     }
 
     return "<a href=\".\" onClick=\"CleanPrint($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+}
+
+
+// Adds the CleanPrint print button for use by a shortcode
+function cleanprint_add_button($atts, $content, $tag) {
+    global $post;
+    global $optionsName;
+    global $imagesUrl;
+    global $defaultButtonStyle;
+	 	    
+    extract( shortcode_atts( array(
+		'print' => 'true',
+        'pdf'   => 'false',
+        'email' => 'false',
+	), $atts ) );
+	 	    
+    $options     = get_option($optionsName);
+    $buttonStyle = $options['buttonStyle'];
+    $postId      = isset($post) && isset($post->ID) ? sprintf("'post-%s'", $post->ID) : "";
+    $rtn         = ""; 
+        
+    if (!isset($buttonStyle)) {
+        $buttonStyle = $defaultButtonStyle;
+    }
+
+    if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"CleanPrint($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+    if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"CleanPDF  ($postId);return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\"        /></a>";
+    if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"CleanEmail($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\"      /></a>";
+
+    return $rtn;
 }
 
 
