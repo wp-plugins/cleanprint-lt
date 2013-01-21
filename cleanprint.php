@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Box.net, Google Docs, Google Drive, Google Cloud Print and Dropbox
-Version: 3.2.4
+Version: 3.2.5
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -457,15 +457,15 @@ function cleanprint_add_content($content) {
         }
 
         if ($showPrintBtn) {
-            $buttons .= "<a href=\".\" onClick=\"CleanPrint($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+            $buttons .= "<a href=\".\" onClick=\"CleanPrint4WP_Print($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
         }
 
         if ($showPdfBtn) {
-            $buttons .= "<a href=\".\" onClick=\"CleanPDF($postId);return false\" title=\"PDF page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\" /></a>";
+            $buttons .= "<a href=\".\" onClick=\"CleanPrint4WP_PDF($postId);return false\" title=\"PDF page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\" /></a>";
         }
 
         if ($showEmailBtn) {
-            $buttons .= "<a href=\".\" onClick=\"CleanEmail($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\" /></a>";
+            $buttons .= "<a href=\".\" onClick=\"CleanPrint4WP_Email($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\" /></a>";
         }
 
 
@@ -503,7 +503,7 @@ function cleanprint_add_print_button() {
         $buttonStyle = $defaultButtonStyle;
     }
 
-    return "<a href=\".\" onClick=\"CleanPrint($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+    return "<a href=\".\" onClick=\"CleanPrint4WP_Print($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
 }
 
 
@@ -529,9 +529,9 @@ function cleanprint_add_button($atts, $content, $tag) {
         $buttonStyle = $defaultButtonStyle;
     }
 
-    if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"CleanPrint($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
-    if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"CleanPDF  ($postId);return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\"        /></a>";
-    if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"CleanEmail($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\"      /></a>";
+    if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"CleanPrint4WP_Print($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+    if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"CleanPrint4WP_PDF  ($postId);return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\"        /></a>";
+    if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"CleanPrint4WP_Email($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\"      /></a>";
 
     return $rtn;
 }
@@ -570,19 +570,19 @@ function cleanprint_wp_head() {
 	}
 		
     printf( "<script id='cpf_wp' type='text/javascript'>\n");
-    printf( "   function CleanPrint(postId) {\n");
+    printf( "   function CleanPrint4WP_Print(postId) {\n");
     printf( "   	CleanPrintPrintHtml(null,postId);\n");
 						if ($GASetting=="true") {
 							printf( "   try { _gaq.push(['_trackEvent', 'CleanPrint', 'Print']); } catch(e) {}\n");
 						}
     printf( "   }\n");
-    printf( "   function CleanEmail(postId) {\n");
+    printf( "   function CleanPrint4WP_Email(postId) {\n");
     printf( "   	CleanPrintSendEmail(null,postId);\n");
 						if ($GASetting=="true") {
 							printf( "   try { _gaq.push(['_trackEvent', 'CleanPrint', 'Email']); } catch(e) {}\n");
 						}
     printf( "   }\n");
-    printf( "   function CleanPDF(postId) {\n");
+    printf( "   function CleanPrint4WP_PDF(postId) {\n");
     printf( "   	CleanPrintGeneratePdf(null,postId);\n");
 						if ($GASetting=="true") {
 							printf( "   try { _gaq.push(['_trackEvent', 'CleanPrint', 'PDF']); } catch(e) {}\n");
