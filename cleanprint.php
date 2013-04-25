@@ -2,8 +2,8 @@
 /*
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
-Description: Eco-friendly content output to print, PDF, text, email, Box.net, Google Docs, Google Drive, Google Cloud Print and Dropbox
-Version: 3.2.5
+Description: Eco-friendly content output to print, PDF, text, email, Kindle, Google Cloud Print, Box, Google Drive and Dropbox
+Version: 3.3.0
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -14,7 +14,7 @@ if( !class_exists( 'WP_Http' ) )
 
 // Plug-in parameters (do not change these)
 $cleanprint_plugin_name       = 'cleanprint-lt';
-$cleansave_plugin_file        = $cleanprint_plugin_name . '/cleanprint.php';
+$cleanprint_plugin_file        = $cleanprint_plugin_name . '/cleanprint.php';
 $cleanprint_plugin_attr       = 'plugin';
 $cleanprint_print_attr        = 'print';
 $cleanprint_options_name      = 'CleanPrintAdminOptions';
@@ -598,9 +598,9 @@ function cleanprint_wp_head() {
 // Add the Settings menu link to the plugin page
 function cleanprint_add_action_links($links, $file) {
 	global $cleanprint_plugin_name;
-    global $cleansave_plugin_file;
+    global $cleanprint_plugin_file;
     
-    if ($file == $cleansave_plugin_file) {
+    if ($file == $cleanprint_plugin_file) {
 		$links[] = sprintf("<a href='options-general.php?page=%s'>Settings</a>", $cleanprint_plugin_name);
 	}
 	return $links;
@@ -657,11 +657,11 @@ function cleanprint_uninstall() {
 // WP callback for initializing the options menu
 function cleanprint_admin_init() {
     global $cleanprint_plugin_name;
-    global $cleansave_plugin_file;
+    global $cleanprint_plugin_file;
     global $cleanprint_options_name;
     
     register_setting       ($cleanprint_options_name, $cleanprint_options_name, 'cleanprint_sanitize_options');
-    register_uninstall_hook($cleansave_plugin_file, 'cleanprint_uninstall');
+    register_uninstall_hook($cleanprint_plugin_file, 'cleanprint_uninstall');
 
     add_settings_section   ('plugin_main', '', 'cleanprint_add_settings_section', $cleanprint_plugin_name);
     add_settings_field     ('plugin_logoUrl',         '<strong>Image:</strong>',                     'cleanprint_add_settings_field_logo_url_',     $cleanprint_plugin_name, 'plugin_main');
