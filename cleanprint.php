@@ -82,7 +82,7 @@ function cleanprint_add_settings_field_logo_url_() {
     global $cleanprint_def_logo_url;
     
 	$options        = get_option($cleanprint_options_name);
-	$logoUrl        = $options['logoUrl'];
+	$logoUrl        = isset($options['logoUrl']) ? $options['logoUrl'] : null;
     $customChecked  = isset($logoUrl) && $logoUrl!=$cleanprint_def_logo_url;
     $defaultChecked = !$customChecked;
 
@@ -105,7 +105,7 @@ function cleanprint_add_settings_field_button_color() {
     global $cleanprint_def_btn_style;
     
 	$options     = get_option($cleanprint_options_name);
-	$buttonStyle = $options['buttonStyle'];
+	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
 	
 	if(!isset($buttonStyle)) {
         $buttonStyle = $cleanprint_def_btn_style;
@@ -152,9 +152,9 @@ function cleanprint_add_settings_field_button_color() {
     printf("<script>document.getElementById('cpf_button_selector').appendChild(buildButtonSelect());</script>");
     
 	
-	$PrintInclude    = $options['PrintInclude'];
-    $PDFInclude      = $options['PDFInclude'];
-    $EmailInclude    = $options['EmailInclude'];
+	$PrintInclude    = isset($options['PrintInclude']) ? $options['PrintInclude'] : null;
+    $PDFInclude      = isset($options['PDFInclude'])   ? $options['PDFInclude']   : null;
+    $EmailInclude    = isset($options['EmailInclude']) ? $options['EmailInclude'] : null;
     $printChecked    = !isset($PrintInclude) || $PrintInclude=="include";
     $pdfChecked      = !isset($PDFInclude)   || $PDFInclude  =="include";
     $emailChecked    = !isset($EmailInclude) || $EmailInclude=="include";
@@ -172,7 +172,7 @@ function cleanprint_add_settings_field_print_btn() {
     global $cleanprint_options_name;
     
 	$options         = get_option($cleanprint_options_name);
-	$PrintInclude    = $options['PrintInclude'];
+	$PrintInclude    = isset($options['PrintInclude']) ? $options['PrintInclude'] : null;
 	$printChecked    = !isset($PrintInclude) || $PrintInclude == "include";
 	
 	printf( "<select id='plugin_PrintInclude' name='%s[PrintInclude]' onchange='changeButton(this,\"cpImg\"); return false;'>", $cleanprint_options_name);
@@ -187,7 +187,7 @@ function cleanprint_add_settings_field_pdf_btn() {
     global $cleanprint_options_name;
     
 	$options         = get_option($cleanprint_options_name);
-	$PDFInclude      = $options['PDFInclude'];
+	$PDFInclude      = isset($options['PDFInclude'])   ? $options['PDFInclude']   : null;
     $pdfChecked      = !isset($PDFInclude) || $PDFInclude == "include";
 	
 	printf( "<select id='plugin_PDFInclude' name='%s[PDFInclude]' onchange='changeButton(this,\"pdfImg\"); return false;'>", $cleanprint_options_name);
@@ -202,7 +202,7 @@ function cleanprint_add_settings_field_email_btn() {
     global $cleanprint_options_name;
     
 	$options         = get_option($cleanprint_options_name);
-	$EmailInclude    = $options['EmailInclude'];
+	$EmailInclude    = isset($options['EmailInclude']) ? $options['EmailInclude'] : null;
 	$emailChecked    = !isset($EmailInclude) || $EmailInclude == "include";
 	
 	printf( "<select id='plugin_EmailInclude' name='%s[EmailInclude]' onchange='changeButton(this,\"emailImg\"); return false;'>", $cleanprint_options_name);
@@ -218,7 +218,7 @@ function cleanprint_add_settings_field_btn_placement() {
     global $cleanprint_def_btn_placement;
     
 	$options         = get_option($cleanprint_options_name);
-	$ButtonPlacement = $options['ButtonPlacement'];
+	$ButtonPlacement = isset($options['ButtonPlacement']) ? $options['ButtonPlacement'] : null;
 	
 	if (!isset($ButtonPlacement)) {
 	   $ButtonPlacement = $cleanprint_def_btn_placement;
@@ -250,8 +250,8 @@ function cleanprint_add_settings_field_homepage() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $homepage    = $options['HomepageInclude'];
-    $isChecked   = $homepage=="include" || !isset($homepage);
+    $homepage    = isset($options['HomepageInclude']) ? $options['HomepageInclude'] : null;
+    $isChecked   = !isset($homepage) || $homepage=="include";
     
     printf( "<select id='plugin_homepage' name='%s[HomepageInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
@@ -265,8 +265,8 @@ function cleanprint_add_settings_field_frontpage() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $frontpage   = $options['FrontpageInclude'];
-    $isChecked   = $frontpage=="include" || !isset($frontpage);
+    $frontpage   = isset($options['FrontpageInclude']) ? $options['FrontpageInclude'] : null;
+    $isChecked   = !isset($frontpage) || $frontpage=="include";
     
     printf( "<select id='plugin_frontpage' name='%s[FrontpageInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
@@ -280,8 +280,8 @@ function cleanprint_add_settings_field_category() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $category    = $options['CategoryInclude'];
-    $isChecked   = $category=="include" || !isset($category);
+    $category    = isset($options['CategoryInclude']) ? $options['CategoryInclude'] : null;
+    $isChecked   = !isset($category) || $category=="include";
     
     printf( "<select id='plugin_category' name='%s[CategoryInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
@@ -295,8 +295,8 @@ function cleanprint_add_settings_field_posts() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $posts       = $options['PostsInclude'];
-    $isChecked   = $posts=="include" || !isset($posts);
+    $posts       = isset($options['PostsInclude']) ? $options['PostsInclude'] : null;
+    $isChecked   = !isset($posts) || $posts=="include";
     
     printf( "<select id='plugin_posts' name='%s[PostsInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
@@ -310,8 +310,8 @@ function cleanprint_add_settings_field_pages() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $pages       = $options['PagesInclude'];
-    $isChecked   = $pages=="include" || !isset($pages);
+    $pages       = isset($options['PagesInclude']) ? $options['PagesInclude'] : null;
+    $isChecked   = !isset($pages) || $pages=="include";
     
     printf( "<select id='plugin_pages' name='%s[PagesInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
@@ -325,8 +325,8 @@ function cleanprint_add_settings_field_tags() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $tags        = $options['TagsInclude'];
-    $isChecked   = $tags=="include" || !isset($tags);
+    $tags        = isset($options['TagsInclude']) ? $options['TagsInclude'] : null;
+    $isChecked   = !isset($tags) || $tags=="include";
     
     printf( "<select id='plugin_tags' name='%s[TagsInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
@@ -341,7 +341,7 @@ function cleanprint_add_settings_field_excludes() {
     global $cleanprint_options_name;
     
     $options     = get_option($cleanprint_options_name);
-    $excludes    = $options['PagesExcludes'];
+    $excludes    = isset($options['PagesExcludes']) ? $options['PagesExcludes'] : "";
     
     printf( "<input type='text' id='plugin_excludes' name='%s[PagesExcludes]' value='%s' /><br>\n", $cleanprint_options_name, $excludes);
 //  printf("<tr><td colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");  
@@ -353,9 +353,9 @@ function cleanprint_add_settings_field_ga() {
     global $cleanprint_options_name;
     
 	$options         = get_option($cleanprint_options_name);
-	$GASetting       = $options['GASetting'];
+	$GASetting       = isset($options['GASetting']) ? $options['GASetting'] : null;
 	$disabledChecked = !isset($GASetting) || $GASetting=="false";
-    $enabledChecked  = $GASetting;
+    $enabledChecked  = !$disabledChecked;
     
     printf( "<input type='radio' id='plugin_gaOption' name='%s[GASetting]' value='true' %s />", $cleanprint_options_name, $enabledChecked?"checked='checked'":"");
 	printf( "Enabled<br />\n");
@@ -380,8 +380,8 @@ function cleanprint_sanitize_options($options) {
    global $optionsVersion;
    
    // Map the customLogo into logoUrl
-   $logoUrl    = $options['logoUrl'];
-   $customLogo = $options['customLogo'];
+   $logoUrl    = isset($options['logoUrl'])    ? $options['logoUrl']    : null;
+   $customLogo = isset($options['customLogo']) ? $options['customLogo'] : null;
    if (isset($logoUrl) && isset($customLogo) && $logoUrl!=$cleanprint_def_logo_url) {
       $options['logoUrl'] = $customLogo;            
    }   
@@ -396,13 +396,13 @@ function cleanprint_is_pagetype() {
 	global $cleanprint_options_name;
 
     $options       = get_option($cleanprint_options_name);
-    $homepage      = $options['HomepageInclude'];
-    $frontpage     = $options['FrontpageInclude'];
-    $category      = $options['CategoryInclude'];
-    $posts         = $options['PostsInclude'];
-    $pages         = $options['PagesInclude'];
-    $tags          = $options['TagsInclude'];
-/*  $excludes      = $options['PagesExcludes'];
+    $homepage      = isset($options['HomepageInclude'])  ? $options['HomepageInclude']  : null;
+    $frontpage     = isset($options['FrontpageInclude']) ? $options['FrontpageInclude'] : null;
+    $category      = isset($options['CategoryInclude'])  ? $options['CategoryInclude']  : null;
+    $posts         = isset($options['PostsInclude'])     ? $options['PostsInclude']     : null;
+    $pages         = isset($options['PagesInclude'])     ? $options['PagesInclude']     : null;
+    $tags          = isset($options['TagsInclude'])      ? $options['TagsInclude']      : null;
+/*  $excludes      = isset($options['PagesExcludes'])    ? $options['PagesExcludes']    : null;
 
     if (isset($excludes) && isset($page_id)) {
        $IDs = explode(",", $excludes);
@@ -412,12 +412,12 @@ function cleanprint_is_pagetype() {
        }
     }
 */
-    $isHomeChecked = $homepage =='include' || !isset($homepage);
-    $isFrntChecked = $frontpage=='include' || !isset($frontpage);
-    $isCatgChecked = $category =='include' || !isset($category);
-    $isPostChecked = $posts    =='include' || !isset($posts);
-    $isPageChecked = $pages    =='include' || !isset($pages);
-    $isTagChecked  = $tags     =='include' || !isset($tags);
+    $isHomeChecked = !isset($homepage)  || $homepage =='include';
+    $isFrntChecked = !isset($frontpage) || $frontpage=='include';
+    $isCatgChecked = !isset($category)  || $category =='include';
+    $isPostChecked = !isset($posts)     || $posts    =='include';
+    $isPageChecked = !isset($pages)     || $pages    =='include';
+    $isTagChecked  = !isset($tags)      || $tags     =='include';
     
     if (is_home()       && $isHomeChecked) return true;
     if (is_front_page() && $isFrntChecked) return true;              
@@ -438,13 +438,14 @@ function cleanprint_add_content($content) {
 	global $cleanprint_def_btn_placement;
 	 	    
 	$options         = get_option($cleanprint_options_name);
-	$buttonStyle     = $options['buttonStyle'];
-    $ButtonPlacement = $options['ButtonPlacement'];
+	$buttonStyle     = isset($options['buttonStyle'])     ? $options['buttonStyle']     : null;
+    $ButtonPlacement = isset($options['ButtonPlacement']) ? $options['ButtonPlacement'] : null;
     
-    $showPrintBtn    = $options['PrintInclude']=='include' || !isset($options['PrintInclude']);
-    $showPdfBtn      = $options['PDFInclude']  =='include' || !isset($options['PDFInclude']);
-    $showEmailBtn    = $options['EmailInclude']=='include' || !isset($options['EmailInclude']);
+    $showPrintBtn    = !isset($options['PrintInclude']) || $options['PrintInclude']=='include';
+    $showPdfBtn      = !isset($options['PDFInclude'])   || $options['PDFInclude']  =='include';
+    $showEmailBtn    = !isset($options['EmailInclude']) || $options['EmailInclude']=='include';
     $postId          = isset($post) && isset($post->ID) ? sprintf("'post-%s'", $post->ID) : ""; 
+    $buttons         = "";
     
     if (!isset($ButtonPlacement)) {
        $ButtonPlacement = $cleanprint_def_btn_placement;
@@ -495,7 +496,7 @@ function cleanprint_add_print_button() {
     global $cleanprint_def_btn_style;
 	 	    
     $options     = get_option($cleanprint_options_name);
-    $buttonStyle = $options['buttonStyle'];
+    $buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
     $postId      = isset($post) && isset($post->ID) ? sprintf("'post-%s'", $post->ID) : ""; 
         
     if (!isset($buttonStyle)) {
@@ -520,7 +521,7 @@ function cleanprint_add_button($atts, $content, $tag) {
 	), $atts ) );
 	 	    
     $options     = get_option($cleanprint_options_name);
-    $buttonStyle = $options['buttonStyle'];
+    $buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
     $postId      = isset($post) && isset($post->ID) ? sprintf("'post-%s'", $post->ID) : "";
     $rtn         = ""; 
         
@@ -546,12 +547,12 @@ function cleanprint_wp_head() {
     global $cleanprint_debug;
    
 	$options      = get_option($cleanprint_options_name);
-	$GASetting    = $options['GASetting'];
-	$logoUrl      = $options['logoUrl'];
+	$GASetting    = isset($options['GASetting']) ? $options['GASetting'] : null;
+	$logoUrl      = isset($options['logoUrl'])   ? $options['logoUrl']   : null;
 
-    $showPrintBtn = $options['PrintInclude']=='include' || !isset($options['PrintInclude']);
-    $showPdfBtn   = $options['PDFInclude'  ]=='include' || !isset($options['PDFInclude']);
-    $showEmailBtn = $options['EmailInclude']=='include' || !isset($options['EmailInclude']);
+    $showPrintBtn = !isset($options['PrintInclude']) || $options['PrintInclude']=='include';
+    $showPdfBtn   = !isset($options['PDFInclude'  ]) || $options['PDFInclude'  ]=='include';
+    $showEmailBtn = !isset($options['EmailInclude']) || $options['EmailInclude']=='include';
 
     if (cleanprint_is_pagetype() == false) {
        // Disabled page type
@@ -614,19 +615,19 @@ function cleanprint_activate() {
    $optionsVersion = '2.1';
    
    if (isset($options)) {
-      $version  = $options['version'];   
+      $version  = isset($options['version']) ? $options['version'] : null;   
    
       // Don't know what version we looking at (0.97, 1.0.0, 1.0.1, or 2.0.0) so there is only
       // so much we can do.  The biggest issue of the logoUrl which was hijacked in 2.0.0 and
       // now we cannot tell it use apart from earlier releases.
       if (!isset($version)) {      
-         $logoUrl = $options['logoUrl'];
+         $logoUrl = isset($options['logoUrl']) ? $options['logoUrl'] : null;
          // Get rid of the old CP3/WP leader board header
          if (isset($logoUrl) && $logoUrl == 'http://cache-01.cleanprint.net/media/2434/1229027745109_699.jpg') {      
             unset($options['logoUrl']);
          }
          
-         $buttonColor = $options['buttonColor'];
+         $buttonColor = isset($options['buttonColor']) ? $options['buttonColor'] : null;
          if (isset($buttonColor)) {
             $options['buttonStyle'] = 'Btn_' . $buttonColor;
          }
