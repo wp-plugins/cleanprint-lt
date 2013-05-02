@@ -1,12 +1,12 @@
 === CleanPrint ===
 Contributors: johncadams, lucascolin
 Donate link: http://www.formatdynamics.com/
-Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, dropbox, google docs, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print
+Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, kindle, dropbox, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print, box, box.net, box.com
 Requires at least: 2.0.2
-Tested up to: 3.5
-Stable tag: 3.2.4
+Tested up to: 3.5.1
+Stable tag: 3.3.0
   
-CleanPrint - Eco-friendly content output to print, PDF, email, Google Drive and Dropbox
+CleanPrint - Eco-friendly content output to print, PDF, email, Kindle, Box, Google Drive and Dropbox
 
 
 == Description ==
@@ -14,7 +14,7 @@ The world's best and most used eco-friendly print tool is now available on WordP
 
 <h4>How CleanPrint Works</h4>
 
-CleanPrint is an eco-friendly tool that saves paper, ink and money when printing from the internet. Users can easily edit content before printing or saving to PDF, Dropbox or Google Docs. CleanPrint includes sharing tools and a pagination/paper saving counter that shows visitors how eco-friendly your site is and helps them avoid that dreaded extra sheet of paper!
+CleanPrint is an eco-friendly tool that saves paper, ink and money when printing from the internet. Users can easily edit content before printing or saving to PDF, Kindle, Dropbox, Google Drive or Box. CleanPrint includes sharing tools and a pagination/paper saving counter that shows visitors how eco-friendly your site is and helps them avoid that dreaded extra sheet of paper!
 
 1. User activates CleanPrint by hitting print button
 2. Print preview appears including pagination and editing tools for optimization
@@ -24,6 +24,7 @@ CleanPrint is an eco-friendly tool that saves paper, ink and money when printing
    * Dropbox - Saves a PDF or text file to your Dropbox account
    * Box - Saves a PDF or text file to your Box account
    * Google Drive - Saves a PDF or text file to your Google Drive account
+   * Kindle - Saves content directly to your Kindle
    * Google Cloud Print - prints to a remote printer
    * Print - Sends content to your printer
    * Email - Sends content via email
@@ -35,7 +36,7 @@ CleanPrint is an eco-friendly tool that saves paper, ink and money when printing
 2. Lightbox keeps users on your page within their original browser window.
 3. Green ticker shows how many pages CleanPrint has saved.
 4. Pagination/paper saving counter helps users avoid that dreaded extra sheet of paper.
-5. Control - Users are in control of font size, images, gray scale of text, and eliminating any unwanted content before outputting to print, PDF, Dropbox, and Google Docs.
+5. Control - Users are in control of font size, images, gray scale of text, and eliminating any unwanted content before outputting to print, PDF, Kindle, Dropbox, Google Drive and Box.
 6. Button Set - Users feel good about hitting eco-friendly content output buttons next to your content.
 7. Branded output - Your brand/URL are printed on the page or saved so that people can always get back to your site.
 
@@ -176,10 +177,14 @@ Visit us at:
 
 1. CleanPrint allows you to insert Print, Email and PDF buttons into your content anywhere you like from a large number of button styles.
 2. CleanPrint reformats your article content in order to make it easier to read and saves both paper and ink.  Users can edit article content further to get the output they desire.
-3. Users can then print the article, email it to their friends or save it as a PDF or text document to their computer, Google Docs or Dropbox account.
+3. Users can then print the article, email it to their friends or save it as a PDF or text document to their computer, Kindle, Google Drive, Dropbox or Box account.
 
 
 == Changelog ==
+
+= 3.3.0 =
+* Kindle support
+* Minor bug fixes 
 
 = 3.2.4 =
 * New shortcode behavior 
