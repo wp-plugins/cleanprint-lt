@@ -46,75 +46,33 @@ CleanPrint is an eco-friendly tool that saves paper, ink and money when printing
 1. Log into your WordPress installation as an administrator.
 2. On the navigation on the left hand side, click 'Plugins', then 'Add New' from the menu.
 3. Enable the CleanPrint plugin.
-4. Visit the CleanPrint Settings page, select the appropriate options and click "Save Changes".
-5. To remove ads from CleanPrint go to http://www.formatdynamics.com/diypub-adfree/ and sign up.
+4. Visit the CleanPrint Settings page, select the appropriate options and click 'Save Changes'.
+5. To remove ads from CleanPrint go to http://www.formatdynamics.com/diypub-adfree and sign up. 
+   Upon receipt of your registration ads will be removed automatically.
 
 
 <h4>Using Your Own Buttons</h4>
-
-If you prefer to use your own print link or button instead of one of the provided buttons you may do so by:
+If you prefer to use your own text links or buttons you may do so but it does
+require a deeper understanding of WordPress administration and HTML.  This information can be found in
+WordPress documentation found elsewhere:
 
 1. Hide the buttons under Button Styles in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
-   * &lt;a href='.' onClick='CleanPrint(); return false' title='Print page'&gt;Print&lt;/a&gt;
-   * &lt;a href='.' onClick='CleanEmail(); return false' title='Email page'&gt;Email&lt;/a&gt;
-   * &lt;a href='.' onClick='CleanPDF();   return false' title='PDF page'&gt;PDF&lt;/a&gt;
-
-Below are paths to each of our standard Print buttons.
-
-    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black.png
-    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_white.png
-    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_transparent.png
-    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text.png
-    
-    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_black_small.png
-    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_gray_small.png
-    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintBtn_text_small.png
-    
-    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_32x32.png
-    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/CleanPrintIcn_16x16.png
-
-Below are paths to each of our standard PDF buttons.
-
-    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black.png
-    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_white.png
-    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_transparent.png
-    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text.png
-
-    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_black_small.png
-    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_gray_small.png
-    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/PdfBtn_text_small.png
-    
-    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_32x32.png
-    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/PdfIcn_16x16.png
-    
-Below are paths to each of our standard Email buttons.
-
-    Large/Black        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black.png
-    Large/White        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_white.png
-    Large/Transparent  : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_transparent.png
-    Large/Text         : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text.png
-
-    Medium/Black       : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_black_small.png
-    Medium/Gray        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_gray_small.png
-    Medium/Text        : http://cache-02.cleanprint.net/media/pfviewer/images/EmailBtn_text_small.png
-
-    Medium/Chiclet     : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_32x32.png
-    Small/Chiclet      : http://cache-02.cleanprint.net/media/pfviewer/images/EmailIcn_16x16.png
+   <pre>
+      &lt;a href='.' onClick='CleanPrint(); return false' title='Print page'&gt;Print&lt;/a&gt;
+      &lt;a href='.' onClick='CleanEmail(); return false' title='Email page'&gt;Email&lt;/a&gt;
+      &lt;a href='.' onClick='CleanPDF();   return false' title='PDF page'  &gt;PDF&lt;/a&gt;
+   </pre>
 
 
-<h4>Using The Shortcode Button</h4>
-
-1. Hide the buttons under Button Styles in the CleanPrint Settings page.
-2. Add the shortcode [cleanprint_button] to your content
-3. Add the following to your theme's functions.php file:
-<pre>
-    add_shortcode('cleanprint_button', 'cleanprint_add_button');
-</pre>
-4. You may enable any of the buttons as follows:
-<pre>
-    [cleanprint_button print="true" pdf='true" email="true"]
-</pre>
+<h4>Using Shortcode Buttons</h4>
+<ol>
+   <li> Hide the buttons under Button Styles in the CleanPrint Settings page.</li>
+   <li> Add the shortcode [cleanprint_button] to your theme's functions.php file (usually at/near the bottom):</li>
+        <pre>add_shortcode('cleanprint_button', 'cleanprint_add_button');</pre>
+   <li> Activate the button(s) in your HTML content, for example to add all 3 buttons:</li>
+        <pre>[cleanprint_button print='true' pdf='true' email='true']</pre>
+</ol>
 
 
 == Frequently Asked Questions ==
@@ -184,7 +142,6 @@ Visit us at:
 
 = 3.4.0 =
 * HTTPS support
-* Minor bug fixes 
 
 = 3.3.0 =
 * Kindle support
