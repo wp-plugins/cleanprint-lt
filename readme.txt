@@ -66,10 +66,10 @@ WordPress documentation found elsewhere:
 
 
 <h4>Using Shortcode Buttons</h4>
-1. Hide the buttons under Button Styles in the CleanPrint Settings page.</li>
-2. Add the shortcode [cleanprint_button] to your theme's functions.php file (usually at/near the bottom):</li>
+1. Hide the buttons under Button Styles in the CleanPrint Settings page.
+2. Add the shortcode [cleanprint_button] to your theme's functions.php file (usually at/near the bottom):
    <pre>add_shortcode('cleanprint_button', 'cleanprint_add_button');</pre>
-3. Activate the button(s) in your HTML content, for example to add all 3 buttons:</li>
+3. Activate the button(s) in your HTML content, for example to add all 3 buttons:
    <pre>[cleanprint_button print='true' pdf='true' email='true']</pre>
 
 
