@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Kindle, Google Cloud Print, Box, Google Drive and Dropbox
-Version: 3.4.0
+Version: 3.4.1
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -20,7 +20,7 @@ $cleanprint_print_attr        = 'print';
 $cleanprint_options_name      = 'CleanPrintAdminOptions';
 
 // CleanPrint parameters (change these *only* if you know what you're doing)
-$cleanprint_base_url          = is_ssl() ? 'https://cache-01-secure.cleanprint.net' : 'http://cache-02.cleanprint.net';
+$cleanprint_base_url          = is_ssl() ? 'https://cache-02.cleanprint.net' : 'http://cache-02.cleanprint.net';
 $cleanprint_publisher_key     = 'wpdefault';
 
 // Best not change these (internal-use only)
