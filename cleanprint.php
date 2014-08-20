@@ -405,9 +405,8 @@ function cleanprint_is_pagetype() {
 
     if (isset($excludes) && isset($page_id)) {
        $IDs = explode(",", $excludes);
-       $len = count($IDs);
-       for ($i=0; $i<$len; $i++) {
-          if ($page_id == $IDs[$i]) return false;
+       foreach ($IDs as $id) {
+          if ($page_id == $id) return false;
        }
     }
 
@@ -490,15 +489,17 @@ function cleanprint_add_print_button() {
     global $cleanprint_options_name;
     $cleanprint_images_base_url = plugins_url("/images",__FILE__);
     global $cleanprint_def_btn_style;
-	 	    
-    $options     = get_option($cleanprint_options_name);
-    $buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null; 
-        
-    if (!isset($buttonStyle)) {
-        $buttonStyle = $cleanprint_def_btn_style;
-    }
 
-    return "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml();return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/CleanPrint$buttonStyle.png\" /></a>";
+	if (cleanprint_is_pagetype()) {	 	    
+    	$options     = get_option($cleanprint_options_name);
+    	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null; 
+        
+    	if (!isset($buttonStyle)) {
+        	$buttonStyle = $cleanprint_def_btn_style;
+    	}
+	
+    	return "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml();return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/CleanPrint$buttonStyle.png\" /></a>";
+	}
 }
 
 
@@ -514,19 +515,21 @@ function cleanprint_add_button($atts, $content, $tag) {
         'email' => 'false',
 	), $atts ) );
 	 	    
-    $options     = get_option($cleanprint_options_name);
-    $buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
-    $rtn         = ""; 
+	if (cleanprint_is_pagetype()) {
+    	$options     = get_option($cleanprint_options_name);
+    	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
+    	$rtn         = ""; 
         
-    if (!isset($buttonStyle)) {
-        $buttonStyle = $cleanprint_def_btn_style;
-    }
+    	if (!isset($buttonStyle)) {
+        	$buttonStyle = $cleanprint_def_btn_style;
+    	}
 
-    if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml();return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/CleanPrint$buttonStyle.png\" /></a>";
-    if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf();return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/Pdf$buttonStyle.png\"        /></a>";
-    if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail();return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/Email$buttonStyle.png\"      /></a>";
+    	if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml();return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/CleanPrint$buttonStyle.png\" /></a>";
+    	if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf();return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/Pdf$buttonStyle.png\"        /></a>";
+    	if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail();return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$cleanprint_images_base_url/Email$buttonStyle.png\"      /></a>";
 
-    return $rtn;
+    	return $rtn;
+	}
 }
 
 
@@ -678,7 +681,7 @@ function cleanprint_admin_init() {
     add_settings_field     ('plugin_posts',           '<strong>Posts:</strong>',                     'cleanprint_add_settings_field_posts',         $cleanprint_plugin_name, 'plugin_main');
     add_settings_field     ('plugin_pages',           '<strong>Pages:</strong>',                     'cleanprint_add_settings_field_pages',         $cleanprint_plugin_name, 'plugin_main');
     add_settings_field     ('plugin_tags',            '<strong>Tags:</strong>',                      'cleanprint_add_settings_field_tags',          $cleanprint_plugin_name, 'plugin_main');
-add_settings_field     ('plugin_excludes',        '<strong>Excluded Page IDs:</strong>',         'cleanprint_add_settings_field_excludes',      $cleanprint_plugin_name, 'plugin_main');
+	add_settings_field     ('plugin_excludes',        '<strong>Excluded Page IDs:</strong>',         'cleanprint_add_settings_field_excludes',      $cleanprint_plugin_name, 'plugin_main');
     add_settings_field     ('plugin_gaOption',        '<strong>CleanPrint Event Tracking:</strong>', 'cleanprint_add_settings_field_ga',            $cleanprint_plugin_name, 'plugin_main');
 }
 
