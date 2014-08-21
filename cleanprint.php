@@ -551,7 +551,6 @@ function cleanprint_wp_head() {
 	$options      = get_option($cleanprint_options_name);
 	$GASetting    = isset($options['GASetting']) ? $options['GASetting'] : null;
 	$logoUrl      = isset($options['logoUrl'])   ? $options['logoUrl']   : null;
-	$defLogoUrl   = plugins_url('/CleanPrintSave.png',__FILE__);
 
     $showPrintBtn = !isset($options['PrintInclude']) || $options['PrintInclude']=='include';
     $showPdfBtn   = !isset($options['PDFInclude'  ]) || $options['PDFInclude'  ]=='include';
