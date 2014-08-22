@@ -646,8 +646,10 @@ function cleanprint_activate() {
    
       // Unset the logoUrl if we have the older default URL      
       $logoUrl = isset($options['logoUrl']) ? $options['logoUrl'] : null;      
-      if (isset($logoUrl) && $logoUrl=="http://cache-02.cleanprint.net/media/logos/Default.png") {
-         unset($options['logoUrl']); // Not sure this is working but its getting called
+      if (isset($logoUrl)) {
+		if ($logoUrl=="http://cache-02.cleanprint.net/media/logos/Default.png" || $logoUrl=="http://cache-02.cleanprint.net/media/logos/CleanSave.png") {
+			unset($options['logoUrl']); // Not sure this is working but its getting called
+		}
       }
    
       // Set the version and commit the changes
