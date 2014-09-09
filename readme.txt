@@ -106,13 +106,15 @@ This can be tricky depending upon your WordPress knowledge and requires you to s
 You have two options:
 <ol>
    <li>Visit our website and try it out:
-   	<ul>
-      <li>http://www.formatdynamics.com/cleanprint-4-0</li>      
-   </ul></li>
+      <ul>
+         <li>http://www.formatdynamics.com/cleanprint-4-0</li>      
+      </ul>
+   </li>
    <li>Install our free browser tool and try it anywhere yourself.
    <ul>
       <li>http://www.formatdynamics.com/bookmarklets.</li>
-   </ul></li>
+   </ul>
+   </li>
 </ol>
 
 = Where can I learn more about CleanPrint? =
