@@ -428,6 +428,8 @@ function cleanprint_is_pagetype() {
     $posts         = isset($options['PostsInclude'])     ? $options['PostsInclude']     : null;
     $pages         = isset($options['PagesInclude'])     ? $options['PagesInclude']     : null;
     $tags          = isset($options['TagsInclude'])      ? $options['TagsInclude']      : null;
+    $taxs          = isset($options['TaxsInclude'     ]) ? $options['TaxsInclude'     ] : null;
+    $others        = isset($options['OthersInclude'   ]) ? $options['OthersInclude'   ] : null;
 	$excludes      = isset($options['PagesExcludes'])    ? $options['PagesExcludes']    : null;
 
     if (isset($excludes) && isset($post) && isset($post->ID)) {
@@ -458,7 +460,7 @@ function cleanprint_is_pagetype() {
     if (is_page()       && $isPageChecked ) return true;
     if (is_tag()        && $isTagChecked  ) return true;
     if (is_tax()        && $isTaxChecked  ) return true;
-    
+
     return false;
 }
 
@@ -579,11 +581,6 @@ function cleanprint_wp_head() {
     $showPrintBtn = !isset($options['PrintInclude']) || $options['PrintInclude']=='include';
     $showPdfBtn   = !isset($options['PDFInclude'  ]) || $options['PDFInclude'  ]=='include';
     $showEmailBtn = !isset($options['EmailInclude']) || $options['EmailInclude']=='include';
-
-    if (cleanprint_is_pagetype() == false) {
-       // Disabled page type
-       return;
-    }
 
     if ($debugEnabled) {
 		printf("\n\n\n<!--\n\tCleanPrint Debug\n\t\t%s\n\t\tpage_id:$page_id, post->ID:$post->ID, is_home:%d, is_front_page:%d, is_category:%d, is_single:%d, is_page:%d, is_tag:%d, is_tax:%d\n-->\n\n",
