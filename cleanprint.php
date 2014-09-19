@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Kindle, Google Cloud Print, Box, Google Drive and Dropbox
-Version: 3.4.2
+Version: 3.4.3
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -27,7 +27,7 @@ $cleanprint_loader_url        = $cleanprint_base_url . '/cpf/cleanprint?polite=n
 $cleanprint_btn_helper_url    = $cleanprint_base_url . '/cpf/publisherSignup/js/generateCPFTag.js';
 $cleanprint_def_btn_style     = 'Btn_white';
 $cleanprint_def_btn_placement = 'tr';
-$cleanprint_debug             = false;
+$cleanprint_post_id_format    = 'post-%s';
 
 
 
@@ -103,14 +103,10 @@ function cleanprint_add_settings_field_button_color() {
     global $cleanprint_def_btn_style;
     
 	$options     = get_option($cleanprint_options_name);
-	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
+	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : $cleanprint_def_btn_style;
 	$imagesUrl   = plugins_url("/images",__FILE__);
     
-	if(!isset($buttonStyle)) {
-        $buttonStyle = $cleanprint_def_btn_style;
-    }
-    
-    printf("<script type='text/javascript' src='%s'></script>", $cleanprint_btn_helper_url);    
+	printf("<script type='text/javascript' src='%s'></script>", $cleanprint_btn_helper_url);    
     printf("<script type='text/javascript'>function buildButtonSelect() {");
     printf("var select = document.createElement('select');");
     printf("select.setAttribute('id',       'plugin_buttonStyle');");
@@ -217,11 +213,7 @@ function cleanprint_add_settings_field_btn_placement() {
     global $cleanprint_def_btn_placement;
     
 	$options         = get_option($cleanprint_options_name);
-	$ButtonPlacement = isset($options['ButtonPlacement']) ? $options['ButtonPlacement'] : null;
-	
-	if (!isset($ButtonPlacement)) {
-	   $ButtonPlacement = $cleanprint_def_btn_placement;
-	}
+	$ButtonPlacement = isset($options['ButtonPlacement']) ? $options['ButtonPlacement'] : $cleanprint_def_btn_placement;
 	
 	$trChecked  = $ButtonPlacement=="tr";
     $tlChecked  = $ButtonPlacement=="tl";
@@ -255,8 +247,7 @@ function cleanprint_add_settings_field_homepage() {
     printf( "<select id='plugin_homepage' name='%s[HomepageInclude]'>", $cleanprint_options_name);
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
-    printf( "</select>");
-    printf( "<i> - i.e. is_home()</i>");  
+    printf( "</select>");  
 }
 
 
@@ -271,7 +262,6 @@ function cleanprint_add_settings_field_frontpage() {
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
     printf( "</select>");
-    printf( "<i> - i.e. is_front_page()</i>");
 }
 
 
@@ -286,7 +276,6 @@ function cleanprint_add_settings_field_category() {
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
     printf( "</select>");
-    printf( "<i> - i.e. is_category()</i>");
 }
 
 
@@ -301,7 +290,6 @@ function cleanprint_add_settings_field_posts() {
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
     printf( "</select>");
-    printf( "<i> - i.e. is_single()</i>");
 }
 
 
@@ -316,7 +304,6 @@ function cleanprint_add_settings_field_pages() {
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
     printf( "</select>");
-    printf( "<i> - i.e. is_page()</i>");
 }
 
 
@@ -331,7 +318,34 @@ function cleanprint_add_settings_field_tags() {
     printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
     printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
     printf( "</select>");
-    printf( "<i> - i.e. is_tag()</i>");
+}
+
+
+function cleanprint_add_settings_field_taxs() {
+    global $cleanprint_options_name;
+    
+    $options     = get_option($cleanprint_options_name);
+    $taxs        = isset($options['TaxsInclude']) ? $options['TaxsInclude'] : null;
+    $isChecked   = !isset($taxs) || $taxs=="include";
+    
+    printf( "<select id='plugin_taxs' name='%s[TaxsInclude]'>", $cleanprint_options_name);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");
+}
+
+
+function cleanprint_add_settings_field_others() {
+    global $cleanprint_options_name;
+    
+    $options     = get_option($cleanprint_options_name);
+    $others      = isset($options['OthersInclude']) ? $options['OthersInclude'] : null;
+    $isChecked   = isset($others) && $others=="include";
+    
+    printf( "<select id='plugin_others' name='%s[OthersInclude]'>", $cleanprint_options_name);
+    printf( "<option value='include' %s>Include</option>", ( $isChecked ?"selected='selected'":""));
+    printf( "<option value='exclude' %s>Exclude</option>", (!$isChecked ?"selected='selected'":""));
+    printf( "</select>");
 }
 
 
@@ -342,7 +356,7 @@ function cleanprint_add_settings_field_excludes() {
     $excludes    = isset($options['PagesExcludes']) ? $options['PagesExcludes'] : "";
     
     printf( "<input type='text' id='plugin_excludes' name='%s[PagesExcludes]' value='%s' /><br>\n", $cleanprint_options_name, $excludes);
-    printf( "<i>(comma separated)</i>");
+    printf( "<i>(comma separated list of post IDs)</i>");
     printf("<tr><td colspan='3'><h2>Google Analytics</h2><hr /></td></tr>");  
 }
 
@@ -361,6 +375,18 @@ function cleanprint_add_settings_field_ga() {
 
 	printf( "<input type='radio' id='plugin_gaOption' name='%s[GASetting]' value='false' %s />", $cleanprint_options_name, $disabledChecked ?"checked='checked'":"");
 	printf( "Disabled<br /><br />\n");
+	printf("<tr><td colspan='3'><h2>Internal Use Only</h2><hr /></td></tr>");
+}
+
+
+function cleanprint_add_settings_field_debug() {
+    global $cleanprint_options_name;
+    
+	$options      = get_option($cleanprint_options_name);
+	$debug        = isset($options['Debug']) ? $options['Debug'] : null;
+	$debugEnabled = isset($debug) && $debug=="true";
+
+    printf( "<input type='checkbox' id='plugin_debug' name='%s[Debug]' value='true' %s/>", $cleanprint_options_name, $debugEnabled  ?"checked='checked'":"");
 }
 
 
@@ -392,7 +418,7 @@ function cleanprint_sanitize_options($options) {
 
 
 function cleanprint_is_pagetype() {
-    global $page_id;
+    global $post;
 	global $cleanprint_options_name;
 
     $options       = get_option($cleanprint_options_name);
@@ -402,29 +428,39 @@ function cleanprint_is_pagetype() {
     $posts         = isset($options['PostsInclude'])     ? $options['PostsInclude']     : null;
     $pages         = isset($options['PagesInclude'])     ? $options['PagesInclude']     : null;
     $tags          = isset($options['TagsInclude'])      ? $options['TagsInclude']      : null;
+    $taxs          = isset($options['TaxsInclude'     ]) ? $options['TaxsInclude'     ] : null;
+    $others        = isset($options['OthersInclude'   ]) ? $options['OthersInclude'   ] : null;
 	$excludes      = isset($options['PagesExcludes'])    ? $options['PagesExcludes']    : null;
 
-    if (isset($excludes) && isset($page_id)) {
-       $IDs = explode(",", $excludes);
-       foreach ($IDs as $id) {
-          if ($page_id == $id) return false;
+    if (isset($excludes) && isset($post) && isset($post->ID)) {
+	   $ids = explode(",", $excludes);
+       foreach ($ids as $id) {
+          if ($post->ID == trim($id)) {
+             return false;
+          }
        }
     }
 
-    $isHomeChecked = !isset($homepage)  || $homepage =='include';
-    $isFrntChecked = !isset($frontpage) || $frontpage=='include';
-    $isCatgChecked = !isset($category)  || $category =='include';
-    $isPostChecked = !isset($posts)     || $posts    =='include';
-    $isPageChecked = !isset($pages)     || $pages    =='include';
-    $isTagChecked  = !isset($tags)      || $tags     =='include';
+    $isHomeChecked  = !isset($homepage)  || $homepage =='include';
+    $isFrntChecked  = !isset($frontpage) || $frontpage=='include';
+    $isCatgChecked  = !isset($category)  || $category =='include';
+    $isPostChecked  = !isset($posts)     || $posts    =='include';
+    $isPageChecked  = !isset($pages)     || $pages    =='include';
+    $isTagChecked   = !isset($tags)      || $tags     =='include';
+    $isTaxChecked   = !isset($taxs)      || $taxs     =='include';
+    $isOtherChecked =  isset($others)    && $others   =='include';
     
-    if (is_home()       && $isHomeChecked) return true;
-    if (is_front_page() && $isFrntChecked) return true;              
-    if (is_category()   && $isCatgChecked) return true;
-    if (is_single()     && $isPostChecked) return true;
-    if (is_page()       && $isPageChecked) return true;
-    if (is_tag()        && $isTagChecked ) return true;
+    $isOther        = !is_home() && !is_front_page() && !is_category() && !is_single() && !is_page() && !is_tag() && !is_tax();
     
+    if ($isOther        && $isOtherChecked) return true;
+    if (is_home()       && $isHomeChecked ) return true;
+    if (is_front_page() && $isFrntChecked ) return true;
+    if (is_category()   && $isCatgChecked ) return true;
+    if (is_single()     && $isPostChecked ) return true;
+    if (is_page()       && $isPageChecked ) return true;
+    if (is_tag()        && $isTagChecked  ) return true;
+    if (is_tax()        && $isTaxChecked  ) return true;
+
     return false;
 }
 
@@ -434,12 +470,13 @@ function cleanprint_add_content($content) {
     global $cleanprint_options_name;
 	global $cleanprint_def_btn_style;
 	global $cleanprint_def_btn_placement;
+	global $cleanprint_post_id_format;
 	 	    
 	$options         = get_option($cleanprint_options_name);
-	$buttonStyle     = isset($options['buttonStyle'])     ? $options['buttonStyle']     : null;
-    $ButtonPlacement = isset($options['ButtonPlacement']) ? $options['ButtonPlacement'] : null;
+	$buttonStyle     = isset($options['buttonStyle'])     ? $options['buttonStyle']     : $cleanprint_def_btn_style;
+    $ButtonPlacement = isset($options['ButtonPlacement']) ? $options['ButtonPlacement'] : $cleanprint_def_btn_placement;
     $imagesUrl       = plugins_url("/images",__FILE__);
-    $postId          = isset($post) && isset($post->ID) ? sprintf("'post-%s'",$post->ID) : null; 
+    $postId          = isset($post) && isset($post->ID) ? sprintf("'$cleanprint_post_id_format'",$post->ID) : null; 
     
     
     $showPrintBtn    = !isset($options['PrintInclude']) || $options['PrintInclude']=='include';
@@ -447,16 +484,8 @@ function cleanprint_add_content($content) {
     $showEmailBtn    = !isset($options['EmailInclude']) || $options['EmailInclude']=='include';
     $buttons         = "";
     
-    if (!isset($ButtonPlacement)) {
-       $ButtonPlacement = $cleanprint_def_btn_placement;
-    }
-    
     if (cleanprint_is_pagetype()) {
-	   if (!isset($buttonStyle)) {
-            $buttonStyle = $cleanprint_def_btn_style;
-        }
-
-        if ($showPrintBtn) {
+		if ($showPrintBtn) {
             $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
         }
 
@@ -493,17 +522,14 @@ function cleanprint_add_print_button() {
 	global $post;
     global $cleanprint_options_name;
     global $cleanprint_def_btn_style;
+    global $cleanprint_post_id_format;
 
 	if (cleanprint_is_pagetype()) {	 	    
     	$options     = get_option($cleanprint_options_name);
-    	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
+    	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : $cleanprint_def_btn_style;
         $imagesUrl   = plugins_url("/images",__FILE__);
-        $postId      = isset($post) && isset($post->ID) ? sprintf("'post-%s'",$post->ID) : null; 
+        $postId      = isset($post) && isset($post->ID) ? sprintf("'$cleanprint_post_id_format'",$post->ID) : null; 
         
-    	if (!isset($buttonStyle)) {
-        	$buttonStyle = $cleanprint_def_btn_style;
-    	}
-	
     	return "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
 	}
 }
@@ -514,6 +540,7 @@ function cleanprint_add_button($atts, $content, $tag) {
 	global $post;
     global $cleanprint_options_name;
     global $cleanprint_def_btn_style;
+    global $cleanprint_post_id_format;
 	 	    
     extract( shortcode_atts( array(
 		'print' => 'true',
@@ -523,15 +550,11 @@ function cleanprint_add_button($atts, $content, $tag) {
 	 	    
 	if (cleanprint_is_pagetype()) {
     	$options     = get_option($cleanprint_options_name);
-    	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : null;
+    	$buttonStyle = isset($options['buttonStyle']) ? $options['buttonStyle'] : $cleanprint_def_btn_style;
     	$imagesUrl   = plugins_url("/images",__FILE__);
-    	$postId      = isset($post) && isset($post->ID) ? sprintf("'post-%s'",$post->ID) : null;
+    	$postId      = isset($post) && isset($post->ID) ? sprintf("'$cleanprint_post_id_format'",$post->ID) : null;
     	$rtn         = ""; 
         
-    	if (!isset($buttonStyle)) {
-        	$buttonStyle = $cleanprint_def_btn_style;
-    	}
-
     	if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml  ($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
     	if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf($postId);return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\"        /></a>";
     	if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail  ($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\"      /></a>";
@@ -543,6 +566,7 @@ function cleanprint_add_button($atts, $content, $tag) {
 
 // Adds the CleanPrint script tags to the head section
 function cleanprint_wp_head() {
+	global $post;
     global $page_id;
     global $cleanprint_options_name;
     global $cleanprint_loader_url;
@@ -551,24 +575,16 @@ function cleanprint_wp_head() {
 	$options      = get_option($cleanprint_options_name);
 	$GASetting    = isset($options['GASetting']) ? $options['GASetting'] : null;
 	$logoUrl      = isset($options['logoUrl'])   ? $options['logoUrl']   : null;
-
+	$debug        = isset($options['Debug']) ? $options['Debug'] : null;
+	$debugEnabled = isset($debug) && $debug=="true";
+	
     $showPrintBtn = !isset($options['PrintInclude']) || $options['PrintInclude']=='include';
     $showPdfBtn   = !isset($options['PDFInclude'  ]) || $options['PDFInclude'  ]=='include';
     $showEmailBtn = !isset($options['EmailInclude']) || $options['EmailInclude']=='include';
 
-    if (cleanprint_is_pagetype() == false) {
-       // Disabled page type
-       return;
-    }
-/*
-    if (!($showPrintBtn || $showPdfBtn || $showEmailBtn)) {
-       // All the buttons are excluded
-       return;
-    }
-*/
-    if ($cleanprint_debug) {
-		printf("\n\n\n<!-- CleanPrint Debug\n\t\t%s\n\t\tpage_id:%s, home:%d, front:%d, category:%d, single:%d, page:%d, tag:%d\n-->\n\n\n",
-					               http_build_query($options,"","\n\t\t"), $page_id, is_home(), is_front_page(), is_category(), is_single(), is_page(), is_tag());
+    if ($debugEnabled) {
+		printf("\n\n\n<!--\n\tCleanPrint Debug\n\t\t%s\n\t\tpage_id:$page_id, post->ID:$post->ID, is_home:%d, is_front_page:%d, is_category:%d, is_single:%d, is_page:%d, is_tag:%d, is_tax:%d\n-->\n\n",
+					               http_build_query($options,"","\n\t\t"), is_home(), is_front_page(), is_category(), is_single(), is_page(), is_tag(), is_tax());
 	}
 		
     printf( "<script id='cpf_wp_cp' type='text/javascript'>\n");
@@ -605,7 +621,18 @@ function cleanprint_add_action_links($links, $file) {
     global $cleanprint_plugin_file;
     
     if ($file == $cleanprint_plugin_file) {
-		$links[] = sprintf("<a href='options-general.php?page=%s'>Settings</a>", $cleanprint_plugin_name);
+		$links[] = "<a href='options-general.php?page=$cleanprint_plugin_name'>Settings</a>";
+	}
+	return $links;
+}
+
+function cleanprint_add_meta_links($links, $file) {
+	global $cleanprint_plugin_name;
+    global $cleanprint_plugin_file;
+    
+    if ($file == $cleanprint_plugin_file) {
+        $links[] = "<a href='http://wordpress.org/plugins/$cleanprint_plugin_name/faq/'>FAQ</a>";
+        $links[] = "<a href='http://wordpress.org/support/plugin/$cleanprint_plugin_name'>Support</a>";
 	}
 	return $links;
 }
@@ -688,8 +715,11 @@ function cleanprint_admin_init() {
     add_settings_field     ('plugin_posts',           '<strong>Posts:</strong>',                     'cleanprint_add_settings_field_posts',         $cleanprint_plugin_name, 'plugin_main');
     add_settings_field     ('plugin_pages',           '<strong>Pages:</strong>',                     'cleanprint_add_settings_field_pages',         $cleanprint_plugin_name, 'plugin_main');
     add_settings_field     ('plugin_tags',            '<strong>Tags:</strong>',                      'cleanprint_add_settings_field_tags',          $cleanprint_plugin_name, 'plugin_main');
-	add_settings_field     ('plugin_excludes',        '<strong>Excluded Page IDs:</strong>',         'cleanprint_add_settings_field_excludes',      $cleanprint_plugin_name, 'plugin_main');
+	add_settings_field     ('plugin_taxs',            '<strong>Taxonies:</strong>',                  'cleanprint_add_settings_field_taxs',          $cleanprint_plugin_name, 'plugin_main');
+    add_settings_field     ('plugin_others',          '<strong>Others:</strong>',                    'cleanprint_add_settings_field_others',        $cleanprint_plugin_name, 'plugin_main');
+    add_settings_field     ('plugin_excludes',        '<strong>Excluded IDs:</strong>',              'cleanprint_add_settings_field_excludes',      $cleanprint_plugin_name, 'plugin_main');
     add_settings_field     ('plugin_gaOption',        '<strong>CleanPrint Event Tracking:</strong>', 'cleanprint_add_settings_field_ga',            $cleanprint_plugin_name, 'plugin_main');
+    add_settings_field     ('plugin_debug',           'debug',                                       'cleanprint_add_settings_field_debug',         $cleanprint_plugin_name, 'plugin_main');
 }
 
 
@@ -709,8 +739,13 @@ add_action('admin_menu',          'cleanprint_admin_menu');
 add_action('wp_head',             'cleanprint_wp_head', 1);
 
 // Filters
-add_filter('plugin_action_links', 'cleanprint_add_action_links', - 10, 2);
+add_filter('plugin_action_links', 'cleanprint_add_action_links', 10, 2);
+add_filter('plugin_row_meta',     'cleanprint_add_meta_links',   10, 2);
 add_filter('the_content',         'cleanprint_add_content');
 add_filter('query_vars',          'cleanprint_add_query_vars');
+
+// Shortcodes
+add_shortcode('cleanprint_button',       'cleanprint_add_button');
+add_shortcode('cleanprint_print_button', 'cleanprint_add_print_button');
 
 ?>
