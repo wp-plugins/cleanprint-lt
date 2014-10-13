@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Kindle, Google Cloud Print, Box, Google Drive and Dropbox
-Version: 3.4.3
+Version: 3.4.4
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -435,7 +435,7 @@ function cleanprint_is_pagetype() {
     if (isset($excludes) && isset($post) && isset($post->ID)) {
 	   $ids = explode(",", $excludes);
        foreach ($ids as $id) {
-          if ($post->ID == trim($id)) {
+          if ("$post->ID" === trim($id)) {
              return false;
           }
        }
@@ -483,7 +483,7 @@ function cleanprint_add_content($content) {
     $showPdfBtn      = !isset($options['PDFInclude'])   || $options['PDFInclude']  =='include';
     $showEmailBtn    = !isset($options['EmailInclude']) || $options['EmailInclude']=='include';
     $buttons         = "";
-    
+
     if (cleanprint_is_pagetype()) {
 		if ($showPrintBtn) {
             $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
