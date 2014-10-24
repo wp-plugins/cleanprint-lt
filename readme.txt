@@ -4,7 +4,7 @@ Donate link: http://www.formatdynamics.com/contact-us
 Tags: pdf, print, printer, printable, printing, widget, email, save, optimize, output, edit, editing, eco-friendly, environmental, sustainable, reader, iPad, tablet, saving, ecological, eco, ink, social, output, plugin, saver, box, box.net, box.com, kindle, dropbox, rtf, printer friendly, readlater, instapaper, cloud, google docs, google drive, google cloud print, box, box.net, box.com
 Requires at least: 2.0.2
 Tested up to: 4.0
-Stable tag: 3.4.4
+Stable tag: 3.4.5
   
 CleanPrint - Eco-friendly content output to print, PDF, email, Kindle, Box, Google Drive and Dropbox
 
@@ -56,9 +56,9 @@ WordPress documentation found elsewhere:
 1. Hide the buttons under Button Styles in the CleanPrint Settings page.
 2. Insert a hyperlink into your page as per the example below:
    <pre>
-      &lt;a href='.' onClick='CleanPrint(); return false' title='Print page'&gt;Print&lt;/a&gt;
-      &lt;a href='.' onClick='CleanEmail(); return false' title='Email page'&gt;Email&lt;/a&gt;
-      &lt;a href='.' onClick='CleanPDF();   return false' title='PDF page'  &gt;PDF&lt;/a&gt;
+      &lt;a href='.' onClick='WpCpCleanPrintPrintHtml(); return false' title='Print page'&gt;Print&lt;/a&gt;
+      &lt;a href='.' onClick='WpCpCleanPrintSendEmail(); return false' title='Email page'&gt;Email&lt;/a&gt;
+      &lt;a href='.' onClick='WpCpCleanPrintGeneratePdf(); return false' title='PDF page'  &gt;PDF&lt;/a&gt;
    </pre>
 
 
@@ -134,6 +134,9 @@ Visit us at:
 
 
 == Changelog ==
+
+= 3.4.5 =
+* Corrected issue with function names 
 
 = 3.4.4 =
 * Non-standard page excludes
