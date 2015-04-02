@@ -3,7 +3,7 @@
 Plugin Name: CleanPrint
 Plugin URI: http://www.formatdynamics.com
 Description: Eco-friendly content output to print, PDF, text, email, Kindle, Google Cloud Print, Box, Google Drive and Dropbox
-Version: 3.4.5
+Version: 3.4.6
 Author: Format Dynamics
 Author URI: http://www.formatdynamics.com
 */
@@ -486,15 +486,15 @@ function cleanprint_add_content($content) {
 
     if (cleanprint_is_pagetype()) {
 		if ($showPrintBtn) {
-            $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+            $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" alt=\"Print page\"/></a>";
         }
 
         if ($showPdfBtn) {
-            $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf($postId);return false\" title=\"PDF page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\" /></a>";
+            $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf($postId);return false\" title=\"PDF page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\" alt=\"PDF page\"/></a>";
         }
 
         if ($showEmailBtn) {
-            $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\" /></a>";
+            $buttons .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\" alt=\"Email page\"/></a>";
         }
 
 
@@ -530,7 +530,7 @@ function cleanprint_add_print_button() {
         $imagesUrl   = plugins_url("/images",__FILE__);
         $postId      = isset($post) && isset($post->ID) ? sprintf("'$cleanprint_post_id_format'",$post->ID) : null; 
         
-    	return "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
+    	return "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" alt=\"Print page\"/></a>";
 	}
 }
 
@@ -555,9 +555,9 @@ function cleanprint_add_button($atts, $content, $tag) {
     	$postId      = isset($post) && isset($post->ID) ? sprintf("'$cleanprint_post_id_format'",$post->ID) : null;
     	$rtn         = ""; 
         
-    	if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml  ($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" /></a>";
-    	if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf($postId);return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\"        /></a>";
-    	if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail  ($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\"      /></a>";
+    	if ("{$print}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintPrintHtml  ($postId);return false\" title=\"Print page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/CleanPrint$buttonStyle.png\" alt=\"Print page\"/></a>";
+    	if ("{$pdf}"  =="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintGeneratePdf($postId);return false\" title=\"PDF page\"   class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Pdf$buttonStyle.png\"        alt=\"PDF page\"/></a>";
+    	if ("{$email}"=="true") $rtn .= "<a href=\".\" onClick=\"WpCpCleanPrintSendEmail  ($postId);return false\" title=\"Email page\" class=\"cleanprint-exclude\"><img src=\"$imagesUrl/Email$buttonStyle.png\"      alt=\"Email page\"/></a>";
 
     	return $rtn;
 	}
